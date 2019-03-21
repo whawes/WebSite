@@ -426,6 +426,32 @@ body {
 .layer-4 form {
   animation: 0.8s ease-in-out 2.4s normal backwards 1 running fadeInUp;
 }
+.layer-5 .title-5 input {
+  border: medium 1px;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  color: #444444;
+  height: 30px;
+  line-height: 50px;
+  padding-left: 20px;
+  position: relative;
+  width: 100%;
+}
+.layer-5 {
+  margin-top: 0px;
+  padding-left: 20px;
+}
+.layer-5 form.title-5 button {
+  background: #a94442 none repeat scroll 0 0;
+  border: medium none;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  font-size: 22px;
+  height: 30px;
+  line-height: 22px;
+  position: absolute;
+  width: 70px;
+}
 /*----------------------------------------*/
 /*  4.	Online Banner Area CSS
 /*----------------------------------------*/
@@ -2562,4 +2588,64 @@ h3.widget-title-modal {
   color: white;
   font-size: 2em;
 }
+.neww
+{
+  padding-left: 100px;
+}
+.newww
+{
+  padding-left: 20px;
+}
+.sujets
+{
+  background: #a94442 none repeat scroll 0 0;
+  border-bottom: medium none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 5px 30px;
+  text-transform: uppercase;
+}
+.partage
+{
+  border-bottom: 1px solid #e5e5e5;
+  float: left;
+  margin: 0 0 20px;
+  padding: 0 0 38px;
+  width: 100%;
+}
+.partage .single_add_to_cart_button
+{
+  background: #a94442 none repeat scroll 0 0;
+  border: medium none;
+  color: #ffffff;
+  float: left;
+  font-weight: 700;
+  height: 40px;
+  margin-left: 15px;
+  padding: 0 70px;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+}
+.partage .single_add_to_cart_button:hover
+{
+  background: #282828 none repeat scroll 0 0;
+}
+.tabble
+{
+  padding-top: 20px; 
+}
+.msg
+{
+  height: 150px;
+  width: 500px;
+}
+.msg2
+{
+  width: 500px;
+}
+#poost
+{
+  width: 90%;
 }
