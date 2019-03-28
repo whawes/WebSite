@@ -308,7 +308,7 @@ body {
   text-align: center;
   transition: all 0.3s ease 0s;
   vertical-align: middle;
-  width: 20px;
+  width: 200px;
 }
 .cart-product-info p a:hover {
   color: #9c9b9b;

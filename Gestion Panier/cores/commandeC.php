@@ -4,20 +4,54 @@ require  '../config.php';
 $DB =new config();
 class CommandeC{
 
-    function CalculNumCommande()
+    function TotalDeProduit()
     {
-        $sql = "select ID_Commande from commande";
+        $sql = "select count(ID_Produit) as nbr from cart";
         $DB = config::getConnexion();
         $req = $DB->prepare($sql);
-        $NumCommande = 0;
+
         try {
             $req->execute();
             foreach ($req as $row):
                 {
-                    $NumCommande++;
+                    return $row['nbr'];
                 }
             endforeach;
-            return $NumCommande;
+
+
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function ModifierEtat($etat,$id_commande){
+        $sql="UPDATE commande set Etat_Commande=:etat where ID_Commande=$id_commande";
+        $DB = config::getConnexion();
+        $req=$DB->prepare($sql);
+
+        try{
+            $req->bindValue(':etat',$etat);
+            $req->execute();
+
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+    function CalculNumCommande()
+    {
+        $sql = "select count(ID_Commande) as nbr from commande";
+        $DB = config::getConnexion();
+        $req = $DB->prepare($sql);
+
+        try {
+            $req->execute();
+            foreach ($req as $row):
+                {
+                    return $row['nbr'];
+                }
+            endforeach;
+
+
         } catch (Exception $e) {
             die('Erreur: ' . $e->getMessage());
         }
@@ -68,7 +102,7 @@ class CommandeC{
     function ajouterFacture($NumCommande){
         $sql="select cart.Qty_Produit,produits.Prix_Produit,produits.Nom_Produit from cart inner join produits on cart.ID_Produit=produits.ID_Produit";
         $sql1="insert into facture (ID_Commande,Qty_Produit,Prix_Produit,Nom_Produit) values (:ID_Commande,:Qty_Produit,:Prix_Produit,:Nom_Produit)";
-        $sql2="Delete * from cart";
+        $sql2="Delete from cart";
         $DB = config::getConnexion();
 
         try{
@@ -138,7 +172,19 @@ class CommandeC{
     }
     function afficherCommande(){
 
-        $sql="SElECT ID_Commande,Date_Creation,Etat_Commande From commande where ID_User=1";
+        $sql="SElECT ID_Commande,Date_Creation,Etat_Commande From commande";
+        $DB = config::getConnexion();
+        try{
+            $liste=$DB->query($sql);
+            return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+    function afficherFacture($id){
+
+        $sql="SElECT * From facture where ID_Commande=$id";
         $DB = config::getConnexion();
         try{
             $liste=$DB->query($sql);
@@ -149,12 +195,19 @@ class CommandeC{
         }
     }
     function supprimerCommande($ID){
-        $sql="DELETE FROM commande where ID_Produit like $ID";
+        $sql3="DELETE FROM facture where ID_Commande like $ID";
+        $sql2="DELETE FROM detail_commande where ID_Commande like $ID";
+        $sql1="DELETE FROM commande where ID_Commande like $ID";
+
         $DB = config::getConnexion();
-        $req=$DB->prepare($sql);
+        $req3=$DB->prepare($sql3);
+        $req2=$DB->prepare($sql2);
+        $req1=$DB->prepare($sql1);
 
         try{
-            $req->execute();
+            $req3->execute();
+            $req2->execute();
+            $req1->execute();
 
         }
         catch (Exception $e){

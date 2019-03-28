@@ -30,7 +30,7 @@
                                 </td>
                                 <td class="product-image">
                                     <a href="#">
-                                        <img src="img/shop/1.jpg"  alt="">
+                                        <img src="img/shop/1.jpg"  alt="" width="50" height="50">
                                     </a>
                                 </td>
                                 <td class="t-product-name">
@@ -66,7 +66,7 @@
                     </table>
                 </div>
                 <div class="shopingcart-bottom-area">
-                    <a class="left-shoping-cart" href="#">CONTINUE SHOPPING</a>
+                    <a class="left-shoping-cart" href="shop.php">CONTINUE SHOPPING</a>
                     <div class="shopingcart-bottom-area pull-right">
                         <a class="right-shoping-cart" href="supprimerPanier.php?id='%'">CLEAR SHOPPING CART</a>
                         <a class="right-shoping-cart" href="#">UPDATE SHOPPING CART</a>
@@ -85,9 +85,9 @@
                         <h2>SUBTOTAL<span><?= $somme=$panierC->subtotalPanier(); ?></span></h2>
                     </div>
                     <div class="subtotal-area">
-                        <h2>GRAND TOTAL<span>$ 200</span></h2>
+                        <h2>GRAND TOTAL<span><?= $panierC->totalPanier(); ?></span></h2>
                     </div>
-                    <a href="#">CHECKOUT</a>
+                    <a href="chekout.php">CHECKOUT</a>
                     <p>Checkout With Multiple Addresses</p>
                 </div>
             </div>

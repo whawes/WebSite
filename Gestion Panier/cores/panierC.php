@@ -3,20 +3,59 @@ require  '../config.php';
 $DB =new config();
 class PanierC{
 
-    function subtotalPanier(){
-        $sql="select Prix_Produit from cart";
+    function totalPanier(){
+        $sql="select Prix_Produit,Qty_Produit from cart";
         $DB = config::getConnexion();
         $req=$DB->prepare($sql);
-
+$somme=0;
         try{
             $req->execute();
             foreach ($req as $produit):
                 {
-                    $somme=$produit['Prix_Produit'];
+                     $somme+=$produit['Prix_Produit']*$produit['Qty_Produit'];
                 }
             endforeach;
-            return $somme;
+return $somme;
 
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+    function nbrProduit(){
+        $sql="select count(ID_Produit) as nbr from cart ";
+        $DB = config::getConnexion();
+        $req=$DB->prepare($sql);
+
+
+        try{
+
+                 $req->execute();
+                 foreach ($req as $row):
+                     {
+                         return $row['nbr'];
+                     }
+            endforeach;
+
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+    function subtotalPanier(){
+        $sql="select Prix_Produit from cart";
+        $DB = config::getConnexion();
+        $req=$DB->prepare($sql);
+        $somme=0;
+        try{
+            $req->execute();
+            foreach ($req as $produit):
+                {
+                   $somme+= $produit['Prix_Produit'];
+                }
+            endforeach;
+
+return $somme;
         }
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
