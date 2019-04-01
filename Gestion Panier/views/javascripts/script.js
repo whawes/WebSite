@@ -8,15 +8,17 @@ $(function() {
 	$("#street_error_message").hide();
 	$("#city_error_message").hide();
 	$("#cp_error_message").hide();
+	$("#livraison_error_message").hide();
 
-	var error_lastname = false;
-	var error_firstname = false;
-	var error_phone = false;
-	var error_street = false;
-	var error_mail = false;
-	var error_cp = false;
-	var error_country = false;
-	var error_city = false;
+	var error_livraison ="";
+	var error_lastname = "";
+	var error_firstname = "";
+	var error_phone = "";
+	var error_street = "";
+	var error_mail = "";
+	var error_cp = "";
+	var error_country = "";
+	var error_city = "";
 
 	$("#form_firstname").focusout(function() {
 
@@ -41,7 +43,7 @@ $(function() {
 	});
 	$("#form_city").focusout(function() {
 
-		check_retype_password();
+		check_city();
 		
 	});
 
@@ -60,6 +62,7 @@ $(function() {
 		check_cp();
 
 	});
+
 
 	function check_lastname() {
 	
@@ -92,12 +95,14 @@ $(function() {
 	
 		var phone_length = $("#form_phone").val().length;
 		
-		if(phone_length == 8) {
+		if(phone_length < 8 || phone_length > 8 ) {
+			$("#phone_error_message").hide();
+
+		} else {
+
 			$("#phone_error_message").html("At least 8 characters");
 			$("#phone_error_message").show();
 			error_phone = true;
-		} else {
-			$("#phone_error_message").hide();
 		}
 	
 	}
@@ -148,7 +153,7 @@ $(function() {
 		var city_length = $("#form_city").val().length;
 
 
-		if(city_length > 4 ) {
+		if(city_length < 4 ) {
 			$("#city_error_message").html("Invalid City");
 			$("#city_error_message").show();
 			error_city = true;
@@ -171,41 +176,6 @@ $(function() {
 		}
 	
 	}
-
-	$("#Commande_form").submit(function() {
-											
-		error_lastname = false;
-		error_firstname = false;
-		error_phone = false;
-		error_country = false;
-		error_mail = false;
-		error_city = false;
-		error_cp = false;
-		error_street = false;
-											
-		check_firstname();
-		check_lastname();
-		check_phone();
-		check_street();
-		check_mail();
-		check_cp();
-		check_city();
-		check_country();
-		
-		if(error_firstname == false && error_lastname == false && error_phone == false && error_country == false && error_mail == false && error_city == false && error_cp == false && error_street == false) {
-			return true;
-		} else {
-			return false;	
-		}
-
-	});
-
-});
-$(function() {
-	$("#livraison_error_message").hide();
-
-	var error_livraison = false;
-
 	function check_livraison() {
 
 		if($('#form_livraison').is(':checked') || $('#form_livraison1').is(':checked')  ) {
@@ -219,21 +189,35 @@ $(function() {
 		}
 
 	}
-$("#Commande_form1").submit(function() {
 
+	$("#Commande_form").submit(function() {
+											
+		error_lastname = false;
+		error_firstname = false;
+		error_phone = false;
+		error_country = false;
+		error_mail = false;
+		error_city = false;
+		error_cp = false;
+		error_street = false;
+		error_livraison = false;
+											
+		check_firstname();
+		check_lastname();
+		check_phone();
+		check_street();
+		check_mail();
+		check_cp();
+		check_city();
+		check_country();
+		check_livraison();
+		
+		if(error_firstname == false && error_livraison == false && error_lastname == false && error_phone == false && error_country == false && error_mail == false && error_city == false && error_cp == false && error_street == false) {
+			return true;
+		} else {
+			return false;	
+		}
 
-	error_livraison = false;
-
-
-
-	check_livraison();
-
-	if(error_livraison == false ) {
-		return true;
-	} else {
-		return false;
-	}
-
-});
+	});
 
 });

@@ -50,6 +50,7 @@ $DB = new config();
         <link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr css -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
         <script type="text/javascript" language="javascript" src="javascripts/jquery.js"></script>
         <script type="text/javascript" language="javascript" src="javascripts/script.js"></script>
@@ -139,11 +140,11 @@ $DB = new config();
                                         <div class="total-cart-price">
                                             <div class="cart-product-line fast-line">
                                                 <span>Shipping</span>
-                                                <span class="free-shiping">$10.50</span>
+                                                <span class="free-shiping"><?= $somme=$panierC->subtotalPanier(); ?></span>
                                             </div>
                                             <div class="cart-product-line">
                                                 <span>Total</span>
-                                                <span class="total">$ 140.00</span>
+                                                <span class="total"><?= $panierC->totalPanier(); ?></span>
                                             </div>
                                         </div>
 
@@ -233,7 +234,7 @@ $DB = new config();
 
             <div class="container">
                 <div class="row">
-                    <form action="AjouterCommande.php" method="post">
+                    <form action="AjouterCommande.php" method="post" id=Commande_form>
                     <div class="col-md-8">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
@@ -250,7 +251,7 @@ $DB = new config();
 									<div class="panel-body">
 
 										<div class="row">
-                                            <form id=Commande_form >
+
 											<div class="col-md-6">
 												<p class="form-row">
 													<input type="text" class="form_text" name="nom" id="form_firstname" placeholder="First Name *"><span class="error_form" id="firstname_error_message"></span>
@@ -295,7 +296,7 @@ $DB = new config();
 
                                                 </p>
 											</div>
-                                            </form>
+
 										</div>
 
 									</div>
@@ -360,11 +361,11 @@ $DB = new config();
 													<tbody>
 
 														<tr>
-															<td><h3 class="product-name"><?= $roww['$Nom_Produit'] ?></h3></td>
-															<td><span class="cart-price"><span class="check-price"><?= $roww['$Prix_Produit'] ?></span></span></td>
-															<td><?= $row['$Qty_Produit'] ?></td>
+															<td><h3 class="product-name"><?=  $roww['Nom_Produit']?></h3></td>
+															<td><span class="cart-price"><span class="check-price"><?= $roww['Prix_Produit'] ?></span></span></td>
+															<td><?= $row['Qty_Produit'] ?></td>
 															<!-- sub total starts here -->
-															<td><span class="cart-price"><span class="check-price"><?= $roww['$Nom_Produit']*$roww['$Prix_Produit'] ?></span></span></td>
+															<td><span class="cart-price"><span class="check-price"><?= $roww['Nom_Produit']*$roww['Prix_Produit'] ?></span></span></td>
 														</tr>
 
 													</tbody>
@@ -372,15 +373,11 @@ $DB = new config();
 													<tfoot>
 														<tr>
 															<td colspan="3">Subtotal</td>
-															<td><span class="check-price">$377.00</span></td>
-														</tr>
-														<tr>
-															<td colspan="3">Shipping Handling (Flat Rate - Fixed)</td>
-															<td><span class="check-price">$10.00</span></td>
+															<td><span class="check-price"><?= $somme=$panierC->subtotalPanier(); ?></span></td>
 														</tr>
 														<tr>
 															<td colspan="3"><strong>Grand Total</strong></td>
-															<td><strong><span class="check-price">$387.00</span></strong></td>
+															<td><strong><span class="check-price"><?= $panierC->totalPanier(); ?></span></strong></td>
 														</tr>
 													</tfoot>
 
