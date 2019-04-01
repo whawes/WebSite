@@ -1,11 +1,3 @@
-<?php
-
-require '../core/commantaireFunction.php';
-$commantaireF=new CommantaireF();
-$DB = new config();
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +10,7 @@ $DB = new config();
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Tables</title>
+    <title>Charts</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -51,7 +43,7 @@ $DB = new config();
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/logo.png" alt="CoolAdmin" class="logo_img" />
+                            <img src="images/icon/logo.png" alt="CoolAdmin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -190,11 +182,11 @@ $DB = new config();
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="chart.php">
                                 <i class="fas fa-chart-bar"></i>Charts</a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="table.php">
                                 <i class="fas fa-table"></i>Tables</a>
                         </li>
@@ -451,43 +443,28 @@ $DB = new config();
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row">
-                            <?php
-                            $titre=$_GET['Titre_post'];
-                            $createur=$_GET['Createur_post'];
-                            ?>
-                            <div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Commantaires sujet <?php echo $titre?></h3>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
-                                        <thead>
-                                            <tr>
-                                                <th>Créateur Commantaire</th>
-                                                <th>Date</th>
-                                                <th>Texte</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                <?php require 'tabAfficher3.php';?>
-                                </tbody>
-                                    </table>
+                            <div class="col-lg-6">
+                                <div class="au-card m-b-30">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 m-b-40">Nombre de posts</h3>
+                                    <?php Require 'chart2.php' ?>
                                 </div>
-                                <!-- END DATA TABLE -->
+                                </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
-                                    <p>Copyright © 2018 Tech Army. All rights reserved.</p>
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- END MAIN CONTENT-->
         </div>
+        <!-- END PAGE CONTAINER-->
 
     </div>
 

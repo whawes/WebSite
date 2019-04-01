@@ -50,7 +50,7 @@ $DB = new config();
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/logo.png" alt="CoolAdmin" />
+                            <img src="images/icon/logo.png" alt="CoolAdmin" class="logo_img" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -165,7 +165,7 @@ $DB = new config();
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="Cool Admin" class="logo_img"/>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">

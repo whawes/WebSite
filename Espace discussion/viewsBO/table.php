@@ -52,7 +52,7 @@ $DB = new config();
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/logo.png" alt="CoolAdmin" />
+                            <img src="images/icon/logo.png" alt="CoolAdmin" class="logo_img" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -167,7 +167,7 @@ $DB = new config();
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/icon/logo.png" alt="Cool Admin" class="logo_img"/>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -192,11 +192,11 @@ $DB = new config();
                             </ul>
                         </li>
                         <li>
-                            <a href="chart.html">
+                            <a href="chart.php">
                                 <i class="fas fa-chart-bar"></i>Charts</a>
                         </li>
                         <li class="active">
-                            <a href="table.html">
+                            <a href="table.php">
                                 <i class="fas fa-table"></i>Tables</a>
                         </li>
                         <li>
@@ -489,7 +489,7 @@ $DB = new config();
                                 <!-- DATA TABLE -->
                                 <h3 class="title-5 m-b-35">Livres Téléchargeables</h3>
                                                                     <div class="table-data__tool-right">
-                                        <a href="form.php"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <a href="form.php"><button class="au-btn au-btn-icon au-btn--green2 au-btn--small">
                                             <i class="zmdi zmdi-plus"></i>add item</button></a>
                                     </div>
                                 <div class="table-responsive table-responsive-data2">

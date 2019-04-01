@@ -428,6 +428,22 @@ class SujetF
             die('Erreur: '.$e->getMessage());
         }	
 	}
+
+
+	function stat()
+	{
+		$sql="SElECT Createur,count(*) as Number From sujet group by Createur order by number asc";
+		$db = config::getConnexion();
+		try
+		{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
 }
 
 ?>

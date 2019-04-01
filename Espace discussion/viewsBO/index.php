@@ -1,11 +1,3 @@
-<?php
-
-require '../core/commantaireFunction.php';
-$commantaireF=new CommantaireF();
-$DB = new config();
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +10,7 @@ $DB = new config();
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Tables</title>
+    <title>Dashboard</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -166,13 +158,13 @@ $DB = new config();
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" class="logo_img"/>
+                    <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
+                        <li class="active has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
@@ -191,11 +183,11 @@ $DB = new config();
                             </ul>
                         </li>
                         <li>
-                            <a href="chart.php">
+                            <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Charts</a>
                         </li>
-                        <li class="active">
-                            <a href="table.php">
+                        <li>
+                            <a href="table.html">
                                 <i class="fas fa-table"></i>Tables</a>
                         </li>
                         <li>
@@ -444,49 +436,38 @@ $DB = new config();
                     </div>
                 </div>
             </header>
-            <!-- END HEADER DESKTOP-->
+            <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row">
-                            <?php
-                            $titre=$_GET['Titre_post'];
-                            $createur=$_GET['Createur_post'];
-                            ?>
                             <div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Commantaires sujet <?php echo $titre?></h3>
-                                <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
-                                        <thead>
-                                            <tr>
-                                                <th>Créateur Commantaire</th>
-                                                <th>Date</th>
-                                                <th>Texte</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                <?php require 'tabAfficher3.php';?>
-                                </tbody>
-                                    </table>
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">overview</h2>
                                 </div>
-                                <!-- END DATA TABLE -->
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="au-card chart-percent-card">
+                                    <?php Require 'chart.php' ?>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
-                                    <p>Copyright © 2018 Tech Army. All rights reserved.</p>
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
         </div>
 
     </div>

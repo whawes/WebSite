@@ -484,6 +484,13 @@ section {
 .au-btn--green:hover {
     background: #59bd60;
 }
+.au-btn--green2 {
+    background: #a94442;
+}
+
+.au-btn--green2:hover {
+    background: #f75e5b;
+}
 
 .au-btn-plus {
     position: absolute;
@@ -826,12 +833,12 @@ section {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    background: #4272d7;
+    background: #a94442;
     margin-left: -3px;
 }
 
 .au-btn--submit:hover {
-    background: #3868cd;
+    background: #f75e5b;
 }
 
 .au-btn--submit > i {
@@ -1631,11 +1638,11 @@ section {
 }
 
 .navbar-sidebar .navbar__list li a:hover {
-    color: #4272d7;
+    color: #a94442;
 }
 
 .navbar-sidebar .navbar__list li.active > a {
-    color: #4272d7;
+    color: #a94442;
 }
 
 .has-sub {
@@ -14638,4 +14645,9 @@ section {
 
 .vue-lists ul, .vue-lists ol {
     padding-left: 30px;
+}
+.logo_img{
+    margin-top: -28px;
+    width: 70%;
+    height: 90%;
 }
