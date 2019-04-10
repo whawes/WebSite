@@ -10,7 +10,7 @@ $client=$Clients1->afficherclient(13);
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>About Us || Witter Multipage Responsive Template</title>
+        <title>Votre profil</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- favicon -->
@@ -316,25 +316,7 @@ $client=$Clients1->afficherclient(13);
 			</div>
 		</div>		
 		<!-- Mobile Menu End -->   
-        <!-- Breadcrumbs Area Start -->
-        <div class="breadcrumbs-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-					    <div class="breadcrumbs">
-					       <h2>My Account</h2> 
-					       <ul class="breadcrumbs-list">
-						        <li>
-						            <a title="Return to Home" href="index.html">Home</a>
-						        </li>
-						        <li>My Account</li>
-						    </ul>
-					    </div>
-					</div>
-				</div>
-			</div>
-		</div> 
-		<!-- Breadcrumbs Area Start -->
+        
 		<!-- My Account Area Start -->
 		<div class="my-account-area section-padding">
 			<div class="container">
