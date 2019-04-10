@@ -24,7 +24,7 @@ class Client{
 	}
 	
 	
-	function getNom(){
+	function getNomC(){
 		return $this->Nom;
 	}
 	function getPrenom(){

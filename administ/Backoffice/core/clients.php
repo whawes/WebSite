@@ -34,7 +34,7 @@ class Clients {
         }
 		
 	}
-	function recuperernom($id)
+	/*function recuperernom($id)
     {
         $dbh = config::getConnexion();
 
@@ -47,9 +47,9 @@ class Clients {
         }
 
 
-    }
+    }*/
 	
-	/*function afficherclient(){
+	function afficherclient(){
 		$sql="SElECT * From client";
 		$db = config::getConnexion();
 		try{
@@ -59,12 +59,12 @@ class Clients {
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
         }	
-	}*/
-	function supprimerclient($cin){
-		$sql="DELETE FROM employee where cin= :cin";
+	}
+	function supprimerclient($id){
+		$sql="DELETE FROM client where id= :ID";
 		$db = config::getConnexion();
         $req=$db->prepare($sql);
-		$req->bindValue(':cin',$cin);
+		$req->bindValue(':ID',$id);
 		try{
             $req->execute();
            // header('Location: index.php');
@@ -94,7 +94,7 @@ try{
 		
             $s=$req->execute();
 			
-           // header('Location: index.php');
+           ;
         }
         catch (Exception $e){
             echo " Erreur ! ".$e->getMessage();
@@ -125,7 +125,7 @@ try{
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
         }
-	}*/
+	}
 }
 
 ?>

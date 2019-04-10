@@ -22,5 +22,5 @@ $employee1->ajouterEmploye($employe1);
 }
 //*/
 }
-echo "erreur"
+header('Location: index.html');
 ?>

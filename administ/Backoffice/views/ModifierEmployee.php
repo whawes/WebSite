@@ -13,6 +13,10 @@ if (isset($_POST["supprimer"]))
 
 $Tabemploye=$Employee1->supprimerEmploye($_GET['id']);
 }
-header('Location: table.php');
+
+
+
+
+header('Location: tableemployee.php');
 
 ?>

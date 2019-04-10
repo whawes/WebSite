@@ -56,14 +56,14 @@ class Employee {
 		$sql="UPDATE employee SET Salaire=:salaire WHERE ID=$id";
 		
 		$db = config::getConnexion();
-		//$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
+	
 try{		
         $req=$db->prepare($sql);
         
 		$req->bindValue(':salaire',$Salaire);
             $s=$req->execute();
 			
-           // header('Location: index.php');
+          
         }
         catch (Exception $e){
             echo " Erreur ! ".$e->getMessage();
@@ -74,8 +74,19 @@ try{
 
 
 
-	function recupererEmploye($cin){
-		$sql="SELECT * from employe where cin=$cin";
+	function recupererEmploye($nom){
+		$sql="SELECT * from employee where Nom like '%$nom%'";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+	function trierEmploye(){
+		$sql="SELECT * from employee ORDER BY Salaire ASC ";
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);
@@ -86,17 +97,7 @@ try{
         }
 	}
 	
-	function rechercherListeEmployes($tarif){
-		$sql="SELECT * from employe where tarifHoraire=$tarif";
-		$db = config::getConnexion();
-		try{
-		$liste=$db->query($sql);
-		return $liste;
-		}
-        catch (Exception $e){
-            die('Erreur: '.$e->getMessage());
-        }
-	}
+	
 }
 
 ?>

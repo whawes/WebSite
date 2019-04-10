@@ -8,7 +8,7 @@ class Clients {
 		try{
         $req=$db->prepare($sql);
 		
-        $nom=$client->getNom();
+        $nom=$client->getNomC();
         $prenom=$client->getPrenom();
         $email=$client->getemail();
         $motdepasse=$client->getmotdepasse();
@@ -35,9 +35,9 @@ class Clients {
 		
 	}
 	
-	function afficherclient(){
-		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-		$sql="SElECT * From employee";
+	function afficherclient($id){
+		
+		$sql="SElECT * From client where ID=$id";
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);
@@ -47,7 +47,33 @@ class Clients {
             die('Erreur: '.$e->getMessage());
         }	
 	}
-	function supprimerclient($cin){
+	function modifierclient($nom,$prenom,$email,$motdepasse,$numtel,$id){
+		$db = config::getConnexion();
+		$sql="UPDATE client SET Nom=:nom,Prenom=:prenom,Email=:email,Motdepasse=:motdepasse,NumTel=:numtel WHERE ID=$id";
+
+try{		
+        $req=$db->prepare($sql);
+		
+		
+		$req->bindValue(':nom',$nom);
+		$req->bindValue(':prenom',$prenom);
+		$req->bindValue(':email',$email);
+		$req->bindValue(':motdepasse',$motdepasse);
+	    $req->bindValue(':numtel',$numtel);
+		
+		
+            $s=$req->execute();
+			
+        }
+        catch (Exception $e){
+            echo " Erreur ! ".$e->getMessage();
+   echo " Les datas : " ;
+  print_r($datas);
+        }
+		
+	}
+
+	/*function supprimerclient($cin){
 		$sql="DELETE FROM employee where cin= :cin";
 		$db = config::getConnexion();
         $req=$db->prepare($sql);
@@ -59,41 +85,9 @@ class Clients {
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
         }
-	}
-	/*function modifierclient($employe,$cin){
-		$sql="UPDATE employee SET cin=:cinn, nom=:nom,prenom=:prenom,email=:email,salaire=:salaire WHERE cin=:cin";
-		
-		$db = config::getConnexion();
-		//$db->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
-try{		
-        $req=$db->prepare($sql);
-		$cinn=$client->getCin();
-        $nom=$client->getNom();
-        $prenom=$client->getPrenom();
-        $email=$client->getEmail();
-        $salaire=$client->getSalaire();
-		$datas = array(':cinn'=>$cinn, ':cin'=>$cin, ':nom'=>$nom,':prenom'=>$prenom,':nbH'=>$nb,':tarifH'=>$tarif);
-		$req->bindValue(':cinn',$cinn);
-		$req->bindValue(':cin',$cin);
-		$req->bindValue(':nom',$nom);
-		$req->bindValue(':prenom',$prenom);
-		$req->bindValue(':nbH',$nb);
-		$req->bindValue(':tarifH',$tarif);
-		
-		
-            $s=$req->execute();
-			
-           // header('Location: index.php');
-        }
-        catch (Exception $e){
-            echo " Erreur ! ".$e->getMessage();
-   echo " Les datas : " ;
-  print_r($datas);
-        }
-		
-	}
-	function recupererclient($cin){
-		$sql="SELECT * from employe where cin=$cin";
+	}*/
+	/*function recupererclient($id){
+		$sql="SELECT * from client where ID=$id";
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);
@@ -104,7 +98,7 @@ try{
         }
 	}
 	
-	function rechercherListeclient($tarif){
+	/*function rechercherListeclient($tarif){
 		$sql="SELECT * from employe where tarifHoraire=$tarif";
 		$db = config::getConnexion();
 		try{

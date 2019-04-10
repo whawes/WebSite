@@ -1,12 +1,11 @@
 <?php 
-require '../core/clients.php';
+include "../core/clients.php";
 $Clients1=new Clients() ;
-
+$client=$Clients1->afficherclient(13);
  
-
 ?>
 
-
+<!doctype html>
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
@@ -340,65 +339,54 @@ $Clients1=new Clients() ;
 		<div class="my-account-area section-padding">
 			<div class="container">
 				<div class="section-title2">
-                    
-					<h2>Procced to Checkout</h2> 
-                <?php echo $Clients1->recuperernom(1) ;?>
-					<p>Welcome to your account. Here you can manage all of your personal information and orders.</p>
-				</div>
-				<div class="row">
-					<div class="addresses-lists">
-						<div class="col-xs-12 col-sm-6 col-lg-6">
-							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-						
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingFour">
-										<h4 class="panel-title">
-											<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-												<i class="fa fa-building"></i>
-												<span>My personal information</span>
-											</a>
-										</h4>
-									</div>
-									<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-										<div class="panel-body">
-											<div class="coupon-info">
-												<h1 class="heading-title">Your personal information</h1>
-												<p class="coupon-text">Please be sure to update your personal information if it has changed.</p>
-												<p class="required">*Required field</p>
-												<form action="ModifierClient.php?id=<?php echo $row['ID']?>" method="POST" >
-												
-													<p class="form-row">
-														<input name="Nom" type="text" placeholder="Votre nom*"  value="<?php echo $Clients->recuperernom(1) ;?>" />
-													</p>
-													<p class="form-row">
-														<input name="Prenom" type="text" placeholder="Votre prenom *" required/>
-													</p>
-                                                    <p class="form-row">
-                                                        <input name="Email" type="text" placeholder="Votre nouveau email *" required/>
-                                                    </p>
-													<p class="form-row">
-														<input name="Nouveaupasse" type="text" placeholder="Nouveau mot de passe *" required/>
-													</p>
-													<p class="form-row">
-														<input name="Numtel" type="text" placeholder="Numero de telephone *" required/>
-													</p>
-												
-													<a title="Save" class="btn button button-small" href="index.html">
-														<span>
-															  Save
-															<i class="fa fa-chevron-right"></i>
-														</span>
-													</a>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 					
-					</div>
+					<h2>Bienvenue sur votre compte. Ici, vous pouvez gérer toutes vos informations personnelles.
+<h2>
 				</div>
+				<table class="table table-borderless table-striped table-earning">
+                                        <thead>
+
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Prenom</th>
+                                                <th>Email</th>
+                                                <th>Mot de passe</th>
+                                                <th>Numero de telephone</th>
+                                              <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <?php foreach ($client as $row):  ?>
+                                            <form action="ModifierClient.php?id=<?php echo $row['ID']?>" method="POST" >
+                                        <tbody>
+                                         
+                                            <tr>
+                                                
+                                                
+                                                <td><input type="text" name="Nom" value="<?php echo $row['Nom']?>"></td>
+                                            <td> <input type="text" name="Prenom" value="<?php echo $row['Prenom']?>"></td>
+                                                <td><input type="text" name="Email" value="<?php echo $row['Email']?>"></td>
+                                                <td >
+                                                    
+                                                    <input name="Motdepasse" type="text" value="<?php echo $row['Motdepasse']?>" >
+                                                    
+                                            </td>
+                                            <td><input type="text" name="Numtel" value="<?php echo $row['NumTel']?>"></td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                       
+                                                        <button name="modifierclient" class="item" data-toggle="tooltip" data-placement="top" type="submit">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                        
+                                                       
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        </form>
+                                    <?php endforeach ; ?>
+
+                                    </table>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="create-account-button pull-left">
