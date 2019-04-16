@@ -376,21 +376,16 @@ $auteur=new auteurC();
         <div class="shopping-cart-area section-padding">
     <div class="container">
  <div class="row" id="det">
-<h2>Liste complète des auteurs</h2>
+<h2>Liste complète des auteurss</h2>
     <?php
     
-        $list=$auteur->afficherAuteur();
+        $list=$auteur->rechercheAvance($_GET['search']);
     ?>
     <?php foreach($list as $row): ?>
     <div  class="single-shop-product">
         <div class="col-xs-12 col-sm-7 col-nn-8">
             <div class="deal-product-content">
-                <h4>
-                    <form action="#">
-                    <a title="East of eden" href="" data-toggle="modal" data-target="#productModal"><?php echo $row['nom'] ; echo " "; echo $row['prenom'] ;echo "<br>" ?></a><span><h5><?php echo "informations :"; echo $row['informations']; echo "<br>"; echo " livres :" ; echo $row['livres']?></h5></span>
-                    
-                                                </form>
-                </h4>
+              
                 
             </div>
         </div>

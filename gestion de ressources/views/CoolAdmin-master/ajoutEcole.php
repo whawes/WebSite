@@ -1,3 +1,13 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["superadmin"]) || $_SESSION["superadmin"] !== true){
+    header("location: ../login-admin.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -195,9 +205,17 @@
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Charts</a>
                         </li>
-                        <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
+                       <li>
+                            <a href="table-Auteur.php">
+                                <i class="fas fa-table"></i>Table auteurs</a>
+                        </li>
+                         <li>
+                            <a href="Ecole.php">
+                                <i class="fas fa-table"></i>Table Packs</a>
+                        </li>
+                         <li>
+                            <a href="editeur-list.php">
+                                <i class="fas fa-table"></i>Table éditeurs</a>
                         </li>
                         <li class="active">
                             <a href="form.html">
@@ -486,7 +504,7 @@
                                                         <label for="textarea-input" class=" form-control-label">Description</label>
                                                     </div>
                                                     <div class="col-12 col-md-9">
-                                                        <textarea name="informations" id="informations" rows="9" placeholder="Description ..." class="form-control"></textarea>
+                                                        <textarea name="informations" id="informations" rows="9" placeholder="Description ..." class="form-control" required></textarea>
                                                     </div>
                                                 </div>
 

@@ -1044,6 +1044,7 @@ body {
   text-transform: capitalize;
 }
 .breadcrumbs-area-ecole {
+ 
   background: rgba(0, 0, 0, 0) url("ecole.png") no-repeat scroll center center;
   color: #fefefe;
   text-align: center;

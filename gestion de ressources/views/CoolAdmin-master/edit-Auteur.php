@@ -1,4 +1,14 @@
 <?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["superadmin"]) || $_SESSION["superadmin"] !== true){
+    header("location: ../login-admin.php");
+    exit;
+}
+?>
+<?php
 require '../../core/AuteurC.php';
 $auteur=new AuteurC();
 ?>
@@ -14,7 +24,7 @@ $auteur=new AuteurC();
     <meta name="description" content="au theme template">
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
-
+    <script type="text/javascript" src="js/control.js" ></script>
     <!-- Title Page-->
     <title>Forms</title>
 

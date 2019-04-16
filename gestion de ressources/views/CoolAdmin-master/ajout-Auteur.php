@@ -1,3 +1,13 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["superadmin"]) || $_SESSION["superadmin"] !== true){
+    header("location: ../login-admin.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +21,7 @@
 
     <!-- Title Page-->
     <title>Forms</title>
-
+    <script type="text/javascript" src="js/control.js" ></script>
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
@@ -191,9 +201,17 @@
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Charts</a>
                         </li>
-                        <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
+                       <li>
+                            <a href="table-Auteur.php">
+                                <i class="fas fa-table"></i>Table auteurs</a>
+                        </li>
+                         <li>
+                            <a href="Ecole.php">
+                                <i class="fas fa-table"></i>Table Packs</a>
+                        </li>
+                         <li>
+                            <a href="editeur-list.php">
+                                <i class="fas fa-table"></i>Table éditeurs</a>
                         </li>
                         <li class="active">
                             <a href="form.html">
@@ -464,7 +482,7 @@
                                                     <label for="text-input" class=" form-control-label">Nom</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="nom" name="nom" placeholder="nom" class="form-control" required>
+                                                    <input type="text" id="nom" name="nom" placeholder="nom" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -472,7 +490,7 @@
                                                                 <label for="email-input" class=" form-control-label">Prenom</label>
                                                             </div>
                                                             <div class="col-12 col-md-9">
-                                                                <input type="text" id="prenom" name="prenom" placeholder="prenom" class="form-control" required>
+                                                                <input type="text" id="prenom" name="prenom" placeholder="prenom" class="form-control" required="" >
                                                                 <small class="help-block form-text"></small>
                                                             </div>
                                                         </div> 
@@ -482,7 +500,7 @@
                                                         <label for="textarea-input" class=" form-control-label">Description</label>
                                                     </div>
                                                     <div class="col-12 col-md-9">
-                                                        <textarea name="informations" id="informations" rows="9" placeholder="Description ..." class="form-control"></textarea>
+                                                        <textarea name="informations" id="informations" rows="9" placeholder="Description ..." class="form-control" required=""></textarea>
                                                     </div>
                                                 </div>
 
@@ -491,7 +509,7 @@
                                                             <label for="text-input" class=" form-control-label">Livres</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input type="text" id="livres" name="livres" placeholder="livres" class="form-control" required>
+                                                            <input type="text" id="livres" name="livres" placeholder="livres" class="form-control " required >
                                                         </div>
                                                     </div>
 
@@ -509,7 +527,7 @@
                                         
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <button type="submit" onclick="testAuteur()" class="btn btn-primary btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> Enregistrer
                                         </button>
                                         <button type="reset" class="btn btn-danger btn-sm">

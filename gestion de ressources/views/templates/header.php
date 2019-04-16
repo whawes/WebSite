@@ -100,7 +100,7 @@
                                             <li><a href="Editeur.php">Espace éditeurs</a></li>
 
                                         </ul></li>
-                                     <li><a href="login-admin.html">ESPACE ECOLE</a>
+                                     <li><a href="login-admin.php">ESPACE ECOLE</a>
                                     </li>
                                     <li><a href="#">CONTACT</a>
                                     <ul class="sub-menu">

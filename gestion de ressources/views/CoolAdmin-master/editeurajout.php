@@ -1,3 +1,13 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["superadmin"]) || $_SESSION["superadmin"] !== true){
+    header("location: ../login-admin.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

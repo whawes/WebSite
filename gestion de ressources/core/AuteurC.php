@@ -102,6 +102,17 @@ try{
             die('Erreur: '.$e->getMessage());
         }
 	}
+	function rechercheAvance($nom){
+		$sql="SElECT * from auteur where nom like '%$nom%'";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
 	function rechercherAuteurById($id){
 		$sql="SELECT * from auteur where id=$id";
 		$db = config::getConnexion();

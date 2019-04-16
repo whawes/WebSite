@@ -1,4 +1,14 @@
 <?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["superadmin"]) || $_SESSION["superadmin"] !== true){
+    header("location: ../login-admin.php");
+    exit;
+}
+?>
+<?php
 require '../../core/EditeurC.php';
 $editeur=new EditeurC();
 ?>
@@ -408,7 +418,7 @@ $editeur=new EditeurC();
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#"> <?php echo $_SESSION["username"];?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -419,7 +429,7 @@ $editeur=new EditeurC();
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#"><?php echo $_SESSION["username"]; ?></a>
                                                     </h5>
                                                     <span class="email">johndoe@example.com</span>
                                                 </div>
@@ -497,8 +507,7 @@ $editeur=new EditeurC();
                                             <div class="dropDownSelect2"></div>
                                         </div>
                                         
-                                        <button class="au-btn-filter">
-                                            <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                      
                                     </div>
                                     <div class="table-data__tool-right">
                                         <a href="editeurajout.php" class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -544,7 +553,7 @@ $editeur=new EditeurC();
            echo "<td>" . $row['adresse'] . "</td>";
            echo "<td>";
            echo "<div class='table-data-feature'>";
-           echo "<a href='Editeur-edit.php?id=". $row['id'] ."' class='item' data-toggle='tooltip' data-placement='top' title='Edit'><i class='zmdi zmdi-mail-send'></i></a>";
+           
            echo "<a href='Editeur-update.php?id=". $row['id'] ."' class='item' title='Update Record' data-toggle='tooltip'>  <i class='zmdi zmdi-edit'></i></a>";
            echo "<a href='supprimerEditeur.php?id=". $row['id'] ."' class='item' title='Delete Record' data-toggle='tooltip'><i class='zmdi zmdi-delete'></i></a>";
        echo "</div>";
