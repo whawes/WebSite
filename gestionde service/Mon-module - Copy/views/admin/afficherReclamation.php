@@ -280,7 +280,8 @@ if(isset($_GET['filtrage'])) {
                                             <td><?PHP echo $row['nom']; ?></td>
                                             <td><?PHP echo $row['mail']; ?></td>
                                             <td><?PHP echo $row['msg']; ?></td>
-                                            <td><?PHP echo $row['traitement']; ?></td>
+                                            <td><?PHP if($row['traitement']=='non')echo"<span class=\"status--denied\">non</span>";
+                                            else echo"<span class=\"status--process\">oui</span>";?></td>
                                             <td>
                                                 <div class="table-data-feature">
                                                     <a href="trait.php?id=<?php echo $row['id']; ?>">

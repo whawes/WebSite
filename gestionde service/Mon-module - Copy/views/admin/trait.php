@@ -7,9 +7,10 @@ $recl=new reclamationC();
 echo $s;
 var_dump($s+0);
 $k=$s+0;
-    mail("omar.jmai@esprit.tn", "tiitt", "tiit we7dde o5raa");
 
 $t=$recl->traiter($k);
+mail("jmaiomarr6@gmail.com", "Reclamation", "Votre Reclamtion est traite");
+
 
     header('Location: afficherReclamation.php');
 ?>
