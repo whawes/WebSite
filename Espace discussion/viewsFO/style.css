@@ -1822,6 +1822,7 @@ p.form-row-phone {
 }
 .deal-product-content {
   padding-top: 20px;
+  word-wrap: break-word;
 }
 /*----------------------------------------*/
 /*  18.	Single Product Page CSS

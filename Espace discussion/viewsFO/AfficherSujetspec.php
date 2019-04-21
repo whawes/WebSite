@@ -1,13 +1,7 @@
 <div class="row">
     <?php
-        if(isset($_GET['Createur_post']) && isset($_GET['Titre_post']))
-        {
-            $createur=$_GET['Createur_post'];
-            $titre=$_GET['Titre_post'];
-            $_SESSION["createur"] = $createur;
-            $_SESSION["titre"] = $titre;
-        }
-        $list=$sujetF->recupererSujet($_SESSION["createur"],$_SESSION["titre"]);
+    $_SESSION["page"]=$_SERVER['REQUEST_URI'];
+        $list=$sujetF->recupererSujet($_GET['id']);
         $_SESSION["connected"] = "aaa";
     ?>
     <?php foreach($list as $row): ?>
@@ -15,44 +9,24 @@
         <div class="col-xs-12 col-sm-7 col-nn-8">
             <div class="deal-product-content">
                 <h1>
-                    <a title="East of eden" href="sujet.php?Titre_post=<?=$row['Titre']?>&Createur_post=<?=$row['Createur']?>"><?php echo $row['Titre']?></a><span><h5><?php echo "créer par "; echo $row['Createur']; echo " le "; echo $row['Date']?></h5></span><span><h5><?php echo $row['Genre']?></h5></span>
+                    <?php $id=$row['ID']; 
+                    echo "<a title=\"East of eden\" href=\"sujet.php?id=$id\">" ?><?php echo $row['Titre']?></a><span><h5><?php echo "créer par "; echo $row['Createur']; echo " le "; echo $row['Date']?></h5></span><span><h5><?php echo "Genre: ".$row['Genre']?></h5></span>
                 </h1>
                 <p><h4><?php echo $row['Texte']?></h4></p>
+                <p><?php echo $row['Note']." jaimes"; ?> </p>
                 <div class="availability">
-                    <big><?php echo $row['Note']; ?> </big>
-                    <?php
-                        $up=0;
-                                $Titre_post=$row['Titre'];
-                                $Createur_post=$row['Createur'];
-                                $line=$row['Titre'].$row['Createur'];
-                                $file = fopen("lib/upvote.txt","r");
-                                    $result = fgets($file);
-                                    if(strpos($result,$line)!==false)
-                                    {
-                                        $up=1;
-                                    }
-                                fclose($file);
-                                if($up==0)
-                            echo "<span><a href=\"up2.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-arrow-up\"></i></a></span>";
+             <?php
+                    
+                                $liste2=$sujetF->like($id,$_SESSION["connected"]);
+                    foreach($liste2 as $row2):
+                        {
+                         $n=$row2['n'];
+                        }
+                    endforeach;
+                    if($n==0)
+                            echo "<span><a href=\"up.php?id=$id\"><i class=\"fa fa-thumbs-up\"></i> J'aime</a></span>";
                                 else
-                    echo "<span style=\"background-color:#4841a8\" ><a href=\"upno2.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-arrow-up\"></i></a></span>";
-                      ?>
-                     <?php
-                        $up2=0;
-                                $Titre_post=$row['Titre'];
-                                $Createur_post=$row['Createur'];
-                                $line2=$row['Titre'].$row['Createur'];
-                                $file2 = fopen("lib/downvote.txt","r");
-                                    $result2 = fgets($file2);
-                                    if(strpos($result2,$line2)!==false)
-                                    {
-                                        $up2=1;
-                                    }
-                                fclose($file2);
-                                if($up2==0)
-                            echo "<span><a href=\"down2.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-arrow-down\"></i></a></span>";
-                                else
-                    echo "<span style=\"background-color:#4841a8\" ><a href=\"downno2.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-arrow-down\"></i></a></span>";
+                    echo "<span style=\"background-color:#4841a8\" ><a href=\"down.php?id=$id\"><i class=\"fa fa-thumbs-up\"></i> Je n'aime plus</a></span>";
                       ?>
                 </div>
             </div>
@@ -61,8 +35,10 @@
     <?php endforeach; ?>
 
     <?php
-        $list2=$commantaireF->afficherCommantaires($_SESSION["titre"],$_SESSION["createur"]);
+        $list2=$commantaireF->afficherCommantaires($id);
         $_SESSION["connected"] = "aaa";
+         $_SESSION['idd']=$_GET['id'];
+         $id=$_SESSION['idd'];
     ?>
     <?php foreach($list2 as $row2): ?>
     <div class="single-shop-product2">
@@ -77,22 +53,45 @@
                     <?php
                         if ($row2['Createur']==$_SESSION["connected"])
                             { 
-                                            $creea=$_SESSION["createur"];
-                                            $tit=$_SESSION["titre"];
+                                            
                                             $crea2=$row2['Createur'];
                                             $text=$row2['Texte'];
-                                echo "<span><a id=\"abcde\" title=\"Modifier\" href=\"#\" data-toggle=\"modal\" onclick=\"geturl3('$tit','$creea','$crea2','$text')\" data-target=\"#modifierpost\"><i class=\"fa fa fa-file-text-o\"></i></a></span>";;
-                            }
+                               ?>
+                               <span><a id="abcde" title="Modifier" href="#" data-toggle="modal" data-target="#d<?PHP echo $row2['ID']; ?>"><i class="fa fa fa-file-text-o"></i></a></span>"
+                   <?php          }
                     ?>
                     <?php
-                    $crea=$row2['Createur'];
-                    $txt=$row2['Texte'];
+                    $id2=$row2['ID'];
                         if ($row2['Createur']==$_SESSION["connected"])
                             {
-                                echo "<span><a href=\"SupprimerCommantaire.php?Createur=$crea&Texte=$txt\"><i class=\"fa fa-close\"></i></a></span>";
+                                echo "<span><a href=\"SupprimerCommantaire.php?ids=$id&id=$id2\"><i class=\"fa fa-close\"></i></a></span>";
                             }
                     ?>
+                    <div class="modal fade" id="d<?PHP echo $row2['ID']; ?>" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-product">                                
+                                    <form method="POST" name="modif" action="ModifierCommantaire.php" class="cart">
+                                        <div class="tabble">
+
+                                            <input type="hidden" name="id" value="<?php echo $row2['ID'] ?>">
+                                             <textarea name="post_text" class="msg" required><?php echo $row2['Texte'] ?></textarea>
+                                        </div>
+                                        <div class="quick-desc"></div>
+                                        <div class="quick-add-to-cart" style="padding-top: 20px">
+                                            <button class="single_add_to_cart_button" type="submit">Modifier</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -100,11 +99,7 @@
     <div class="single-shop-product2">
         <div class="col-xs-12 col-sm-7 col-nn-8">
             <div class="deal-product-content">
-                <?php 
-                    $Createur_post=$_SESSION["createur"];
-                    $Titre_post=$_SESSION["titre"];
-                ?>
-                <form method="POST" action="AjouterCommantaire.php?Titre_post=$Titre_post&Createur_post=$Createur_post\" class="cart">
+                <form method="GET" action="AjouterCommantaire.php" class="cart">
                     <h5>nouveau commantaire</h5>
                     <div class="tabble">
                         <textarea name="post_text" class="msg3" placeholder="Text" required></textarea>

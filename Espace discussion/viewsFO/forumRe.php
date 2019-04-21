@@ -1,4 +1,5 @@
     <?php
+require "../config.php";
 
 require '../core/sujetFunction.php';
 
@@ -329,6 +330,9 @@ setcookie($upvote, $value, time() + (86400 * 30), "/");*/
                                                     <a href="vossujet.php" class="sujets">vos sujets</a>
                                                 </form>
                                             </li>
+                                            <li style="padding-left: 50px">
+                                                <a href="forum.php"><i class="fa fa-home"></i>Home</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -338,15 +342,13 @@ setcookie($upvote, $value, time() + (86400 * 30), "/");*/
                                             <li class="product-size-deatils2">
                                                 <div class="show-label">
                                                     <label><i class="fa fa-sort-amount-asc"></i>Sort by : </label>
-                                                        <select name='tri'>
-                                                            <option selected="selected" value="Note">Note</option>
+                                                        <select name='tri' onchange="this.form.submit()">
+                                                            <option selected="selected"></option>
+                                                            <option value="Note">Note</option>
                                                             <option value="Name">Nom</option>
                                                             <option value="Date">Date</option>
                                                         </select>
                                                 </div>
-                                            </li>
-                                            <li>       
-                                                <button type="submit" class="tri">Tri</button>
                                             </li>
                                         </form>
                                     </ul>

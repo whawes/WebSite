@@ -2,15 +2,13 @@
 class Commantaire
 {
 	private $Sujet;
-	private $SujetCreateur;
 	private $Date;
 	private $Createur;
 	private $Texte;
 
-	function __construct($Sujet,$SujetCreateur,$Date,$Createur,$Texte)
+	function __construct($Sujet,$Date,$Createur,$Texte)
 	{
 		$this->Sujet=$Sujet;
-		$this->SujetCreateur=$SujetCreateur;
 		$this->Date=$Date;
 		$this->Createur=$Createur;
 		$this->Texte=$Texte;
@@ -23,15 +21,6 @@ class Commantaire
 	function setSujet($Sujet)
 	{
 		$this->Sujet=$Sujet;
-	}
-
-	function getSujetCreateur()
-	{
-		return $this->SujetCreateur;
-	}
-	function setSujetCreateur($SujetCreateur)
-	{
-		$this->SujetCreateur=$SujetCreateur;
 	}
 
 	function getDate()

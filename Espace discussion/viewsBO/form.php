@@ -1,4 +1,6 @@
 <?php
+
+require "../config.php";
 require '../core/livretFunction.php';
 $livretF=new livretF();
 $DB = new config();
@@ -461,7 +463,7 @@ $DB = new config();
                                         <form action="AjouterLivreT.php" name="modiflivre" method="get" >
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Titre</label>
-                                                <input id="cc-pament" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                                <input id="cc-pament" name="cc-payment" type="file" class="form-control" aria-required="true" aria-invalid="false" required>
                                             </div>
                                             <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">Description</label>

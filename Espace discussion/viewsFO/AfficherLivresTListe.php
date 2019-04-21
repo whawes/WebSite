@@ -14,8 +14,10 @@
             <p><?php echo $row['Description']?></p>
             <div class="availability">
                 <?php
-                $titre=$row['Titre'].".pdf";
-                echo "<span><a href=\"files/$titre\" download=\"files/$titre\">Telecharger</a></span>"?>
+                $file=$row['ID'];
+                
+                $titret=$titre.'.pdf';
+                echo "<span><a href=\"files/$titret\" download=\"$titret\">Telecharger</a></span>"?>
             </div>
         </div>
     </div>

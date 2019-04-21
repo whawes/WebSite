@@ -1,5 +1,6 @@
 <?php
 
+require "../config.php";
 require '../core/sujetFunction.php';
 
 session_start();
@@ -308,7 +309,7 @@ $DB = new config();
                                     <div class="layer-5">
                                         <ul>
                                             <li>
-                                                <form method="GET" action="forumRe.php" class="title-5">
+                                                <form action="forumRe.php" method="get" class="title-5">
                                                     <input type="reche" placeholder="Enter your tags" required>
                                                     <button type="submit"><i class="fa fa-search"></i></button>
                                                 </form>
@@ -323,6 +324,9 @@ $DB = new config();
                                                     <a href="" class="sujets">vos sujets</a>
                                                 </form>
                                             </li>
+                                            <li style="padding-left: 50px">
+                                                <a href="forum.php"><i class="fa fa-home"></i>Home</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -332,15 +336,12 @@ $DB = new config();
                                             <li class="product-size-deatils2">
                                                 <div class="show-label">
                                                     <label><i class="fa fa-sort-amount-asc"></i>Sort by : </label>
-                                                        <select name='tri'>
+                                                        <select name='tri' onchange="this.form.submit()">
                                                             <option selected="selected" value="Note">Note</option>
                                                             <option value="Name">Nom</option>
                                                             <option value="Date">Date</option>
                                                         </select>
                                                 </div>
-                                            </li>
-                                            <li>       
-                                                <button type="submit" class="tri">Tri</button>
                                             </li>
                                         </form>
                                     </ul>
@@ -490,7 +491,16 @@ $DB = new config();
                                             <input type="text" class="msg2" name="post_name" placeholder="Titre" required/>
                                         </div>
                                         <div class="tabble">
-                                            <input type="text" class="msg2" name="post_tags" placeholder="Tags" required/>
+                                            <table>
+                                                <tr>
+                                                    <td style="padding-right: 20px">Genre</td>
+                                                        <td><select name='post_tags'>
+                                                            <option selected="selected" value="Note">Note</option>
+                                                            <option value="Name">Nom</option>
+                                                            <option value="Date">Date</option>
+                                                        </select></td>
+                                                        </tr>
+                                        </table>
                                         </div>
                                         <div class="tabble">
                                             <textarea name="post_text" class="msg" placeholder="Text" required></textarea>
@@ -508,7 +518,7 @@ $DB = new config();
             </div>
         </div>
         
-                <?php require 'ModifSujet2.php';?>
+                <?php require 'ModifSujet.php';?>
         <!-- Footer Area End -->
         <!--Quickview Product Start -->
         <!--End of Quickview Product-->         

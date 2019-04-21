@@ -9,9 +9,11 @@
             </a>
             <div class="product-description">
                 <div class="functional-buttons">
+                    <form action="post">
                     <a title="Telecharger" href="#">
                         <i class="fa fa-download"></i>
                     </a>
+                    </form>
                     <a title="Quick view" href="#" data-toggle="modal" data-target="#productModal">
                         <i class="fa fa-compress"></i>
                     </a>

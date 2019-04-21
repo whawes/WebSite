@@ -1,7 +1,15 @@
 <?php
+
+require "../config.php";
 require '../core/sujetFunction.php';
-require '../entities/sujet.php';
+require '../core/commantaireFunction.php';
+session_start();
 $sujetF=new SujetF();
-$sujetF->supprimerSujet($_GET['Titre_post'],$_GET['Createur_post']);
-header('location:forum.php');
+$commantaireF=new CommantaireF();
+$sujetF->supprimerSujet($_GET['id']);
+echo $_GET['id'];
+$commantaireF->supprimerCommantaireS($_GET['id']);
+$up=$_SESSION["page"];
+//$up = $str = explode('?', $up)[0];
+	header('location:'.$up);
 ?>

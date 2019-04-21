@@ -1,4 +1,6 @@
 <?php
+
+require "../config.php";
 require '../core/livretFunction.php';
 session_start();
 $livretF=new livretF();
@@ -453,6 +455,12 @@ $DB = new config();
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="card">
+
+                            <?php $list=$livretF->afficherLivreTspes($_GET['id']);?>
+                            <?php foreach($list as $row):  ?>
+                                <?php $n=$row['Titre'];
+                                $v=$row['Description'];
+                                 ?>
                                     <div class="card-header">Livre Téléchargeable</div>
                                     <div class="card-body">
                                         <div class="card-title">
@@ -462,12 +470,13 @@ $DB = new config();
                                         <form action="ModificationLivre.php" method="get">
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Titre</label>
-                                                <input id="cc-pament" name="cc-payment2" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                                <input id="cc-pament" name="cc-payment2" type="text" class="form-control" aria-required="true" aria-invalid="false" value="<?php echo $n ?>" disabled>
                                             </div>
                                             <div class="form-group has-success">
                                                 <label for="cc-name" class="control-label mb-1">Description</label>
+                                            <input type="hidden" name="id" value="<?php echo $row['ID'] ?>">
                                                 <input id="cc-name" name="cc-name2" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
-                                                    autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                    autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error" value="<?php echo $v ?>">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                             </div>
                                             <div>
@@ -477,24 +486,7 @@ $DB = new config();
                                             </div>
                                         </form>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="card">
-                                    <div class="card-header">Livre Téléchargeable</div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2">Ancien Données</h3>
-                                        </div>
-                                        <hr>
-                                         <div class="form-group">
-                                                <label for="cc-payment" class="control-label mb-1">Titre: <?php $_SESSION["t"]=$_GET['Titre']; echo $_GET['Titre'] ;?></label>
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label for="cc-name" class="control-label mb-1">Descritption: <?php $_SESSION["d"]=$_GET['Description']; echo $_GET['Description'] ;?></label>
-                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
-                                            </div>
-                                    </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
@@ -511,8 +503,6 @@ $DB = new config();
         </div>
 
     </div>
-    <?php if(isset($_GET['id']))
-    echo "<script>alert(\"Ce fichier n'existe pas\")</script>"; ?>
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->

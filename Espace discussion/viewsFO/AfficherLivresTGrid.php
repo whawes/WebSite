@@ -10,11 +10,11 @@
             <div class="product-description">
                 <div class="functional-buttons">
                 <?php
-                $titret=$row['Titre'].".pdf";
                 $titre=$row['Titre'];
                 $description=$row['Description'];
-
-                echo "<a href=\"files/$titret\" download=\"files/$titret\"><i class=\"fa fa-download\"></i></a>";
+                $file=$row['ID'];
+                $titret=$titre.'.pdf';
+                echo "<a href=\"files/$titret\" download=\"$titret\"><i class=\"fa fa-download\"></i></a>";
                 echo "<a id=\"abcdef\" title=\"Quick view\" href=\"#\" onclick=\"geturl4('$titre','$description')\" data-toggle=\"modal\" data-target=\"#productModal\">
                         <i class=\"fa fa-compress\"></i>
                     </a>"?>

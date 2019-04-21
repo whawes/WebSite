@@ -1,7 +1,11 @@
 <?php
+
+require "../config.php";
+require '../core/commantaireFunction.php';
 require '../core/sujetFunction.php';
-require '../entities/sujet.php';
-$sujetF=new SujetF();
-$sujetF->supprimerSujet($_GET['Titre_post'],$_GET['Createur_post']);
+$sujetF=new SujetF();	
+$commantaireF=new CommantaireF();
+$sujetF->supprimerSujet($_GET['Titre_post']);
+$commantaireF->supprimerCommantaireS($_GET['Titre_post']);
 header('location:table.php');
 ?>
