@@ -1,0 +1,35 @@
+.btn.disabled, .btn:disabled, .btn[disabled] {
+    color: #212529 !important;
+    background: #adb5bd !important;
+    border-color: #adb5bd !important;
+    pointer-events: inherit;
+    opacity: .5;
+}
+
+.btn-default {
+    color: #fff;
+    background-color: #495057;
+    border-color: #3d4349;
+}
+.btn-default:hover, .btn-default:active, .btn-default:focus {
+    color: #fff;
+    background-color: #363c41;
+    border-color: #212528;
+}
+
+label.input-stepper input {
+    display: inline-block;
+}
+label.input-stepper input {
+    margin-bottom: 0;
+}
+label.input-stepper a {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+}
+
+#spinner {
+    width: 3em;
+}
