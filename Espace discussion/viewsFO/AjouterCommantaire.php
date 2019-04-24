@@ -1,10 +1,15 @@
 <?php
 session_start();
+
+require "../config.php";
 require '../core/commantaireFunction.php';
 require '../entities/commantaire.php';
 $date=date("Y-m-d H:i:sa");
-$commantaire=new Commantaire($_SESSION["titre"],$_SESSION["createur"],$date,$_SESSION["connected"],$_POST['post_text']);
+$commantaire=new Commantaire($_SESSION['idd'],$date,$_SESSION["connected"],$_GET['post_text']);
 $commantaireF=new CommantaireF();
 $commantaireF->ajouterCommantaire($commantaire);
-header('location:sujet.php');
+$up=$_SESSION["page"];
+echo "$up";
+//$up = $str = explode('?', $up)[0];
+header('location:'.$up);
 ?>

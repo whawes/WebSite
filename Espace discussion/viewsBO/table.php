@@ -1,5 +1,8 @@
 <?php
+session_start();
 
+require "../config.php";
+    $_SESSION["page"]=$_SERVER['REQUEST_URI'];
 require '../core/livretFunction.php';
 $livretF=new livretF();
 $sujetF=new SujetF();

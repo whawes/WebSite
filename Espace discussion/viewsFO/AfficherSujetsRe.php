@@ -1,6 +1,7 @@
 <div class="row">
 
     <?php
+    $_SESSION["page"]=$_SERVER['REQUEST_URI'];
         if(isset($_GET['tri']))
         {
             if($_GET['tri']==='Note')
@@ -20,46 +21,33 @@
                 <h4>
                     <a title="East of eden" href="sujet.php?Titre_post=<?=$row['Titre']?>&Createur_post=<?=$row['Createur']?>"><?php echo $row['Titre']?></a><span><h5><?php echo "créer par "; echo $row['Createur']; echo " le "; echo $row['Date']?></h5></span>
                 </h4>
+                 <div style="float: right"><p>Genre: <?php echo $row['Genre']?></p>
+                </div>
                 
                 <p><?php echo $row['Texte']?></p>
                 <div class="availability">
                     <big><?php echo $row['Note']; ?> </big>
-                    <?php
-                        $up=0;
+                   <?php
+                    
+                                $id=$row['ID'];
                                 $Titre_post=$row['Titre'];
                                 $Createur_post=$row['Createur'];
-                                $line=$row['Titre'].$row['Createur'];
-                                $file = fopen("lib/upvote.txt","r");
-                                    $result = fgets($file);
-                                    if(strpos($result,$line)!==false)
-                                    {
-                                        $up=1;
-                                    }
-                                fclose($file);
-                                if($up==0)
-                            echo "<span><a href=\"up.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-arrow-up\"></i></a></span>";
+                                $Genre_post=$row['Genre'];
+                                $Text_post=$row['Texte'];
+                                $liste2=$sujetF->like($id,$_SESSION["connected"]);
+                    foreach($liste2 as $row2):
+                        {
+                         $n=$row2['n'];
+                        }
+                    endforeach;
+                    if($n==0)
+                            echo "<span><a href=\"up.php?id=$id\"><i class=\"fa fa-thumbs-up\"></i> J'aime</a></span>";
                                 else
-                    echo "<span style=\"background-color:#4841a8\" ><a href=\"upno.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-arrow-up\"></i></a></span>";
+                    echo "<span style=\"background-color:#4841a8\" ><a href=\"down.php?id=$id\"><i class=\"fa fa-thumbs-up\"></i> Je n'aime plus</a></span>";
                       ?>
-                     <?php
-                        $up2=0;
-                                $Titre_post=$row['Titre'];
-                                $Createur_post=$row['Createur'];
-                                $line2=$row['Titre'].$row['Createur'];
-                                $file2 = fopen("lib/downvote.txt","r");
-                                    $result2 = fgets($file2);
-                                    if(strpos($result2,$line2)!==false)
-                                    {
-                                        $up2=1;
-                                    }
-                                fclose($file2);
-                                if($up2==0)
-                            echo "<span><a href=\"down.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-arrow-down\"></i></a></span>";
-                                else
-                    echo "<span style=\"background-color:#4841a8\" ><a href=\"downno.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-arrow-down\"></i></a></span>";
-                      ?>
-                    <span><a href="sujet.php?Titre_post=<?=$row['Titre']?>&Createur_post=<?=$row['Createur']?>"><i class="fa fa-wechat"></i></a></span>
-                    <span><a href=""><i class="fa fa-share"></i></a></span>
+                    <span><a href="sujet.php?id=<?=$id?>"><i class="fa fa-wechat"></i> Commenter</a></span>
+                    
+                    <span><a href="https://www.facebook.com/sharer/sharer.php?u=sujet.php?id=<?=$id?>"><i class="fa fa-share"></i> Partager
                     <?php
                         if ($row['Createur']==$_SESSION["connected"])
                             {
@@ -67,7 +55,7 @@
                                 $Createur_post=$row['Createur'];
                                 $Genre_post=$row['Genre'];
                                 $Text_post=$row['Texte'];
-                                echo "<span><a id=\"abc\" title=\"Modifier\" href=\"#\" data-toggle=\"modal\" onclick=\"geturl('$Titre_post','$Createur_post','$Genre_post','$Text_post')\" data-target=\"#modifierpost\"><i class=\"fa fa fa-file-text-o\"></i></a></span>";
+                                echo "<span><a id=\"abc\" title=\"Modifier\" href=\"#\" data-toggle=\"modal\" onclick=\"geturl('$Titre_post','$Createur_post','$Genre_post','$Text_post')\" data-target=\"#modifierpost\"><i class=\"fa fa fa-file-text-o\"></i> Modifier</a></span>";
                             }
                     ?>
                     <?php
@@ -75,7 +63,7 @@
                             {
                                 $Titre_post=$row['Titre'];
                                 $Createur_post=$row['Createur'];
-                                echo "<span><a href=\"SupprimervosSujet.php?Titre_post=$Titre_post&Createur_post=$Createur_post\"><i class=\"fa fa-close\"></i></a></span>";
+                                echo "<span><a href=\"SupprimervosSujet.php?id=$id\"><i class=\"fa fa-close\"></i> Supprimer</a></span>";
                             }
                     ?>
                 </div>

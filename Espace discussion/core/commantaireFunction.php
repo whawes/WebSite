@@ -1,24 +1,21 @@
 <?PHP
-require '../core/sujetFunction.php';
 
 class CommantaireF
 {
 	function ajouterCommantaire($Commantaire)
 	{
-		$sql="insert into Commentaire (Sujet,SujetCreateur,Date,Createur,Texte) values (:Sujet,:SujetCreateur,:Date,:Createur,:Texte)";
+		$sql="insert into Commentaire (Sujet,Date,Createur,Texte) values (:Sujet,:Date,:Createur,:Texte)";
 		$db = config::getConnexion();
 		try
 		{
 	        $req=$db->prepare($sql);
 			
 	        $Sujet=$Commantaire->getSujet();
-	        $SujetCreateur=$Commantaire->getSujetCreateur();
 	        $Date=$Commantaire->getDate();
 	        $Createur=$Commantaire->getCreateur();
 	        $Texte=$Commantaire->getTexte();
 
 			$req->bindValue(':Sujet',$Sujet);
-			$req->bindValue(':SujetCreateur',$SujetCreateur);
 			$req->bindValue(':Date',$Date);
 			$req->bindValue(':Createur',$Createur);
 			$req->bindValue(':Texte',$Texte);
@@ -31,9 +28,9 @@ class CommantaireF
         }
 	}
 	
-	function afficherCommantaires($Sujet,$SujetCreateur)
+	function afficherCommantaires($id)
 	{
-		$sql="SElECT * From Commentaire where Sujet='$Sujet' AND SujetCreateur='$SujetCreateur'";
+		$sql="SElECT * From Commentaire where Sujet='$id'";
 		$db = config::getConnexion();
 		try
 		{
@@ -46,15 +43,12 @@ class CommantaireF
         }	
 	}
 
-	function supprimerCommantaire($Sujet,$SujetCreateur,$Createur,$Texte)
+	function supprimerCommantaireS($Sujet)
 	{
-		$sql="delete FROM Commentaire where Sujet=:Sujet AND SujetCreateur=:SujetCreateur AND Createur=:Createur AND Texte=:Texte";
+		$sql="delete FROM Commentaire where Sujet=:Sujet";
 		$db = config::getConnexion();
         $req=$db->prepare($sql);
 		$req->bindValue(':Sujet',$Sujet);
-		$req->bindValue(':SujetCreateur',$SujetCreateur);
-		$req->bindValue(':Createur',$Createur);
-		$req->bindValue(':Texte',$Texte);
 		try
 		{
             $req->execute();
@@ -65,9 +59,26 @@ class CommantaireF
         }
 	}
 
-	function modifierCommantaire($Sujet,$SujetCreateur,$Createur,$Texte,$Texte2,$Date)
+	function supprimerCommantaire($Sujet,$id)
 	{
-		$sql="update Commentaire SET Texte=:Texte2, Date=:Date WHERE Sujet='$Sujet' AND SujetCreateur='$SujetCreateur' AND Createur='$Createur' AND Texte='$Texte'";
+		$sql="delete FROM Commentaire where Sujet=:Sujet AND ID=:id";
+		$db = config::getConnexion();
+        $req=$db->prepare($sql);
+		$req->bindValue(':Sujet',$Sujet);
+		$req->bindValue(':id',$id);
+		try
+		{
+            $req->execute();
+        }
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+
+	function modifierCommantaire($id,$Texte2,$Date)
+	{
+		$sql="update commentaire SET Texte=:Texte2, Date=:Date where ID='$id'";
 		$db = config::getConnexion();
 		try
 		{

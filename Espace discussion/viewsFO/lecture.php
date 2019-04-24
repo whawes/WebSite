@@ -1,4 +1,6 @@
 <?php
+
+require "../config.php";
 require '../core/livretFunction.php';
 $livretF=new livretF();
 $DB = new config();
@@ -144,10 +146,10 @@ $DB = new config();
                                         <li><a href="shop.htmll">CATALOGUE1</a></li>
                                         <li><a href="shop.html">CATALOGUE2</a></li>
                                     </ul></li>
-                                    <li><a href="#">ESPACE LECTEUR</a>
+                                    <li><a href="#">ESPACE Discussion</a>
                                     <ul class="sub-menu">
-                                        <li><a href="lecture.html">Lecture</a></li>
-                                        <li><a href="#">Forum</a></li>
+                                        <li><a href="lecture.php">Lecture</a></li>
+                                        <li><a href="forum.php">Forum</a></li>
                                     </ul></li>
                                    <li><a href="#">RESSOURCES</a>
                                         <ul class="sub-menu">

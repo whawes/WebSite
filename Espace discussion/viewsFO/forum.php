@@ -1,4 +1,6 @@
     <?php
+    
+require "../config.php";
 
 require '../core/sujetFunction.php';
 
@@ -10,6 +12,7 @@ $DB = new config();
 <!doctype html>
 <html class="no-js" lang="">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Home One || Witter Multipage Responsive Template</title>
@@ -51,6 +54,7 @@ $DB = new config();
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
+
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -323,6 +327,9 @@ $DB = new config();
                                                     <a href="vossujet.php" class="sujets">vos sujets</a>
                                                 </form>
                                             </li>
+                                            <li style="padding-left: 50px">
+                                                <a href="forum.php"><i class="fa fa-home"></i>Home</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -332,15 +339,13 @@ $DB = new config();
                                             <li class="product-size-deatils2">
                                                 <div class="show-label">
                                                     <label><i class="fa fa-sort-amount-asc"></i>Sort by : </label>
-                                                        <select name='tri'>
-                                                            <option selected="selected" value="Note">Note</option>
+                                                        <select name='tri' onchange="this.form.submit()">
+                                                            <option selected="selected"></option>
+                                                            <option value="Note">Note</option>
                                                             <option value="Name">Nom</option>
                                                             <option value="Date">Date</option>
                                                         </select>
                                                 </div>
-                                            </li>
-                                            <li>       
-                                                <button type="submit" class="tri">Tri</button>
                                             </li>
                                         </form>
                                     </ul>
@@ -490,15 +495,25 @@ $DB = new config();
                                         <div class="tabble">
                                             <input type="text" class="msg2" name="post_name" placeholder="Titre" required/>
                                         </div>
+
                                         <div class="tabble">
-                                            <input type="text" class="msg2" name="post_tags" placeholder="Tags" required/>
+                                            <table>
+                                                <tr>
+                                                    <td style="padding-right: 20px">Genre</td>
+                                                        <td><select name='post_tags'>
+                                                            <option selected="selected" value="Note">Note</option>
+                                                            <option value="Name">Nom</option>
+                                                            <option value="Date">Date</option>
+                                                        </select></td>
+                                                        </tr>
+                                        </table>
                                         </div>
                                         <div class="tabble">
                                             <textarea name="post_text" class="msg" placeholder="Text" required></textarea>
                                         </div>
                                         <div class="quick-desc"></div>
                                         <div class="quick-add-to-cart">
-                                            <button class="single_add_to_cart_button" type="submit">Partager</button>
+                                            <button class="single_add_to_cart_button" type="submit">Ajouter</button>
                                         </div>
                                     </form>
                                 </div>
@@ -508,8 +523,6 @@ $DB = new config();
                 </div>
             </div>
         </div>
-        
-        <?php require 'ModifSujet.php';?>
         <!-- Footer Area End -->
         <!--Quickview Product Start -->
         <!--End of Quickview Product-->         

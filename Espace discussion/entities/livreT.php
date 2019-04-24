@@ -3,11 +3,13 @@ class LivreT
 {
 	private $Titre;
 	private $Description;
+	private $file;
 
-	function __construct($Titre,$Description)
+	function __construct($Titre,$Description,$file)
 	{
 		$this->Titre=$Titre;
 		$this->Description=$Description;
+		$this->file=$file;
 	}
 	
 	function getTitre()
@@ -26,6 +28,15 @@ class LivreT
 	function setDescription($Description)
 	{
 		$this->Description=$Description;
+	}
+
+	function getfile()
+	{
+		return $this->file;
+	}
+	function setfile($file)
+	{
+		$this->file=$file;
 	}
 }
 

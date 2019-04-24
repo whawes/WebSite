@@ -7,7 +7,8 @@
                                                     <div class="table-data-feature">
                                                         <?php $titre=$row['Titre'];
                                                         $desc=$row['Description'];
-                                                        echo "<a href=\"form2.php?Titre=$titre&Description=$desc\" <button class=\"item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"edit\">
+                                                        $id=$row['ID'];
+                                                        echo "<a href=\"form2.php?id=$id\" <button class=\"item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"edit\">
                                                             <i class=\"zmdi zmdi-edit\"></i>
                                                         </button></a>";
                                                         

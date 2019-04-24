@@ -17,6 +17,7 @@ $_SESSION['page']=$_GET['page'];
         <!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Poppins:400,700,600,500,300' rel='stylesheet' type='text/css'>
 
+        <script type="text/javascript" src="js/verif.js"></script>
 		<!-- all css here -->
 		<!-- bootstrap v3.3.6 css -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -361,16 +362,16 @@ $_SESSION['page']=$_GET['page'];
                                 ALREADY RESIGTERED?
                             </h2>
                             <p class="form-row">
-                                <input name="addressmail" type="email" placeholder="Email address" required>
+                                <input id="1" name="addressmail" type="email" placeholder="Email address" required>
                             </p>
                             <p class="form-row">
-                                <input name="pass" type="password" placeholder="Password" required>
+                                <input id="2" name="pass" type="password" placeholder="Password" required>
                             </p>
                             <p class="lost-password form-group">
                                 <a href="#" rel="nofollow">Forgot your password?</a>
                             </p> 
                             <div class="submit">					
-                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                <button name="submitcreate" id="submitcreate" onclick="test3()" type="submit" class="btn-default">
                                     <span>
                                         <i class="fa fa-user left"></i>
                                         SING IN

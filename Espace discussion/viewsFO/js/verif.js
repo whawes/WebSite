@@ -10,6 +10,23 @@ function verifform()
   }
 }
 
+function tri(str) {
+  var xhttp;  
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  }
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("txtHint").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "forum.asp?tri="+str, true);
+  xhttp.send();
+}
+
+
 function verifform2()
 {
   var x = document.forms["modiflivre"]["cc-payment2"].value;
@@ -20,6 +37,17 @@ function verifform2()
     return false;
   }
 }
+
+function test3()
+{
+	var login=document.getElementById("1").value;
+	var mdp=document.getElementById("2").value;
+	if(login==""||mdp=="")
+	{
+		alert("verifiez les champs");
+	}
+}
+
 
 function geturl(Titre_post,Createur_post,Genre_post,Text_post)
 {

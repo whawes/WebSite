@@ -1,8 +1,9 @@
 <?php $list=$sujetF->afficherSujets();?>
     <?php foreach($list as $row): ?>
                                             <tr class="tr-shadow">
-                                                <td><?php $titre=$row['Titre']; $creat=$row['Createur'];
-                                                echo "<a href=\"table2.php?Titre_post=$titre&Createur_post=$creat\">$titre</a>";?></td>
+                                                <td><?php $titre=$row['ID'];
+                                                $t=$row['Titre'];
+                                                echo "<a href=\"table2.php?Titre_post=$titre&nom=$t\">$t</a>";?></td>
                                                 <td>
                                                     <span class="block-email"><?php echo $row['Createur']; ?></span>
                                                 </td>
@@ -13,7 +14,7 @@
                                                     <div class="table-data-feature">
                                                         <?php 
                                                         
-                                                        echo "<a href=\"SupprimerSujet.php?Titre_post=$titre&Createur_post=$creat\"><button class=\"item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Delete\">
+                                                        echo "<a href=\"SupprimerSujet.php?Titre_post=$titre\"><button class=\"item\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Delete\">
                                                             <i class=\"zmdi zmdi-delete\"></i>
                                                         </button></a>"?>
                                                     </div>

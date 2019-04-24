@@ -1,8 +1,22 @@
 <?PHP
 
-require "../config.php";
 class SujetF
 {
+	function like($sujet,$user)
+	{
+		$sql="SElECT count(*) as n From jaime where sujet='$sujet' and user='$user'";
+		$db = config::getConnexion();
+		try
+		{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }
+
+	}
 	function ajouterSujet($sujet)
 	{
 		$sql="insert into sujet (Titre,Date,Note,Createur,Texte,Genre) values (:Titre,:Date,:Note,:Createur,:Texte,:Genre)";
@@ -25,7 +39,7 @@ class SujetF
 			$req->bindValue(':Texte',$Texte);
 			$req->bindValue(':Genre',$Genre);
 			
-	        $req->execute();       
+	        $req->execute();
         }
         catch (Exception $e)
         {
@@ -93,13 +107,12 @@ class SujetF
         }	
 	}
 
-	function supprimerSujet($Titre,$Createur)
+	function supprimerSujet($Sujet)
 	{
-		$sql="delete FROM sujet where Titre=:Titre AND Createur=:Createur";
+		$sql="delete FROM sujet where ID=:Sujet";
 		$db = config::getConnexion();
         $req=$db->prepare($sql);
-		$req->bindValue(':Titre',$Titre);
-		$req->bindValue(':Createur',$Createur);
+		$req->bindValue(':Sujet',$Sujet);
 		try
 		{
             $req->execute();
@@ -110,44 +123,9 @@ class SujetF
         }
 	}
 
-	function modifierSujet($Titre,$Createur,$Titre2,$Genre,$Texte)
+	function modifierSujet($ID,$Titre2,$Texte)
 	{
-		if ((!empty($Titre2))&&(empty($Genre))&&(empty($Texte)))
-		{
-			$sql="update sujet SET Titre=:Titre2 WHERE Createur='$Createur' AND Titre='$Titre'";
-			$db = config::getConnexion();
-			try
-			{		
-		        $req=$db->prepare($sql);
-				$req->bindValue(':Titre2',$Titre2);
-					
-	            $s=$req->execute();
-			}
-	        catch (Exception $e)
-	        {
-	            echo " Erreur ! ".$e->getMessage();
-	        }
-		}
-		elseif ((!empty($Titre2))&&(!empty($Genre))&&(empty($Texte)))
-		{
-			$sql="update sujet SET Titre=:Titre2 , Genre=:Genre WHERE Createur='$Createur' AND Titre='$Titre'";
-			$db = config::getConnexion();
-			try
-			{		
-		        $req=$db->prepare($sql);
-				$req->bindValue(':Titre2',$Titre2);
-				$req->bindValue(':Genre',$Genre);
-					
-	            $s=$req->execute();
-			}
-	        catch (Exception $e)
-	        {
-	            echo " Erreur ! ".$e->getMessage();
-	        }
-		}
-		elseif ((!empty($Titre2))&&(empty($Genre))&&(!empty($Texte)))
-		{
-			$sql="update sujet SET Titre=:Titre2 , Texte=:Texte WHERE Createur='$Createur' AND Titre='$Titre'";
+			$sql="update sujet SET Titre=:Titre2 , Texte=:Texte WHERE ID='$ID'";
 			$db = config::getConnexion();
 			try
 			{		
@@ -161,80 +139,11 @@ class SujetF
 	        {
 	            echo " Erreur ! ".$e->getMessage();
 	        }
-		}
-
-		elseif ((empty($Titre2))&&(!empty($Genre))&&(empty($Texte)))
-		{
-			$sql="update sujet SET Genre=:Genre WHERE Createur='$Createur' AND Titre='$Titre'";
-			$db = config::getConnexion();
-			try
-			{		
-		        $req=$db->prepare($sql);
-				$req->bindValue(':Genre',$Genre);
-					
-	            $s=$req->execute();
-			}
-	        catch (Exception $e)
-	        {
-	            echo " Erreur ! ".$e->getMessage();
-	        }
-		}
-		elseif ((empty($Titre2))&&(!empty($Genre))&&(!empty($Texte)))
-		{
-			$sql="update sujet SET Genre=:Genre , Texte=:Texte WHERE Createur='$Createur' AND Titre='$Titre'";
-			$db = config::getConnexion();
-			try
-			{		
-		        $req=$db->prepare($sql);
-				$req->bindValue(':Texte',$Texte);
-				$req->bindValue(':Genre',$Genre);
-					
-	            $s=$req->execute();
-			}
-	        catch (Exception $e)
-	        {
-	            echo " Erreur ! ".$e->getMessage();
-	        }
-		}
-		elseif ((empty($Titre2))&&(empty($Genre))&&(!empty($Texte)))
-		{
-			$sql="update sujet SET Texte=:Texte WHERE Createur='$Createur' AND Titre='$Titre'";
-			$db = config::getConnexion();
-			try
-			{		
-		        $req=$db->prepare($sql);
-				$req->bindValue(':Texte',$Texte);
-					
-	            $s=$req->execute();
-			}
-	        catch (Exception $e)
-	        {
-	            echo " Erreur ! ".$e->getMessage();
-	        }
-		}
-		elseif ((!empty($Titre2))&&(!empty($Genre))&&(!empty($Texte)))
-		{
-			$sql="update sujet SET Titre=:Titre2 , Genre=:Genre , Texte=:Texte WHERE Createur='$Createur' AND Titre='$Titre'";
-			$db = config::getConnexion();
-			try
-			{		
-		        $req=$db->prepare($sql);
-				$req->bindValue(':Titre2',$Titre2);
-				$req->bindValue(':Texte',$Texte);
-				$req->bindValue(':Genre',$Genre);
-					
-	            $s=$req->execute();
-			}
-	        catch (Exception $e)
-	        {
-	            echo " Erreur ! ".$e->getMessage();
-	        }
-		}
 	}
 
-	function recupererSujet($Createur,$Titre)
+	function recupererSujet($ID)
 	{
-		$sql="SElECT * from sujet where Createur='$Createur' AND Titre='$Titre'";
+		$sql="SElECT * from sujet where ID='$ID'";
 		$db = config::getConnexion();
 		try
 		{
@@ -307,9 +216,9 @@ class SujetF
         }
 	}
 
-	function upvote($Titre,$Createur)
+	function upvote($id,$sujet)
 	{
-		$sql= "SElECT * FROM sujet WHERE Createur='$Createur' AND Titre='$Titre'";
+		$sql= "SElECT * FROM sujet WHERE ID='$id'";
 		$db = config::getConnexion();
 		try
 		{
@@ -318,12 +227,14 @@ class SujetF
 			{
         		$note=$row['Note']+1;
     		}
-    		$sql2="update sujet SET Note=:Note WHERE Createur='$Createur' AND Titre='$Titre'";
+    		$sql2="update sujet SET Note=:Note WHERE ID='$id' ; insert into jaime (Sujet,User) values (:sujet,:user)";
 			$db2 = config::getConnexion();
 			try
 			{
 		        $req=$db2->prepare($sql2);
 				$req->bindValue(':Note',$note);
+				$req->bindValue(':sujet',$id);
+				$req->bindValue(':user',$sujet);
 					
 	            $s=$req->execute();
 			}
@@ -338,9 +249,9 @@ class SujetF
         }
 	}
 
-	function downvote($Titre,$Createur)
+	function downvote($id,$Createur)
 	{
-		$sql= "SElECT * FROM sujet WHERE Createur='$Createur' AND Titre='$Titre'";
+		$sql= "SElECT * FROM sujet WHERE ID='$id'";
 		$db = config::getConnexion();
 		try
 		{
@@ -349,12 +260,14 @@ class SujetF
 			{
         		$note=$row['Note']-1;
     		}
-    		$sql2="update sujet SET Note=:Note WHERE Createur='$Createur' AND Titre='$Titre'";
+    		$sql2="update sujet SET Note=:Note WHERE ID='$id' ; delete from jaime where Sujet=:id and User=:Createur";
 			$db2 = config::getConnexion();
 			try
 			{		
 		        $req=$db2->prepare($sql2);
 				$req->bindValue(':Note',$note);
+				$req->bindValue(':id',$id);
+				$req->bindValue(':Createur',$Createur);
 					
 	            $s=$req->execute();
 			}

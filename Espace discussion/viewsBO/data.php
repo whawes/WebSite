@@ -1,5 +1,6 @@
 <?php
 
+require "../config.php";
 require '../core/livretFunction.php';
 
 $sujetF=new SujetF();

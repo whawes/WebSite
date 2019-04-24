@@ -1,5 +1,7 @@
 <?php
+require "../config.php";
 
+require '../core/sujetFunction.php';
 require '../core/commantaireFunction.php';
 session_start();
 $sujetF=new SujetF();
@@ -430,8 +432,6 @@ $DB = new config();
                 </div>
             </div>
         </footer>
-
-                <?php require 'ModifCommantaire.php';?>
         <!-- Footer Area End -->
         <!--Quickview Product Start -->
         <!--End of Quickview Product-->         

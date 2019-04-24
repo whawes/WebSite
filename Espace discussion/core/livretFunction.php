@@ -1,20 +1,21 @@
 <?PHP
 
-require '../core/sujetFunction.php';
 class livretF
 {
 	function ajouterLivreT($livreT)
 	{
-		$sql="insert INTO livret (Titre, Description) VALUES (:Titre, :Date)";
+		$sql="insert INTO livret (Titre,File, Description) VALUES (:Titre, :file, :Date)";
 		$db = config::getConnexion();
 		try
 		{
 	        $req=$db->prepare($sql);
 			
 	        $Titre=$livreT->getTitre();
+	        $file=$livreT->getfile();
 	        $Description=$livreT->getDescription();
-
+	        $t=fopen($file, 'rb');
 			$req->bindValue(':Titre',$Titre);
+			$req->bindValue(':file',$t);
 			$req->bindValue(':Date',$Description);
 			
 	        $req->execute();       
@@ -27,7 +28,36 @@ class livretF
 
 	function afficherLivresT()
 	{
-		$sql="SElECT * From livreT";
+		$sql="SElECT * From livret";
+		$db = config::getConnexion();
+		try
+		{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
+	function afficherLivreTspes($id)
+	{
+		$sql="SElECT * From livret where ID='$id'";
+		$db = config::getConnexion();
+		try
+		{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+        catch (Exception $e)
+        {
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
+
+	function recupererLivresT($id)
+	{
+		$sql="SElECT *,length(file) as size From livret where id='$id'";
 		$db = config::getConnexion();
 		try
 		{
@@ -56,15 +86,14 @@ class livretF
         }
 	}
 
-	function modifierLivresT($Titre,$Titre2,$Texte2)
+	function modifierLivresT($Titre2,$Texte2)
 	{
-		$sql="update livret SET Description=:Texte2, Titre=:Titre2 WHERE Titre='$Titre'";
+		$sql="update livret SET Description=:Texte2 WHERE ID='$Titre2'";
 		$db = config::getConnexion();
 		try
 		{
 	        $req=$db->prepare($sql);
 
-			$req->bindValue(':Titre2',$Titre2);
 			$req->bindValue(':Texte2',$Texte2);
             $s=$req->execute();
 		}
