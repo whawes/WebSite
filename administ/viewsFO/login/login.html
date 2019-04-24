@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Connecter/Inscrire</title>
+  
+  
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+
+  <p class="tip"></p>
+<div class="cont">
+  <div class="form sign-in">
+      <form action="../connexion.php" method="post">
+    <h2>Bienvenue</h2>
+    <label class="label">
+      <span>Email</span>
+      <input name="addressmail" type="email" />
+    </label>
+    <label class="label">
+      <span>Mot de passe</span>
+      <input name="pass"  type="password" />
+    </label>
+      <label class="label">
+        <span>Restez connecté<input type="checkbox" name="connecte"></span>
+      </label>
+   <p class="forgot-pass"> <a href="">Mot de passe oublié?</a></p>
+    <button type="submit" class="submit">Sign In</button>
+      </form >
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>Nouveau ici ?</h2>
+        <p>Inscrivez vous et decouvrir plusieurs mondes !</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>  ?</h2>
+        <p>Si vous avez deja un compte, juste connectez vous.Vous nous avez manqué. !</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Inscrire</span>
+        <span class="m--in">Connecter </span>
+      </div>
+    </div>
+    <div class="form sign-up">
+
+      <h2>Il est temps de se sentir comme à la maison</h2>
+            <form action="verficationemail.html" method="post"> 
+              <label class="label">
+              <span>Nom</span>
+              <input type="text" name="Nom" required/>
+              </label>
+              <label class="label">
+              <span>Email</span>
+              <input type="email" name="Email" required/>
+              </label>
+              <label class="label">
+              <span>Mot de passe</span>
+              <input type="password" name="MotDePasse" required/>
+              </label>
+              <label class="label">
+              <span>Confirmer mot de passe</span>
+              <input type="password" name="MotDePasse1" required/>
+              </label>
+      <button type="submit" class="submit" name="inscription">Sign Up</button>
+             </form>
+    </div>
+  </div>
+</div>
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
