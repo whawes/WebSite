@@ -1,16 +1,17 @@
 <?PHP
 include "../../core/produit_specifiqueC.php";
-$recl=new Produit_specifiqueC();
 
-$db = config::getConnexion();
-$stmt=$db->prepare("SElECT DISTINCT categorie From produit_specifique  ");
-$stmt->execute();
-$jeson=[];
-while ($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-    extract($row);
-    $jeson[]= $categorie;
+$recl=new Produit_specifiqueC();
+$listeProduit_sp=$recl->afficher_Produit_specifique();
+if(isset($_GET['filtrage'])) {
+    if ($_GET['filtrage'] === 'titre')
+        $listeProduit_sp=$recl->afficher_Produit_specifique_titre();
+    else if ($_GET['filtrage'] === 'auteur')
+        $listeProduit_sp=$recl->afficher_Produit_specifique_auteur();
+    else
+        $listeProduit_sp=$recl->afficher_Produit_specifique_categorie();
 }
-echo json_encode($jeson);
+
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ echo json_encode($jeson);
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Charts</title>
+    <title>Tables</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -47,134 +48,18 @@ echo json_encode($jeson);
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 </head>
 
 <body class="animsition">
 <div class="page-wrapper">
-    <!-- HEADER MOBILE-->
-    <header class="header-mobile d-block d-lg-none">
-        <div class="header-mobile__bar">
-            <div class="container-fluid">
-                <div class="header-mobile-inner">
-                    <a class="logo" href="index.html">
-                        <img src="images/icon/logo.png" alt="CoolAdmin" />
-                    </a>
-                    <button class="hamburger hamburger--slider" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar-mobile">
-            <div class="container-fluid">
-                <ul class="navbar-mobile__list list-unstyled">
-                    <li class="has-sub">
-                        <a class="js-arrow" href="#">
-                            <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                            <li>
-                                <a href="index.html">Dashboard 1</a>
-                            </li>
-                            <li>
-                                <a href="index2.html">Dashboard 2</a>
-                            </li>
-                            <li>
-                                <a href="index3.html">Dashboard 3</a>
-                            </li>
-                            <li>
-                                <a href="index4.html">Dashboard 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="chart.html">
-                            <i class="fas fa-chart-bar"></i>Charts</a>
-                    </li>
-                    <li>
-                        <a href="table.html">
-                            <i class="fas fa-table"></i>Tables</a>
-                    </li>
-                    <li>
-                        <a href="form.html">
-                            <i class="far fa-check-square"></i>Forms</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-calendar-alt"></i>Calendar</a>
-                    </li>
-                    <li>
-                        <a href="map.html">
-                            <i class="fas fa-map-marker-alt"></i>Maps</a>
-                    </li>
-                    <li class="has-sub">
-                        <a class="js-arrow" href="#">
-                            <i class="fas fa-copy"></i>Pages</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                            <li>
-                                <a href="login.html">Login</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Register</a>
-                            </li>
-                            <li>
-                                <a href="forget-pass.html">Forget Password</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="has-sub">
-                        <a class="js-arrow" href="#">
-                            <i class="fas fa-desktop"></i>UI Elements</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                            <li>
-                                <a href="button.html">Button</a>
-                            </li>
-                            <li>
-                                <a href="badge.html">Badges</a>
-                            </li>
-                            <li>
-                                <a href="tab.html">Tabs</a>
-                            </li>
-                            <li>
-                                <a href="card.html">Cards</a>
-                            </li>
-                            <li>
-                                <a href="alert.html">Alerts</a>
-                            </li>
-                            <li>
-                                <a href="progress-bar.html">Progress Bars</a>
-                            </li>
-                            <li>
-                                <a href="modal.html">Modals</a>
-                            </li>
-                            <li>
-                                <a href="switch.html">Switchs</a>
-                            </li>
-                            <li>
-                                <a href="grid.html">Grids</a>
-                            </li>
-                            <li>
-                                <a href="fontawesome.html">Fontawesome Icon</a>
-                            </li>
-                            <li>
-                                <a href="typo.html">Typography</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- END HEADER MOBILE-->
+
 
     <!-- MENU SIDEBAR-->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="#">
-                <img src="images/icon/logo.png" alt="Cool Admin" />
+                <img src="images/icon/logo.png" alt="Cool Admin" class="logo_img" />
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
@@ -327,56 +212,155 @@ echo json_encode($jeson);
 
         <!-- MAIN CONTENT-->
         <div class="main-content">
-            <div class="section__content section__content--p30">
-                <div class="container-fluid">
-                    <div class="row">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- DATA TABLE -->
+                        <h3 class="title-5 m-b-35">data table</h3>
+                        <div class="table-data__tool">
+                            <div class="table-data__tool-left">
 
-                        <div class="col-lg-6">
-                            <div class="au-card m-b-30">
-                                <div class="au-card-inner">
-                                    <h3 class="title-2 m-b-40">Single Bar Chart</h3>
-                                    <canvas id="myChart"></canvas>
-                                    <script>var ctx = document.getElementById('myChart').getContext('2d');
-                                        var chart = new Chart(ctx, {
-                                            // The type of chart we want to create
-                                            type: 'bar',
+                                <div class="rs-select2--light rs-select2--sm">
 
-                                            // The data for our dataset
-                                            data: {
-                                                labels: <?php echo json_encode($jeson); ?>,
 
-                                                datasets: [{
-                                                    label: 'Categorie plus demader',
-                                                    backgroundColor: 'rgb(25,25,112)',
-                                                    borderColor: 'rgb(25,25,112)',
-                                                    data: [<?php echo $recl->cat2(); ?>,<?php echo $recl->cat1(); ?>,<?php echo $recl->cat3(); ?>,<?php echo $recl->cat4(); ?>,<?php echo $recl->cat5(); ?>]
-                                                }]
-                                            },
 
-                                            // Configuration options go here
-                                            options: {}
-                                        });</script>
+                                    <form action="" method="GET">
+                                        <select class="js-select2" name="filtrage">
+                                            <option selected="selected">reclamation</option>
+                                            <option value="nom">Nom</option>
+                                            <option value="id">Identifiant</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
                                 </div>
+                                <i class="zmdi zmdi-filter-list"> </i>
+                                <input type="submit" value="filtre" class="au-btn-filter">
+                                </form>
+
+
+
+
+
                             </div>
+
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                            </div>
+
+                        <div class="table-responsive table-responsive-data2">
+                            <table class="table table-data2">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <label class="au-checkbox">
+                                            <input type="checkbox">
+                                            <span class="au-checkmark"></span>
+                                        </label>
+                                    </th>
+                                    <th>titre</th>
+                                    <th>auteur</th>
+                                    <th>categorie</th>
+                                    <th>Autre information</th>
+                                    <th>Adresse Email</th>
+                                    <th>N°Tel</th>
+
+
+
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                    <?php foreach($listeProduit_sp as $row)
+                                        : ?>
+                                        <tbody>
+                                        <tr class="tr-shadow">
+                                            <td>
+                                                <label class="au-checkbox">
+                                                    <input type="checkbox">
+                                                    <span class="au-checkmark"></span>
+                                                </label>
+                                            </td>
+                                            <td><?PHP echo $row['Titre']; ?></td>
+                                            <td><?PHP echo $row['auteur']; ?></td>
+                                            <td><?PHP echo $row['categorie']; ?></td>
+                                            <td><?PHP echo $row['autre_info']; ?></td>
+
+                                            <td><?PHP echo $row['mail']; ?></td>
+                                            <td><?PHP echo $row['telephone']; ?></td>
+                                            <td>
+                                                <div class="table-data-feature">
+
+                                                    <div class="table-data-feature">
+                                                        <button type="button" class="item"  name="bt" data-toggle="modal" data-target="#sms<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+
+
+
+                                                    </div>
+                                            </td>
+                                           <!-- Modal -->
+                                            <div id="sms<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+
+
+                                                        <div class="modal-body">
+                                                            <p>Repondre a la reclamation de <strong><?PHP echo $row['id']; ?></strong>:</p>
+                                                            <form method="post" action="sendsms.php">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row form-group">
+                                                                    <div class="col col-md-3">
+                                                                        <label for="textarea-input" class=" form-control-label">Message</label>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-9">
+                                                                        <textarea name="msg" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                                                    </div>
+                                                                    <div class="card-footer">
+                                                                        <button type="submit" name="envoyer" class="btn btn-secondary btn-sm">
+                                                                            <i class="fa fa-dot-circle-o"></i> envoyer
+                                                                        </button>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                         </div>
+                        </tr>
+                        <tr class="spacer"></tr>
+
+                        <?php       endforeach;?>
+                        </tbody>
+
+                        </table>
+
                     </div>
                 </div>
+                <!-- END DATA TABLE -->
+
+
+
             </div>
+
         </div>
-        <!-- END MAIN CONTENT-->
-    </div>
-    <!-- END PAGE CONTAINER-->
 
-</div>
 
-<!-- Jquery JS-->
+
+
+        <!-- Jquery JS-->
 <script src="vendor/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap JS-->
 <script src="vendor/bootstrap-4.1/popper.min.js"></script>
@@ -404,4 +388,3 @@ echo json_encode($jeson);
 
 </html>
 <!-- end document-->
-

@@ -53,6 +53,7 @@ if(isset($_GET['filtrage'])) {
 </head>
 
 <body class="animsition">
+
 <div class="page-wrapper">
 
 
@@ -60,7 +61,7 @@ if(isset($_GET['filtrage'])) {
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="#">
-                <img src="images/icon/logo.png" alt="Cool Admin" />
+                <img src="images/icon/logo.png" alt="Cool Admin" class="logo_img" />
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
@@ -213,7 +214,6 @@ if(isset($_GET['filtrage'])) {
 
         <!-- MAIN CONTENT-->
         <div class="main-content">
-            <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
@@ -266,9 +266,13 @@ if(isset($_GET['filtrage'])) {
                                         <th></th>
                                     </tr>
                                     </thead>
-                                    <?php foreach($listeReclamation as $row)
-                                        : ?>
-                                        <tbody>
+                                    <?php foreach($listeReclamation as $row):
+                                                                            ?>
+
+
+                                    <tbody>
+
+
                                         <tr class="tr-shadow">
                                             <td>
                                                 <label class="au-checkbox">
@@ -284,42 +288,131 @@ if(isset($_GET['filtrage'])) {
                                             else echo"<span class=\"status--process\">oui</span>";?></td>
                                             <td>
                                                 <div class="table-data-feature">
-                                                    <a href="trait.php?id=<?php echo $row['id']; ?>">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send" value="traiter" >
-                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        <button type="button" class="item"  name="bt" data-toggle="modal" data-target="#m<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">                                                            <i class="zmdi zmdi-mail-send"></i>
                                                         </button>
-                                                    </a>
-                                                    <a href="supprimerReclamation.php?id=<?php echo $row['id']; ?>">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </button>
-                                                    </a>
 
+                                                    <button class="item" data-toggle="modal" data-placement="top" title="Delete" data-target="#delete<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">   >
+                                                        <i class="zmdi zmdi-delete"></i>
+                                                        </button>
                                                 </div>
                                             </td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
-                                        </tbody>
-                                    <?php endforeach; ?>
-                                </table>
+
+
+                            <!-- Modal -->
+                                            <div id="m<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Envoyer Email</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Repondre a la reclamation de <strong><?PHP echo $row['nom']; ?></strong>:</p>
+                                                            <form method="post" action="trait.php">
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row form-group">
+                                                                    <div class="col col-md-3">
+                                                                        <label for="textarea-input" class=" form-control-label">Message</label>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-9">
+                                                                        <textarea name="msg" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                                                    </div>
+                                                                    <div class="card-footer">
+                                                                        <button type="submit" name="envoyer" class="btn btn-secondary btn-sm">
+                                                                            <i class="fa fa-dot-circle-o"></i> envoyer
+                                                                        </button>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
                             </div>
 
-                        <!-- END DATA TABLE -->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="copyright">
-                            <p>Copyright © 2019 Colorlib. All rights reserved. Template by IT Army.</p>
+
+
+
+
+
+                            <!-- Modal -->
+                            <div id="delete<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title"></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" action="supprimerReclamation.php">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Suppression</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
+                                                        <div class="alert alert-danger">vous voulez suprimer <strong>
+                                                                <?php echo $row['nom']; ?>?</strong> </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" name="delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> YES</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> NO</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+
+                                     <?php       endforeach;?>
+                                    </tbody>
+
+                            </table>
+
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                        <!-- END DATA TABLE -->
+
+
+
     </div>
-</div>
 
 </div>
+
 
 <!-- Jquery JS-->
 <script src="vendor/jquery-3.2.1.min.js"></script>

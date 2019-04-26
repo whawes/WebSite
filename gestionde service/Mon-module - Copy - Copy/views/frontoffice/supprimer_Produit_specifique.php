@@ -1,7 +1,7 @@
 <?PHP
 include "../../core/produit_specifiqueC.php";
 
-$n=225;
+$n=236;
 
     $pr=new produit_specifiqueC();
 

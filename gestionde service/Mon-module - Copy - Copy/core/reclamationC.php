@@ -39,6 +39,23 @@ class reclamationC {
 			die('Erreur: '.$e->getMessage());
 		}
 	}
+	function recuperer_mail($s)
+	{
+		$dbh = config::getConnexion();
+
+		$sth = $dbh->prepare('SELECT mail FROM `reclamation` WHERE id=:s');
+		$sth->bindValue(':s',$s);
+
+		$sth->execute();
+
+		$x = $sth->fetchAll();
+		foreach ($x as $b) {
+			foreach ($b as $i)
+				return $i;
+		}
+
+
+	}
 	function afficherReclamtion(){
 		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
 		$sql="SElECT * From reclamation  ";

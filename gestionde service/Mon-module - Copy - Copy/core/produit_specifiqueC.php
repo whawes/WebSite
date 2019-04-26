@@ -234,16 +234,33 @@ class produit_specifiqueC
 
     }
 
-    function recuperer_numero_tel($id)
+    function recuperer_numero_tel($s)
     {
         $dbh = config::getConnexion();
 
-        $sth = $dbh->prepare('SELECT telephone FROM `produit_specifique` WHERE id=:id');
+        $sth = $dbh->prepare('SELECT telephone FROM `produit_specifique` WHERE id=:s');
+        $sth->bindValue(':s',$s);
+
         $sth->execute();
+
         $x = $sth->fetchAll();
         foreach ($x as $b) {
             foreach ($b as $i)
                 return $i + 0;
+        }
+
+
+    }
+    function recuperer_mail($id)
+    {
+        $dbh = config::getConnexion();
+
+        $sth = $dbh->prepare('SELECT mail FROM `produit_specifique` WHERE id=:id');
+        $sth->execute();
+        $x = $sth->fetchAll();
+        foreach ($x as $b) {
+            foreach ($b as $i)
+                return $i;
         }
 
 

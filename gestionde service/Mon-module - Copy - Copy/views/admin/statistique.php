@@ -1,17 +1,16 @@
 <?PHP
 include "../../core/produit_specifiqueC.php";
-
 $recl=new Produit_specifiqueC();
-$listeProduit_sp=$recl->afficher_Produit_specifique();
-if(isset($_GET['filtrage'])) {
-    if ($_GET['filtrage'] === 'titre')
-        $listeProduit_sp=$recl->afficher_Produit_specifique_titre();
-    else if ($_GET['filtrage'] === 'auteur')
-        $listeProduit_sp=$recl->afficher_Produit_specifique_auteur();
-    else
-        $listeProduit_sp=$recl->afficher_Produit_specifique_categorie();
-}
 
+$db = config::getConnexion();
+$stmt=$db->prepare("SElECT DISTINCT categorie From produit_specifique  ");
+$stmt->execute();
+$jeson=[];
+while ($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+    extract($row);
+    $jeson[]= $categorie;
+}
+echo json_encode($jeson);
 
 ?>
 <!DOCTYPE html>
@@ -26,7 +25,7 @@ if(isset($_GET['filtrage'])) {
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Tables</title>
+    <title>Charts</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -48,18 +47,17 @@ if(isset($_GET['filtrage'])) {
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 </head>
 
 <body class="animsition">
 <div class="page-wrapper">
-
-
     <!-- MENU SIDEBAR-->
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="#">
-                <img src="images/icon/logo.png" alt="Cool Admin" />
+                <img src="images/icon/logo.png" alt="Cool Admin" class="logo_img" />
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
@@ -215,96 +213,34 @@ if(isset($_GET['filtrage'])) {
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12">
-                            <!-- DATA TABLE -->
-                            <div class="main-content">
-                                <div class="section__content section__content--p30">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <!-- DATA TABLE -->
-                                                <h3 class="title-5 m-b-35">data table</h3>
-                                                <div class="table-data__tool">
-                                                    <div class="table-data__tool-left">
 
-                                                        <div class="rs-select2--light rs-select2--sm">
+                        <div class="col-lg-6">
+                            <div class="au-card m-b-30">
+                                <div class="au-card-inner">
+                                    <h3 class="title-2 m-b-40">Single Bar Chart</h3>
+                                    <canvas id="myChart"></canvas>
+                                    <script>var ctx = document.getElementById('myChart').getContext('2d');
+                                        var chart = new Chart(ctx, {
+                                            // The type of chart we want to create
+                                            type: 'bar',
 
+                                            // The data for our dataset
+                                            data: {
+                                                labels: <?php echo json_encode($jeson); ?>,
 
+                                                datasets: [{
+                                                    label: 'Categorie plus demader',
+                                                    backgroundColor: 'rgb(25,25,112)',
+                                                    borderColor: 'rgb(25,25,112)',
+                                                    data: [<?php echo $recl->cat2(); ?>,<?php echo $recl->cat1(); ?>,<?php echo $recl->cat3(); ?>,<?php echo $recl->cat4(); ?>,<?php echo $recl->cat5(); ?>]
+                                                }]
+                                            },
 
-                                                            <form action="" method="GET">
-                                                                <select class="js-select2" name="filtrage">
-                                                                    <option selected="selected">titre</option>
-                                                                    <option value="auteur">Auteur</option>
-                                                                    <option value="categorie">Categorie</option>
-                                                                </select>
-                                                                <div class="dropDownSelect2"></div>
-                                                        </div>
-                                                        <i class="zmdi zmdi-filter-list"> </i>
-                                                        <input type="submit" value="filtre" class="au-btn-filter">
-                                                        </form>
-
-                                                        <div class="table-responsive table-responsive-data2">
-                                <table class="table table-data2">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <th>titre</th>
-                                        <th>auteur</th>
-                                        <th>categorie</th>
-                                        <th>Autre information</th>
-                                        <th>Adresse Email</th>
-                                        <th>N°Tel</th>
-
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <?php foreach($listeProduit_sp as $row)
-                                        : ?>
-                                        <tbody>
-                                        <tr class="tr-shadow">
-                                            <td>
-                                                <label class="au-checkbox">
-                                                    <input type="checkbox">
-                                                    <span class="au-checkmark"></span>
-                                                </label>
-                                            </td>
-                                            <td><?PHP echo $row['Titre']; ?></td>
-                                            <td><?PHP echo $row['auteur']; ?></td>
-                                            <td><?PHP echo $row['categorie']; ?></td>
-                                            <td><?PHP echo $row['autre_info']; ?></td>
-
-                                            <td><?PHP echo $row['mail']; ?></td>
-                                            <td><?PHP echo $row['telephone']; ?></td>
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <a href="sendsms.php?id=<?php echo $row['id']; ?>">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send" value="traiter" >
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button>
-                                                    </a>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                        <i class="zmdi zmdi-edit"></i>
-                                                    </button>
-                                                    <a href="supprimerReclamation.php?id=<?php echo $row['id']; ?>">
-
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                        <i class="zmdi zmdi-more"></i>
-                                                    </button>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
-                                        </tbody>
-                                    <?php endforeach; ?>
-                                </table>
+                                            // Configuration options go here
+                                            options: {}
+                                        });</script>
+                                </div>
                             </div>
-                            <!-- END DATA TABLE -->
                         </div>
                     </div>
                     <div class="row">
@@ -317,7 +253,9 @@ if(isset($_GET['filtrage'])) {
                 </div>
             </div>
         </div>
+        <!-- END MAIN CONTENT-->
     </div>
+    <!-- END PAGE CONTAINER-->
 
 </div>
 
@@ -349,3 +287,4 @@ if(isset($_GET['filtrage'])) {
 
 </html>
 <!-- end document-->
+
