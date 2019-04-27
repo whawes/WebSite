@@ -24,6 +24,7 @@ class reclamationC {
         }
 		
 	}
+
 	function traiter($s){
 
 		$sql="update reclamation set traitement='oui' where id=:s";
@@ -81,7 +82,7 @@ class reclamationC {
 	}
 	function afficherReclamtion_tri($s){
 		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-		$sql="SELECT * FROM reclamation  WHERE traitement='non' and nom like '%$s%' or mail like '%$s%'  ";
+		$sql="SELECT * FROM reclamation  WHERE traitement='non' and (nom like '%$s%' or mail like '%$s%')  ";
 		$db = config::getConnexion();
 		try{
 			$liste=$db->query($sql);
@@ -93,7 +94,7 @@ class reclamationC {
 	}
 	function afficherReclamtion_recherche($s){
 		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-		$sql="SELECT * FROM reclamation  WHERE traitement='oui' and nom like '%$s%' or mail like '%$s%'  ";
+		$sql="SELECT * FROM reclamation  WHERE traitement='oui' and (nom like '%$s%' or mail like '%$s%')  ";
 		$db = config::getConnexion();
 		try{
 			$liste=$db->query($sql);

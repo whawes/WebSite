@@ -47,7 +47,19 @@ class produit_specifiqueC
     function afficher_Produit_specifique()
     {
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql = "SElECT * From produit_specifique  ";
+        $sql = "SElECT * From produit_specifique where  etat='non' ";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_traiter()
+    {
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql = "SElECT * From produit_specifique where etat='oui'";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -58,7 +70,19 @@ class produit_specifiqueC
     }
     function afficher_Produit_specifique_trie($s){
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql="SELECT * FROM produit_specifique  WHERE titre like '%$s%' or auteur like '%$s%'  or categorie like '%$s%' ";
+        $sql="SELECT * FROM produit_specifique  WHERE etat='non' and (titre like '%$s%' or auteur like '%$s%'  or categorie like '%$s%') ";
+        $db = config::getConnexion();
+        try{
+            $liste=$db->query($sql);
+            return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_traiter_recherche($s){
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SELECT * FROM produit_specifique  WHERE etat='oui' and (titre like '%$s%' or auteur like '%$s%'  or categorie like '%$s%') ";
         $db = config::getConnexion();
         try{
             $liste=$db->query($sql);
@@ -71,7 +95,19 @@ class produit_specifiqueC
     function afficher_Produit_specifique_titre()
     {
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql="SElECT * From produit_specifique order by Titre asc ";
+        $sql="SElECT * From produit_specifique where  etat like 'non' order by Titre asc ";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_titre_traiter()
+    {
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SElECT * From produit_specifique where etat like'oui' order by Titre asc ";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -83,7 +119,19 @@ class produit_specifiqueC
     function afficher_Produit_specifique_auteur()
     {
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql="SElECT * From produit_specifique order by auteur asc ";
+        $sql="SElECT * From produit_specifique  where etat like 'non' order by auteur asc ";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_auteur_traiter()
+    {
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SElECT * From produit_specifique  where etat like 'oui' order by auteur asc";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -95,7 +143,19 @@ class produit_specifiqueC
     function afficher_Produit_specifique_categorie()
     {
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql="SElECT * From produit_specifique order by categorie asc ";
+        $sql="SElECT * From produit_specifique where  etat like 'non' order by categorie asc ";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_categorie_traiter()
+    {
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SElECT * From produit_specifique where etat like 'oui' order by categorie asc  ";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);

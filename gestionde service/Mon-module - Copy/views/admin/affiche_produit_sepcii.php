@@ -6,15 +6,9 @@ include "../../config.php";
 $recl=new ReclamationC();
 $prod=new produit_specifiqueC();
 $listeProduit_sp = $prod->afficher_Produit_specifique();
+$listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
 
-if(isset($_GET['filtrage'])) {
-    if ($_GET['filtrage'] === 'titre')
-        $listeProduit_sp=$prod->afficher_Produit_specifique_titre();
-    else if ($_GET['filtrage'] === 'auteur')
-        $listeProduit_sp=$prod->afficher_Produit_specifique_auteur();
-    else
-        $listeProduit_sp=$prod->afficher_Produit_specifique_categorie();
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -115,7 +109,7 @@ if(isset($_GET['filtrage'])) {
                 <div class="container-fluid">
                     <div class="header-wrap">
                         <form class="form-header" action="" method="">
-                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value)" />
+                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value),showCustomer2(this.value)" />
                             <button class="au-btn--submit" type="submit" name="bt" id="sr">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
@@ -227,7 +221,7 @@ if(isset($_GET['filtrage'])) {
                                 <div class="rs-select2--light rs-select2--sm">
 
 
-                                    <select class="js-select2" name="filtrage" onchange="sort(this.value)">
+                                    <select class="js-select2" name="filtrage" onchange="sort(this.value),sort2(this.value)">
                                         <option selected="selected">produit specifique</option>
                                         <option value="titre">titre</option>
                                         <option value="auteur">auteur</option>
@@ -315,7 +309,6 @@ if(isset($_GET['filtrage'])) {
                                                         <div class="form-group">
                                                             <div class="input-group">
                                                                 <input type="hidden" name="id" value="<?PHP echo $row['id']; ?>">
-                                                                <input type="hidden" name="auteur" value="<?PHP echo $row['auteur']; ?>">
                                                                 <input type="hidden" name="produit" value="<?PHP echo $row['Titre']; ?>">
 
                                                             </div>
@@ -365,6 +358,134 @@ if(isset($_GET['filtrage'])) {
             </div>
 
     </div>
+        <div class="col-md-12">
+
+            <!-- DATA TABLE -->
+
+            <h3 class="title-5 m-b-35">Liste de demande  tariter</h3>
+            <div class="table-data__tool">
+                <div class="table-data__tool-left">
+
+
+                </div>
+        <div id="det2" class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                <tr>
+                    <th>
+                        <label class="au-checkbox">
+                            <input type="checkbox">
+                            <span class="au-checkmark"></span>
+                        </label>
+                    </th>
+                    <th>titre</th>
+                    <th>auteur</th>
+                    <th>categorie</th>
+                    <th>Autre information</th>
+                    <th>Adresse Email</th>
+                    <th>N°Tel</th>
+                    <th>Etat</th>
+
+
+
+                    <th></th>
+                </tr>
+                </thead>
+                <?php foreach($listeProduit_sp2 as $row)
+                : ?>
+                <tbody>
+                <tr class="tr-shadow">
+                    <td>
+                        <label class="au-checkbox">
+                            <input type="checkbox">
+                            <span class="au-checkmark"></span>
+                        </label>
+                    </td>
+                    <td><?PHP echo $row['Titre']; ?></td>
+                    <td><?PHP echo $row['auteur']; ?></td>
+                    <td><?PHP echo $row['categorie']; ?></td>
+                    <td><?PHP echo $row['autre_info']; ?></td>
+
+                    <td><?PHP echo $row['mail']; ?></td>
+                    <td><?PHP echo $row['telephone']; ?></td>
+                    <td><?PHP if($row['etat']=='non')echo"<span class=\"status--denied\">non</span>";
+                        else echo"<span class=\"status--process\">oui</span>";?></td>
+                    <td>
+                    <td>
+                        <div class="table-data-feature">
+
+                            <div class="table-data-feature">
+                                <button type="button" class="item"  name="bt" data-toggle="modal" data-target="#sms<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">                                                            <i class="zmdi zmdi-mail-send"></i>
+                                </button>
+
+
+
+                            </div>
+                    </td>
+                    <!-- Modal -->
+                    <div id="sms<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+
+                                <div class="modal-body">
+                                    <p>Repondre a la reclamation de <strong><?PHP echo $row['id']; ?></strong>:</p>
+                                    <form method="post" action="sendsms.php">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="hidden" name="id" value="<?PHP echo $row['id']; ?>">
+                                                <input type="hidden" name="auteur" value="<?PHP echo $row['auteur']; ?>">
+                                                <input type="hidden" name="produit" value="<?PHP echo $row['Titre']; ?>">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="textarea-input" class=" form-control-label">Message</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <textarea name="msg" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button type="submit" name="envoyer" class="btn btn-secondary btn-sm">
+                                                    <i class="fa fa-dot-circle-o"></i> envoyer
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+        </div>
+        </tr>
+        <tr class="spacer"></tr>
+
+        <?php       endforeach;?>
+        </tbody>
+
+        </table>
+
+    </div>
+</div>
+<!-- END DATA TABLE -->
+
+
+
+</div>
+
+</div>
         <script>
             function sort(id)
             {
@@ -388,7 +509,7 @@ if(isset($_GET['filtrage'])) {
                 xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("det").innerHTML = this.responseText;
+                        document.getElementById("det2").innerHTML = this.responseText;
                     }
                 };
                 xhttp.open("GET", "rechercher_prod.php?q="+str, true);
@@ -397,6 +518,38 @@ if(isset($_GET['filtrage'])) {
             }
 
         </script>
+<script>
+    function sort2(id)
+    {
+        $.ajax({
+            url: "trie_produit_specifique_traiter.php",
+            data:{data: id},
+            type: "POST",
+            success: function(data){
+                $('#det2').html(data);
+            },
+            failure: function(data){
+                $('#det2').html(data);
+            }
+        });
+    }
+
+
+    function showCustomer2(str) {
+
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("det2").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "rechercher_produit_specifique_traiter.php?q="+str, true);
+
+        xhttp.send();
+    }
+
+</script>
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>

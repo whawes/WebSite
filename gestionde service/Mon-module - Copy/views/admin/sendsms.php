@@ -8,7 +8,7 @@ if (isset($_POST['envoyer']) ) {
      $p->traiter_prod($_POST['id']);
     $m = $nmo;
     $msg = $_POST['msg'];
-    $messagee="bonjour Mr,Mrs, votre livre  ".$_POST['produit']."de".$_POST['auteur']."est acheter".$msg;
+    $messagee="bonjour Mr,Mrs, votre livre  ".$_POST['produit']." de ".$_POST['auteur']." est acheter".$msg;
     $mobileno = "+216" . $m;
     var_dump($mobileno);
     var_dump($msg);

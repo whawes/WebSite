@@ -14,6 +14,7 @@ $DB = new config();
 
     if ($_GET['q']!="")
             $listeReclamation = $recl->afficherReclamtion_tri($_GET['q']);
+
       else
             $listeReclamation = $recl->afficherReclamtion();
     ?>
