@@ -1,10 +1,9 @@
-
 <!doctype html>
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Contact || Witter Multipage Responsive Template</title>
+        <title>Creat An Account || Witter Multipage Responsive Template</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- favicon -->
@@ -13,6 +12,7 @@
         <!-- Google Fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Poppins:400,700,600,500,300' rel='stylesheet' type='text/css'>
 
+        <script type="text/javascript" src="js/verif.js"></script>
 		<!-- all css here -->
 		<!-- bootstrap v3.3.6 css -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -43,21 +43,13 @@
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
-        <?php if (isset($_SESSION['message'])): ?>
-    <div class="msg">
-        <?php 
-            echo $_SESSION['message']; 
-            unset($_SESSION['message']);
-        ?>
-    </div>
-<?php endif ?>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <!-- Add your site or application content here -->
         <!--Header Area Start-->
-        <div class="header-area">
+       <div class="header-area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-sm-6 col-xs-6">
@@ -137,42 +129,47 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div>                    
                     <div class="col-md-9 col-sm-12 hidden-xs">
                         <div class="mainmenu text-center">
                             <nav>
                                 <ul id="nav">
                                     <li><a href="index.html">HOME</a></li>
-                                    <li><a href="#">CATALOGUE</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
-                                        </ul></li>
+                                    <li><a href="shop.html">CATALOGUE</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="shop.htmll">CATALOGUE1</a></li>
+                                        <li><a href="shop.html">CATALOGUE2</a></li>
+                                    </ul></li>
                                     <li><a href="#">ESPACE LECTEUR</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="lecture.html">Lecture</a></li>
+                                        <li><a href="#">Forum</a></li>
+                                    </ul></li>
+                                   <li><a href="#">RESSOURCES</a>
                                         <ul class="sub-menu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
+                                            <li><a href="auteurs.html">Espace auteurs</a></li>
+                                            <li><a href="editeur.html">Espace éditeurs</a></li>
+
                                         </ul></li>
-                                    <li><a href="#">MAISSON D'EDITION</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
-                                        </ul></li>
+                                     <li><a href="login-admin.html">ESPACE ECOLE</a>
+                                    </li>
                                     <li><a href="#">CONTACT</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="demande_produit.html">Demande produit specifie</a></li>
-                                        </ul></li>
+                                    <ul class="sub-menu">
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="contact.html">Reclamation</a></li>
+                                        <li><a href="demande_produit.html">Demande produit specifie</a></li>
+                                    </ul></li>
                                 </ul>
                             </nav>
-                        </div>
+                        </div>                        
                     </div>
+
+
                     <div class="col-md-1 hidden-sm">
                         <div class="header-right">
                             <ul>
                                 <li>
-                                    <a href="account.html"><i class="flaticon-people"></i></a>
+                                    <a href="my-account.html"><i class="flaticon-people"></i></a>
                                 </li>
                                 <li class="shoping-cart">
                                     <a href="#">
@@ -243,6 +240,41 @@
             </div>
         </div>
         <!--Header Area End-->
+        <!-- Mobile Menu Start -->
+        <div class="mobile-menu-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="mobile-menu">
+                            <nav id="dropdown">
+                                <ul>
+                                    <li><a href="index.html">HOME</a></li>
+                                    <li><a href="shop.html">FEATURED</a></li>
+                                    <li><a href="shop.html">REVIEW BOOK</a></li>
+                                    <li><a href="about.html">ABOUT AUTHOR</a></li>
+                                    <li><a href="#">pages</a>
+                                        <ul>
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="cart.html">Cart Page</a></li>
+                                            <li><a href="checkout.html">Check Out</a></li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="login.html">Login</a></li>
+                                            <li><a href="my-account.html">My Account</a></li>
+                                            <li><a href="shop.html">Shopping Page</a></li>
+                                            <li><a href="single-product.html">Single Shop Page</a></li>
+                                            <li><a href="wishlist.html">Wishlist Page</a></li>
+                                            <li><a href="404.html">404 Page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="contact.html">CONTACT</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+        <!--Header Area End-->
 		<!-- Mobile Menu Start -->
 		<div class="mobile-menu-area">
 			<div class="container">
@@ -278,91 +310,75 @@
 			</div>
 		</div>		
 		<!-- Mobile Menu End -->   
-		<!-- Map Area Start -->
-		<div class="map-area">
-			<div id="googleMap" style="width:100%;height:445px;"></div>
-		</div>
-		<!-- Map Area End -->	
-		<!-- Address Information Area Start -->
-		<div class="address-info-area section-padding">
+        <!-- Breadcrumbs Area Start -->
+        <div class="breadcrumbs-area">
 			<div class="container">
-				<div class="row">
-					<div class="col-md-4 hidden-sm">
-						<div class="address-single">
-							<div class="all-adress-info">
-								<div class="icon">
-									<span><i class="fa fa-user-plus"></i></span>
-								</div>
-								<div class="info">
-									<h3>PHONE</h3>
-									<p>+(02)-12345-6789-55</p>
-									<p>+(05)-15689-5698-44</p>
-								</div>
-							</div>
-						</div>						
-					</div>
-					<div class="col-md-4 col-sm-6">
-						<div class="address-single">
-							<div class="all-adress-info">
-								<div class="icon">
-									<span><i class="fa fa-map-marker"></i></span>
-								</div>
-								<div class="info">
-									<h3>ADDRESS</h3>
-									<p>Mhilara Street 205,</p>
-									<p>Roitan city, USA.</p>
-								</div>
-							</div>
-						</div>						
-					</div>
-					<div class="col-md-4 col-sm-6">
-						<div class="address-single no-margin">
-							<div class="all-adress-info">
-								<div class="icon">
-									<i class="fa fa-envelope"></i>
-								</div>
-								<div class="info">
-									<h3>E-MAIL</h3>
-									<p>info123@gmail.com</p>
-									<p>www.companyweb.com</p>
-								</div>
-							</div>
-						</div>					
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Address Information Area End -->
-		<!-- Contact Form Area Start -->
-		<div class="contact-form-area">
-			<div class="container">
-				<div class="about-title">
-					<h3>LEAVE A MESSAGE</h3>
-				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<form method="POST" action="ajouterReclamation.php">
-
-								<div class="col-md-7">
-									<div class="contact-form-right">
-										<div class="input-message">
-											<textarea name="msg" id="message" required placeholder="Your Message"></textarea>
-                                                                                    <p id="b4"></p>
-
-											<input class="btn btn-default" type="submit" value="SEND" name="submit" id="submit" onclick="test()" >
-                                            
-
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</form>
+					    <div class="breadcrumbs">
+					       <h2>LOGIN/REGISTER</h2> 
+					       <ul class="breadcrumbs-list">
+						        <li>
+						            <a title="Return to Home" href="index.html">Home</a>
+						        </li>
+						        <li>Login</li>
+						    </ul>
+					    </div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- Contact Form Area End -->
+		</div> 
+		<!-- Breadcrumbs Area Start --> 
+        <!-- Loging Area Start -->
+        <div class="login-account section-padding">
+           <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <form action="#" class="create-account-form" method="post">
+                            <h2 class="heading-title">
+                                CREATE AN ACCOUNT
+                            </h2>
+                            <p class="form-row">
+                                <input type="email" placeholder="Email address">
+                            </p>
+                            <div class="submit">					
+                                <button name="submitcreate" id="submitcreate" type="submit" class="btn-default">
+                                    <span>
+                                        <i class="fa fa-user left"></i>
+                                        Create an account
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                       <form action="connexion.php" class="create-account-form" method="post">
+                            <h2 class="heading-title">
+                                ALREADY RESIGTERED?
+                            </h2>
+                            <p class="form-row">
+                                <input id="1" name="addressmail" type="email" placeholder="Email address" required>
+                            </p>
+                            <p class="form-row">
+                                <input id="2" name="pass" type="password" placeholder="Password" required>
+                            </p>
+                            <p class="lost-password form-group">
+                                <a href="#" rel="nofollow">Forgot your password?</a>
+                            </p> 
+                            <div class="submit">					
+                                <button name="submitcreate" id="submitcreate" onclick="test3()" type="submit" class="btn-default">
+                                    <span>
+                                        <i class="fa fa-user left"></i>
+                                        SING IN
+                                    </span>
+                                </button>
+                            </div>                          
+                       </form>
+                    </div>
+                </div>               
+           </div>
+        </div>
+        <!-- Loging Area End -->
         <!-- Footer Area Start -->
         <footer>
             <div class="footer-top-area">
@@ -427,12 +443,8 @@
                             <div class="single-footer footer-newsletter">
                                 <h2 class="footer-title">Our Newsletter</h2>
                                 <p>Consectetur adipisicing elit se do eiusm od tempor incididunt ut labore et dolore magnas aliqua.</p>
-                                <form action="#" method="post">
-                                    <div>
-                                        <input type="text" placeholder="email address">
-                                    </div>
+                                <form action="subscribe.html" method="post">
                                     <button class="btn btn-search btn-small" type="submit">SUBSCRIBE</button>
-                                    <i class="flaticon-networking"></i>
                                 </form>
                                 <ul class="social-icon">
                                     <li>
@@ -478,12 +490,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="footer-bottom-left pull-left">
-                                <p>Copyright &copy; 2016 <span><a href="#">DevItems</a></span>. All Right Reserved.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="footer-bottom-right pull-right">
-                                <img src="img/paypal.png" alt="">
+                                <p>Copyright &copy; 2019 <span><a href="#">Tech Army</a></span>. All Right Reserved.</p>
                             </div>
                         </div>
                     </div>
@@ -491,58 +498,90 @@
             </div>
         </footer>
         <!-- Footer Area End -->
-		<!-- all js here -->
-		<!-- jquery latest version -->
+        <!--Quickview Product Start -->
+        <div id="quickview-wrapper">
+            <!-- Modal -->
+            <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-product">
+                                <div class="product-images">
+                                    <div class="main-image images">
+                                        <img alt="" src="img/quick-view.jpg">
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h1>Frame Princes Cut Diamond</h1>
+                                    <div class="price-box">
+                                        <p class="s-price"><span class="special-price"><span class="amount">$280.00</span></span></p>
+                                    </div>
+                                    <a href="product-details.html" class="see-all">See all features</a>
+                                    <div class="quick-add-to-cart">
+                                        <form method="post" class="cart">
+                                            <div class="numbers-row">
+                                                <input type="number" id="french-hens" value="3">
+                                            </div>
+                                            <button class="single_add_to_cart_button" type="submit">Add to cart</button>
+                                        </form>
+                                    </div>
+                                    <div class="quick-desc">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.
+                                    </div>
+                                    <div class="social-sharing">
+                                        <div class="widget widget_socialsharing_widget">
+                                            <h3 class="widget-title-modal">Share this product</h3>
+                                            <ul class="social-icons">
+                                                <li><a target="_blank" title="Facebook" href="#" class="facebook social-icon"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a target="_blank" title="Twitter" href="#" class="twitter social-icon"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a target="_blank" title="Pinterest" href="#" class="pinterest social-icon"><i class="fa fa-pinterest"></i></a></li>
+                                                <li><a target="_blank" title="Google +" href="#" class="gplus social-icon"><i class="fa fa-google-plus"></i></a></li>
+                                                <li><a target="_blank" title="LinkedIn" href="#" class="linkedin social-icon"><i class="fa fa-linkedin"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div><!-- .product-info -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of Quickview Product-->         
+        <!-- all js here -->
+        <!-- jquery latest version -->
         <script src="js/vendor/jquery-1.12.0.min.js"></script>
-		<!-- bootstrap js -->
+        <!-- bootstrap js -->
         <script src="js/bootstrap.min.js"></script>
-		<!-- owl.carousel js -->
+        <!-- owl.carousel js -->
         <script src="js/owl.carousel.min.js"></script>
-		<!-- jquery-ui js -->
+        <!-- jquery-ui js -->
         <script src="js/jquery-ui.min.js"></script>
-		<!-- jquery Counterup js -->
+        <!-- jquery Counterup js -->
         <script src="js/jquery.counterup.min.js"></script>
-        <script src="js/waypoints.min.js"></script>	
-		<!-- jquery countdown js -->
+        <script src="js/waypoints.min.js"></script> 
+        <!-- jquery countdown js -->
         <script src="js/jquery.countdown.min.js"></script>
-		<!-- jquery countdown js -->
+        <!-- jquery countdown js -->
         <script type="text/javascript" src="venobox/venobox.min.js"></script>
-		<!-- jquery Meanmenu js -->
+        <!-- jquery Meanmenu js -->
         <script src="js/jquery.meanmenu.js"></script>
-		<!-- wow js -->
-        <script src="js/wow.min.js"></script>	
-		<script>
-			new WOW().init();
-		</script>
-		<!-- scrollUp JS -->		
+        <!-- wow js -->
+        <script src="js/wow.min.js"></script>   
+        <script>
+            new WOW().init();
+        </script>
+        <!-- scrollUp JS -->        
         <script src="js/jquery.scrollUp.min.js"></script>
-		<!-- plugins js -->
+        <!-- plugins js -->
         <script src="js/plugins.js"></script>
-		<!-- Nivo slider js -->
-		<script src="lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
-		<script src="lib/home.js" type="text/javascript"></script>
-		<!-- Google Map js -->
-        <script src="https://maps.googleapis.com/maps/api/js"></script>
-		<script>
-			function initialize() {
-			  var mapOptions = {
-				zoom: 16,
-				scrollwheel: false,
-				center: new google.maps.LatLng(23.763474, 90.431483)
-			  };
-			  var map = new google.maps.Map(document.getElementById('googleMap'),
-				  mapOptions);
-			  var marker = new google.maps.Marker({
-				position: map.getCenter(),
-				animation:google.maps.Animation.BOUNCE,
-				icon: 'img/map-icon.png',
-				map: map
-			  });
-			}
-			google.maps.event.addDomListener(window, 'load', initialize);
-		</script>		
-		<!-- main js -->
+        <!-- Nivo slider js -->
+        <script src="lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
+        <script src="lib/home.js" type="text/javascript"></script>
+        <!-- main js -->
         <script src="js/main.js"></script>
-        <script src="contact.js"></script>
     </body>
 </html>

@@ -8,6 +8,7 @@ alert(user);
     var user=document.getElementById("lineEdit").value;
     alert(user);
 }*/
+
 function verfier1() {
     var book=document.getElementById("book").value;
     if( book.length==0 ){
@@ -39,8 +40,8 @@ function verfier3() {
 
 }
 function verfier4() {
-    var city=document.getElementById("city").value;
-    if( city.length==0 ){
+    var city=document.getElementById("tel").value;
+    if( city.length!=8 || typeof (city)=="int"){
         document.getElementById("a3").innerHTML = "inccorrect";
         document.getElementById("a3").style.color = "#ff0000";
     return 0;}
@@ -49,12 +50,16 @@ function verfier4() {
 return 1;
 
 }
+
+
+
 function tryy(){
 
     verfier1();
     verfier2();
     verfier3();
     verfier4();
+
 
 
 

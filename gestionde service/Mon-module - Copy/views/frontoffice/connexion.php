@@ -1,15 +1,22 @@
 <?php
-if(($_POST['adressmail']=='aa@esprit.tn')&&($_POST['motdepasse']==0000))
+include "../../config.php";
+
+session_start();
+
+if(($_POST['addressmail']=='aa@esprit.tn')&&($_POST['pass']==0000))
 {
-	header('Location: contact.html');
-}
-else if(($_POST['adressmail']=='bb@esprit.tn')&&($_POST['motdepasse']==1111))
-{
-	header('Location: ../admin/table.html');
+    $_SESSION['tel']=24551966;
+    $_SESSION['Nom']='aaa';
+    $_SESSION['mail']='jmaiomar184@gmail.com';
+
+    $up=$_SESSION['page2'];
+    echo $_SESSION['page2'];
+
+    header('Location:'.$up);
 }
 else
 {
-	header('Location: login.html');
+	header('Location: login.php');
 }
 
 

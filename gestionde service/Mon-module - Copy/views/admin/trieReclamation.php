@@ -1,5 +1,6 @@
 <?PHP
 include "../../core/reclamationC.php";
+include "../../config.php";
 
 $recl=new ReclamationC();
 if(isset($_GET['filtrage']))

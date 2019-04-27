@@ -1,11 +1,10 @@
 <?PHP
-include "config.php";
 class produit_specifiqueC
 {
 
     function ajouter_produit_specifique($Produit_specifique)
     {
-        $sql = "INSERT INTO `produit_specifique` (`Titre`, `auteur`, `categorie`, `autre_info`, `telephone`, `mail`) values (:titre,:auteur,:categorie,:autre_info,:telephone,:mail )";
+        $sql = "INSERT INTO `produit_specifique` (`Titre`, `auteur`, `categorie`, `autre_info`, `telephone`, `mail` ,`etat`) values (:titre,:auteur,:categorie,:autre_info,:telephone,:mail,'non' )";
         $db = config::getConnexion();
         try {
             $req = $db->prepare($sql);
@@ -31,11 +30,24 @@ class produit_specifiqueC
         }
 
     }
+    function traiter_prod($s){
 
+        $sql="update produit_specifique set etat='oui' where id=:s";
+        $db = config::getConnexion();
+        $req=$db->prepare($sql);
+        $req->bindValue(':s',$s);
+        try{
+            $req->execute();
+
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
     function afficher_Produit_specifique()
     {
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql = "SElECT * From produit_specifique  ";
+        $sql = "SElECT * From produit_specifique where  etat='non' ";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -44,10 +56,58 @@ class produit_specifiqueC
             die('Erreur: ' . $e->getMessage());
         }
     }
+    function afficher_Produit_specifique_traiter()
+    {
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql = "SElECT * From produit_specifique where etat='oui'";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_trie($s){
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SELECT * FROM produit_specifique  WHERE etat='non' and (titre like '%$s%' or auteur like '%$s%'  or categorie like '%$s%') ";
+        $db = config::getConnexion();
+        try{
+            $liste=$db->query($sql);
+            return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_traiter_recherche($s){
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SELECT * FROM produit_specifique  WHERE etat='oui' and (titre like '%$s%' or auteur like '%$s%'  or categorie like '%$s%') ";
+        $db = config::getConnexion();
+        try{
+            $liste=$db->query($sql);
+            return $liste;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
     function afficher_Produit_specifique_titre()
     {
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql="SElECT * From produit_specifique order by Titre asc ";
+        $sql="SElECT * From produit_specifique where  etat like 'non' order by Titre asc ";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_titre_traiter()
+    {
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SElECT * From produit_specifique where etat like'oui' order by Titre asc ";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -59,7 +119,19 @@ class produit_specifiqueC
     function afficher_Produit_specifique_auteur()
     {
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql="SElECT * From produit_specifique order by auteur asc ";
+        $sql="SElECT * From produit_specifique  where etat like 'non' order by auteur asc ";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_auteur_traiter()
+    {
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SElECT * From produit_specifique  where etat like 'oui' order by auteur asc";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -71,7 +143,19 @@ class produit_specifiqueC
     function afficher_Produit_specifique_categorie()
     {
         //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-        $sql="SElECT * From produit_specifique order by categorie asc ";
+        $sql="SElECT * From produit_specifique where  etat like 'non' order by categorie asc ";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->query($sql);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+    function afficher_Produit_specifique_categorie_traiter()
+    {
+        //$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+        $sql="SElECT * From produit_specifique where etat like 'oui' order by categorie asc  ";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -112,7 +196,7 @@ class produit_specifiqueC
         }
     }
 
-    function notif()
+    /*function notif()
     {
         $dbh = new \PDO('mysql:host=localhost;dbname=atlier_php;charset=utf8', 'root', '');
         $sth = $dbh->prepare('SELECT count(*) as total from reclamation where traitement="non"');
@@ -123,11 +207,11 @@ class produit_specifiqueC
                 return $i + 0;
         }
 
-    }
+    }*/
     function notif_prod()
     {
         $dbh = new \PDO('mysql:host=localhost;dbname=atlier_php;charset=utf8', 'root', '');
-        $sth = $dbh->prepare('SELECT count(*) as total from produit_specifique ');
+        $sth = $dbh->prepare('SELECT count(*) as total from produit_specifique where etat="non"');
         $sth->execute();
         $x = $sth->fetchAll();
         foreach ($x as $b) {
@@ -136,16 +220,16 @@ class produit_specifiqueC
         }
 
     }
-    function notification()
+    /*function notification()
     {
         $x=$this->notif()+$this->notif_prod();
         return $x;
-    }
+    }*/
     function notif_con_prod()
     {
 
         $dbh = new \PDO('mysql:host=localhost;dbname=atlier_php;charset=utf8', 'root', '');
-        $sth = $dbh->prepare('SELECT titre  from produit_specifique');
+        $sth = $dbh->prepare('SELECT titre  from produit_specifique where etat="non"');
         $sth->execute();
         $x=$sth->fetchAll();
         foreach ($x as $b)
@@ -220,7 +304,7 @@ class produit_specifiqueC
 
     }
 
-    function notif_con()
+    /*function notif_con()
     {
 
         $dbh = new \PDO('mysql:host=localhost;dbname=atlier_php;charset=utf8', 'root', '');
@@ -232,18 +316,35 @@ class produit_specifiqueC
                 return $i;
         }
 
-    }
+    }*/
 
-    function recuperer_numero_tel($id)
+    function recuperer_numero_tel($s)
     {
         $dbh = config::getConnexion();
 
-        $sth = $dbh->prepare('SELECT telephone FROM `produit_specifique` WHERE id=:id');
+        $sth = $dbh->prepare('SELECT telephone FROM `produit_specifique` WHERE id=:s');
+        $sth->bindValue(':s',$s);
+
         $sth->execute();
+
         $x = $sth->fetchAll();
         foreach ($x as $b) {
             foreach ($b as $i)
                 return $i + 0;
+        }
+
+
+    }
+    function recuperer_mail($id)
+    {
+        $dbh = config::getConnexion();
+
+        $sth = $dbh->prepare('SELECT mail FROM `produit_specifique` WHERE id=:id');
+        $sth->execute();
+        $x = $sth->fetchAll();
+        foreach ($x as $b) {
+            foreach ($b as $i)
+                return $i;
         }
 
 

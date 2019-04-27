@@ -5,9 +5,7 @@ include "../../config.php";
 
 $recl=new ReclamationC();
 $prod=new produit_specifiqueC();
-$listeProduit_sp = $prod->afficher_Produit_specifique();
-$listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
-
+$listeReclamation = $recl->afficherReclamtion_traiter();
 
 
 ?>
@@ -109,7 +107,7 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                 <div class="container-fluid">
                     <div class="header-wrap">
                         <form class="form-header" action="" method="">
-                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value),showCustomer2(this.value)" />
+                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer2(this.value)" />
                             <button class="au-btn--submit" type="submit" name="bt" id="sr">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
@@ -214,24 +212,23 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                 <div class="row">
                     <div class="col-md-12">
                         <!-- DATA TABLE -->
-                        <h3 class="title-5 m-b-35">data table</h3>
+                        <h3 class="title-5 m-b-35">Reclamation tariter</h3>
                         <div class="table-data__tool">
                             <div class="table-data__tool-left">
 
                                 <div class="rs-select2--light rs-select2--sm">
 
 
-                                    <select class="js-select2" name="filtrage" onchange="sort(this.value),sort2(this.value)">
-                                        <option selected="selected">produit specifique</option>
-                                        <option value="titre">titre</option>
-                                        <option value="auteur">auteur</option>
 
+                                    <select class="js-select2" name="filtrage" onchange="sort2(this.value)">
+                                        <option selected="selected">reclamation</option>
+                                        <option value="nom">Nom</option>
+                                        <option value="id">Identifiant</option>
                                     </select>
                                     <div class="dropDownSelect2"></div>
                                 </div>
                                 <i class="zmdi zmdi-filter-list"> Filtrage</i>
 
-                                </form>
 
 
 
@@ -251,22 +248,23 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                                             <span class="au-checkmark"></span>
                                         </label>
                                     </th>
-                                    <th>titre</th>
-                                    <th>auteur</th>
-                                    <th>categorie</th>
-                                    <th>Autre information</th>
-                                    <th>Adresse Email</th>
-                                    <th>N°Tel</th>
-                                    <th>Etat</th>
-
+                                    <th>id</th>
+                                    <th>nom</th>
+                                    <th>mail</th>
+                                    <th>Message</th>
+                                    <th>Traitement</th>
 
 
                                     <th></th>
                                 </tr>
                                 </thead>
-                                <?php foreach($listeProduit_sp as $row)
-                                : ?>
+                                <?php foreach($listeReclamation as $row):
+                                ?>
+
+
                                 <tbody>
+
+
                                 <tr class="tr-shadow">
                                     <td>
                                         <label class="au-checkbox">
@@ -274,42 +272,38 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                                             <span class="au-checkmark"></span>
                                         </label>
                                     </td>
-                                    <td><?PHP echo $row['Titre']; ?></td>
-                                    <td><?PHP echo $row['auteur']; ?></td>
-                                    <td><?PHP echo $row['categorie']; ?></td>
-                                    <td><?PHP echo $row['autre_info']; ?></td>
-
+                                    <td><?PHP echo $row['id']; ?></td>
+                                    <td><?PHP echo $row['nom']; ?></td>
                                     <td><?PHP echo $row['mail']; ?></td>
-                                    <td><?PHP echo $row['telephone']; ?></td>
-                                    <td><?PHP if($row['etat']=='non')echo"<span class=\"status--denied\">non</span>";
+                                    <td><?PHP echo $row['msg']; ?></td>
+                                    <td><?PHP if($row['traitement']=='non')echo"<span class=\"status--denied\">non</span>";
                                         else echo"<span class=\"status--process\">oui</span>";?></td>
-                                    <td>
                                     <td>
                                         <div class="table-data-feature">
 
-                                            <div class="table-data-feature">
-                                                <button type="button" class="item"  name="bt" data-toggle="modal" data-target="#sms<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                </button>
-
-
-
-                                            </div>
+                                            <button class="item" data-toggle="modal" data-placement="top" title="Delete" data-target="#delete<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">   >
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </div>
                                     </td>
+
+
                                     <!-- Modal -->
-                                    <div id="sms<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                                    <div id="m<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
 
                                             <!-- Modal content-->
                                             <div class="modal-content">
-
-
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Envoyer Email</h4>
+                                                </div>
                                                 <div class="modal-body">
-                                                    <p>Repondre a la reclamation de <strong><?PHP echo $row['id']; ?></strong>:</p>
-                                                    <form method="post" action="sendsms.php">
+                                                    <p>Repondre a la reclamation de <strong><?PHP echo $row['nom']; ?></strong>:</p>
+                                                    <form method="post" action="trait.php">
                                                         <div class="form-group">
                                                             <div class="input-group">
-                                                                <input type="hidden" name="id" value="<?PHP echo $row['id']; ?>">
-                                                                <input type="hidden" name="produit" value="<?PHP echo $row['Titre']; ?>">
+                                                                <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
 
                                                             </div>
                                                         </div>
@@ -319,8 +313,7 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                                                                 <label for="textarea-input" class=" form-control-label">Message</label>
                                                             </div>
                                                             <div class="col-12 col-md-9">
-                                                                <textarea name="msg" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
-                                                            </div>
+                                                                s                                                                    </div>
                                                             <div class="card-footer">
                                                                 <button type="submit" name="envoyer" class="btn btn-secondary btn-sm">
                                                                     <i class="fa fa-dot-circle-o"></i> envoyer
@@ -340,216 +333,106 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
 
                                         </div>
                                     </div>
+
+
                         </div>
-                        </tr>
-                        <tr class="spacer"></tr>
 
-                        <?php       endforeach;?>
-                        </tbody>
 
-                        </table>
+
+
+
+
+                        <!-- Modal -->
+                        <div id="delete<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title"></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="supprimerReclamation.php">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Suppression</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
+                                                    <div class="alert alert-danger">vous voulez suprimer <strong>
+                                                            <?php echo $row['nom']; ?>?</strong> </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" name="delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> YES</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> NO</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
 
                     </div>
+                    </tr>
+                    <tr class="spacer"></tr>
+
+                    <?php       endforeach;?>
+                    </tbody>
+
+                    </table>
+
                 </div>
-                <!-- END DATA TABLE -->
-
-
-
             </div>
-
-    </div>
-        <div class="col-md-12">
-
-            <!-- DATA TABLE -->
-
-            <h3 class="title-5 m-b-35">Liste de demande  tariter</h3>
-            <div class="table-data__tool">
-                <div class="table-data__tool-left">
-
-
-                </div>
-        <div id="det2" class="table-responsive table-responsive-data2">
-            <table class="table table-data2">
-                <thead>
-                <tr>
-                    <th>
-                        <label class="au-checkbox">
-                            <input type="checkbox">
-                            <span class="au-checkmark"></span>
-                        </label>
-                    </th>
-                    <th>titre</th>
-                    <th>auteur</th>
-                    <th>categorie</th>
-                    <th>Autre information</th>
-                    <th>Adresse Email</th>
-                    <th>N°Tel</th>
-                    <th>Etat</th>
+            <!-- END DATA TABLE -->
 
 
 
-                    <th></th>
-                </tr>
-                </thead>
-                <?php foreach($listeProduit_sp2 as $row)
-                : ?>
-                <tbody>
-                <tr class="tr-shadow">
-                    <td>
-                        <label class="au-checkbox">
-                            <input type="checkbox">
-                            <span class="au-checkmark"></span>
-                        </label>
-                    </td>
-                    <td><?PHP echo $row['Titre']; ?></td>
-                    <td><?PHP echo $row['auteur']; ?></td>
-                    <td><?PHP echo $row['categorie']; ?></td>
-                    <td><?PHP echo $row['autre_info']; ?></td>
-
-                    <td><?PHP echo $row['mail']; ?></td>
-                    <td><?PHP echo $row['telephone']; ?></td>
-                    <td><?PHP if($row['etat']=='non')echo"<span class=\"status--denied\">non</span>";
-                        else echo"<span class=\"status--process\">oui</span>";?></td>
-                    <td>
-                    <td>
-                        <div class="table-data-feature">
-
-                            <div class="table-data-feature">
-                                <button type="button" class="item"  name="bt" data-toggle="modal" data-target="#sms<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">                                                            <i class="zmdi zmdi-mail-send"></i>
-                                </button>
-
-
-
-                            </div>
-                    </td>
-                    <!-- Modal -->
-                    <div id="sms<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-
-
-                                <div class="modal-body">
-                                    <p>Repondre a la reclamation de <strong><?PHP echo $row['id']; ?></strong>:</p>
-                                    <form method="post" action="sendsms.php">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input type="hidden" name="id" value="<?PHP echo $row['id']; ?>">
-                                                <input type="hidden" name="auteur" value="<?PHP echo $row['auteur']; ?>">
-                                                <input type="hidden" name="produit" value="<?PHP echo $row['Titre']; ?>">
-
-                                            </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col col-md-3">
-                                                <label for="textarea-input" class=" form-control-label">Message</label>
-                                            </div>
-                                            <div class="col-12 col-md-9">
-                                                <textarea name="msg" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
-                                            </div>
-                                            <div class="card-footer">
-                                                <button type="submit" name="envoyer" class="btn btn-secondary btn-sm">
-                                                    <i class="fa fa-dot-circle-o"></i> envoyer
-                                                </button>
-
-                                            </div>
-
-                                        </div>
-
-                                    </form>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
         </div>
-        </tr>
-        <tr class="spacer"></tr>
-
-        <?php       endforeach;?>
-        </tbody>
-
-        </table>
 
     </div>
-</div>
-<!-- END DATA TABLE -->
+    <script>
+        function sort2(id)
+        {
+            $.ajax({
+                url: "trie_reclamation_traiter.php",
+                data:{data: id},
+                type: "POST",
+                success: function(data){
+                    $('#det').html(data);
+                },
+                failure: function(data){
+                    $('#det').html(data);
+                }
+            });
+        }
 
 
+        function showCustomer2(str) {
 
-</div>
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("det").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "recherche_reclamation_traiter.php?q="+str, true);
 
-</div>
-        <script>
-            function sort(id)
-            {
-                $.ajax({
-                    url: "trie_prod.php",
-                    data:{data: id},
-                    type: "POST",
-                    success: function(data){
-                        $('#det').html(data);
-                    },
-                    failure: function(data){
-                        $('#det').html(data);
-                    }
-                });
-            }
+            xhttp.send();
+        }
 
-
-            function showCustomer(str) {
-
-                var xhttp;
-                xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("det2").innerHTML = this.responseText;
-                    }
-                };
-                xhttp.open("GET", "rechercher_prod.php?q="+str, true);
-
-                xhttp.send();
-            }
-
-        </script>
-<script>
-    function sort2(id)
-    {
-        $.ajax({
-            url: "trie_produit_specifique_traiter.php",
-            data:{data: id},
-            type: "POST",
-            success: function(data){
-                $('#det2').html(data);
-            },
-            failure: function(data){
-                $('#det2').html(data);
-            }
-        });
-    }
-
-
-    function showCustomer2(str) {
-
-        var xhttp;
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("det2").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", "rechercher_produit_specifique_traiter.php?q="+str, true);
-
-        xhttp.send();
-    }
-
-</script>
+    </script>
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>

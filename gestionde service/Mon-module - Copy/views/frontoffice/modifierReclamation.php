@@ -1,7 +1,7 @@
 <?PHP
 include "../../entities/reclamation.php";
 include "../../core/reclamationC.php";
-$n=123;
+$n=454;
 if (isset($_POST['modifier']) ){
     $rec=new reclamationC();
     var_dump($_POST['text_modifier']);
