@@ -19,6 +19,7 @@ $DB = new config();
         <title>Checkout</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" sizes="50x50">
         <!-- Place favicon.ico in the root directory -->
@@ -353,45 +354,20 @@ $DB = new config();
 									</div>
 								</div>
                                 <div id="paypal-button"></div>
-                                <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+                                <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
                                 <script>
-                                    paypal.Button.render({
-                                        // Configure environment
-                                        env: 'sandbox',
-                                        client: {
-                                            sandbox: 'AQ4WT-8gOgBrmXMdRiRuF0Y_QhGDKakJDyGv_oRDmQDfBJbbx7-GVZVQThlr-seyGLrBTAgshY_S8W0j'
-                                        },
-                                        // Customize button (optional)
-                                        locale: 'en_US',
-                                        style: {
-                                            size: 'small',
-                                            color: 'gold',
-                                            shape: 'pill',
-                                        },
-
-                                        // Enable Pay Now checkout flow (optional)
-                                        commit: true,
-
-                                        // Set up a payment
-                                        payment: function(data, actions) {
-                                            return actions.payment.create({
-                                                transactions: [{
+                                    paypal.Buttons({
+                                        createOrder: function(data, actions) {
+                                            // Set up the transaction
+                                            return actions.order.create({
+                                                purchase_units: [{
                                                     amount: {
-                                                        total: '<?= $panierC->totalPanier(); ?>',
-                                                        currency: 'USD'
+                                                        value: '0.01'
                                                     }
                                                 }]
                                             });
-                                        },
-                                        // Execute the payment
-                                        onAuthorize: function(data, actions) {
-                                            return actions.payment.execute().then(function() {
-                                                // Show a confirmation message to the buyer
-                                                window.alert('Thank you for your purchase!');
-                                            });
                                         }
-                                    }, '#paypal-button');
-
+                                    }).render('#paypal-button-container');
                                 </script>
 							</div>
                         </div>
