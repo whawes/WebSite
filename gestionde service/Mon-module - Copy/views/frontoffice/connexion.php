@@ -1,23 +1,53 @@
 <?php
+include "../../core/reclamationC.php";
 include "../../config.php";
 
+$user=new ReclamationC();
+$list=$user->afficher_user($_POST['addressmail'],$_POST['pass']);
+$id="";
+$nom="";
+$mdp="";
 session_start();
-
-if(($_POST['addressmail']=='aa@esprit.tn')&&($_POST['pass']==0000))
+foreach ($list as $row)
 {
-    $_SESSION['tel']=24551966;
-    $_SESSION['Nom']='aaa';
-    $_SESSION['mail']='jmaiomar184@gmail.com';
+    $id=$row['user_id'];
+    $nom=$row['user_name'];
+    $mail=$row['user_email'];
+    $mdp=$row['user_pass'];
+    $tel=$row['user_tel'];
+    $role=$row['role'];
 
-    $up=$_SESSION['page2'];
-    echo $_SESSION['page2'];
 
-    header('Location:'.$up);
+
+
 }
+
+$p=$_SESSION['page2'];
+
+if(($_POST['addressmail']==$mail)&&($_POST['pass']==$mdp) && $role=='Client') {
+    $_SESSION['id']=$id;
+    $_SESSION['Nom']=$nom;
+    $_SESSION['mail']=$mdp;
+    $_SESSION['tel']=$mdp;
+
+
+    echo $p;
+    header('location:'.$p);
+}
+else if(($_POST['addressmail']==$mail)&&($_POST['pass']==$mdp)&& $role=='Admin') {
+    $_SESSION['id']=$id;
+    $_SESSION['Nom']=$nom;
+    $_SESSION['mdp']=$mdp;
+    echo $p;
+    header('location:../admin/afficherReclamation.php');
+}
+
 else
 {
-	header('Location: login.php');
-}
+    echo $id;
+    echo $mdp;
 
+   // header('location:login.php');
+}
 
 ?>

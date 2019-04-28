@@ -27,92 +27,53 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/reclamationC.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-153">
-              <caret line="96" column="105" selection-start-line="96" selection-start-column="105" selection-end-line="96" selection-end-column="105" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin/recherc.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" selection-end-line="176" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin/recherche_reclamation_traiter.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin/afficherReclamation.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="373" column="10" lean-forward="true" selection-start-line="365" selection-start-column="3" selection-end-line="373" selection-end-column="10" />
-              <folding>
-                <element signature="e#15207#15214#1#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin/trie_prod.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" lean-forward="true" selection-end-line="128" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/produit_specifiqueC.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="72" column="136" selection-start-line="72" selection-start-column="136" selection-end-line="72" selection-end-column="136" />
+            <state relative-caret-position="85">
+              <caret line="5" column="77" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="77" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/admin/affiche_produit_sepcii.php">
+        <entry file="file://$PROJECT_DIR$/views/admin/afficherReclamation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="438" column="81" selection-start-line="438" selection-start-column="75" selection-end-line="438" selection-end-column="81" />
+            <state relative-caret-position="-145">
+              <caret line="506" column="13" lean-forward="true" selection-start-line="506" selection-start-column="13" selection-end-line="506" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin/sendsms.php">
+        <entry file="file://$PROJECT_DIR$/views/admin/connexion.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="90" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
+            <state relative-caret-position="493">
+              <caret line="29" column="28" lean-forward="true" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin/rechercher_produit_specifique_traiter.php">
+        <entry file="file://$PROJECT_DIR$/views/frontoffice/demande_produit_specifique.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+            <state relative-caret-position="246">
+              <caret line="405" column="79" selection-start-line="405" selection-start-column="79" selection-end-line="405" selection-end-column="79" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/admin/trie_produit_specifique_traiter.php">
+        <entry file="file://$PROJECT_DIR$/views/frontoffice/ajouter_produit_specifique.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="128" lean-forward="true" selection-start-line="23" selection-end-line="128" />
+            <state relative-caret-position="68">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/frontoffice/connexion.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -121,10 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>you ha</find>
-      <find>opt</find>
-      <find>yo</find>
-      <find>votr</find>
       <find>ann</find>
       <find>form</find>
       <find>filtre</find>
@@ -151,12 +108,15 @@
       <find>table</find>
       <find>fil</find>
       <find>sear</find>
+      <find>.btn-primary</find>
+      <find>del</find>
+      <find>det2</find>
+      <find>dele</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/Desktop/New folder/style.css" />
         <option value="$PROJECT_DIR$/views/admin/table.html" />
         <option value="$PROJECT_DIR$/../Mon-module/admin/afficherReclamation.php" />
         <option value="$PROJECT_DIR$/../Mon-module/views/core/employeC.php" />
@@ -175,38 +135,39 @@
         <option value="$PROJECT_DIR$/views/frontoffice/recupere_mail.php" />
         <option value="$PROJECT_DIR$/views/frontoffice/demande_de_produit.html" />
         <option value="$PROJECT_DIR$/views/frontoffice/contact.html" />
-        <option value="$PROJECT_DIR$/views/admin/connexion.php" />
         <option value="$PROJECT_DIR$/../SessionPHP5/SessionPHP5/dbconfig.php" />
         <option value="$PROJECT_DIR$/../SessionPHP5/dbconfig.php" />
         <option value="$PROJECT_DIR$/../SessionPHP5/SessionPHP5/connexion.php" />
         <option value="$PROJECT_DIR$/views/frontoffice/login.php" />
         <option value="$PROJECT_DIR$/views/admin/contact.php" />
-        <option value="$PROJECT_DIR$/views/admin/statistique.php" />
         <option value="$PROJECT_DIR$/views/admin/supprimerReclamation.php" />
         <option value="$PROJECT_DIR$/views/admin/trieReclamation.php" />
         <option value="$PROJECT_DIR$/views/frontoffice/ajouter_produit_specifique.php" />
-        <option value="$PROJECT_DIR$/views/frontoffice/connexion.php" />
         <option value="$PROJECT_DIR$/views/frontoffice/contact.php" />
         <option value="$PROJECT_DIR$/views/frontoffice/supprimer_Produit_specifique.php" />
         <option value="$PROJECT_DIR$/views/frontoffice/ajouterReclamation.php" />
         <option value="$PROJECT_DIR$/entities/reclamation.php" />
         <option value="$PROJECT_DIR$/views/admin/rechercher_prod.php" />
         <option value="$PROJECT_DIR$/views/admin/trie_prod.php" />
-        <option value="$PROJECT_DIR$/views/frontoffice/demande_produit_specifique.php" />
         <option value="$PROJECT_DIR$/views/admin/trie_reclamation_traiter.php" />
         <option value="$PROJECT_DIR$/views/admin/afficher_reclamation_traiter.php" />
         <option value="$PROJECT_DIR$/views/admin/recherche_reclamation_traiter.php" />
-        <option value="$PROJECT_DIR$/core/reclamationC.php" />
         <option value="$PROJECT_DIR$/views/admin/recherc.php" />
-        <option value="$PROJECT_DIR$/views/admin/mystylead.css" />
         <option value="$PROJECT_DIR$/../ProjetWeb/viewsBO/cc.html" />
         <option value="$PROJECT_DIR$/views/admin/trait.php" />
-        <option value="$PROJECT_DIR$/views/admin/afficherReclamation.php" />
         <option value="$PROJECT_DIR$/core/produit_specifiqueC.php" />
         <option value="$PROJECT_DIR$/views/admin/trie_produit_specifique_traiter.php" />
         <option value="$PROJECT_DIR$/views/admin/rechercher_produit_specifique_traiter.php" />
-        <option value="$PROJECT_DIR$/views/admin/affiche_produit_sepcii.php" />
         <option value="$PROJECT_DIR$/views/admin/sendsms.php" />
+        <option value="$USER_HOME$/Desktop/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/views/admin/mystylead.css" />
+        <option value="$PROJECT_DIR$/views/admin/afficherReclamation.php" />
+        <option value="$PROJECT_DIR$/core/reclamationC.php" />
+        <option value="$PROJECT_DIR$/views/frontoffice/connexion.php" />
+        <option value="$PROJECT_DIR$/views/admin/statistique.php" />
+        <option value="$PROJECT_DIR$/views/admin/affiche_produit_sepcii.php" />
+        <option value="$PROJECT_DIR$/views/admin/connexion.php" />
+        <option value="$PROJECT_DIR$/views/frontoffice/demande_produit_specifique.php" />
       </list>
     </option>
   </component>
@@ -226,7 +187,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -248,12 +208,13 @@
               <item name="Mon-module - Copy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="admin" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="frontoffice" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -314,17 +275,18 @@
       <workItem from="1556068979036" duration="527000" />
       <workItem from="1556196452836" duration="4993000" />
       <workItem from="1556306832356" duration="25105000" />
+      <workItem from="1556458747513" duration="8394000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183423000" />
+    <option name="totallyTimeSpent" value="191817000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21255673" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21558245" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -391,16 +353,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/frontoffice/recupere_mail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="12" selection-end-line="8" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/frontoffice/fichier.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/inventory/index.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -474,24 +426,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin/connexion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="31" lean-forward="true" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/admin/supprimerReclamation.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/frontoffice/ajouter_produit_specifique.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
@@ -506,13 +444,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/frontoffice/connexion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
@@ -563,13 +494,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/frontoffice/demande_produit_specifique.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/admin/trie_reclamation_traiter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -580,13 +504,6 @@
     <entry file="file://$PROJECT_DIR$/views/admin/recupere.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin/statistique.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/admin/afficher_reclamation_traiter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -594,20 +511,6 @@
           <folding>
             <element signature="e#15130#15137#1#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin/vendor/bootstrap-4.1/bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="5" column="17327" lean-forward="true" selection-start-line="5" selection-start-column="17327" selection-end-line="5" selection-end-column="17340" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin/mystylead.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="65" column="1152" selection-start-line="65" selection-start-column="1152" selection-end-line="65" selection-end-column="1152" />
         </state>
       </provider>
     </entry>
@@ -653,30 +556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin/afficherReclamation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="373" column="10" lean-forward="true" selection-start-line="365" selection-start-column="3" selection-end-line="373" selection-end-column="10" />
-          <folding>
-            <element signature="e#15207#15214#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin/trie_prod.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/reclamationC.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="96" column="105" selection-start-line="96" selection-start-column="105" selection-end-line="96" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/admin/recherc.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -687,42 +566,136 @@
     <entry file="file://$PROJECT_DIR$/views/admin/recherche_reclamation_traiter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin/trie_prod.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-end-line="128" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/produit_specifiqueC.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
+        <state relative-caret-position="1224">
           <caret line="72" column="136" selection-start-line="72" selection-start-column="136" selection-end-line="72" selection-end-column="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="5" column="34556" selection-end-line="6" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin/mystylead.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/admin/trie_produit_specifique_traiter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="526">
-          <caret line="128" lean-forward="true" selection-start-line="23" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/admin/rechercher_produit_specifique_traiter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+          <caret line="128" selection-start-line="23" selection-end-line="128" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/admin/sendsms.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" column="90" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
+          <caret line="10" column="61" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin/vendor/bootstrap-4.1/bootstrap.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="2" selection-start-column="3" selection-end-line="1" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin/vendor/bootstrap-4.1/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="17327" selection-start-line="5" selection-start-column="17327" selection-end-line="5" selection-end-column="17340" />
+          <folding>
+            <element signature="e#58441#58641#2" expanded="true" />
+            <element signature="e#58849#58998#2" expanded="true" />
+            <element signature="e#59500#59646#2" expanded="true" />
+            <element signature="e#59947#60113#1" expanded="true" />
+            <element signature="e#70793#71036#2" expanded="true" />
+            <element signature="e#71903#72152#2" expanded="true" />
+            <element signature="e#98915#99105#2" expanded="true" />
+            <element signature="e#99151#99341#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/reclamationC.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="77" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin/rechercher_produit_specifique_traiter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="126" lean-forward="true" selection-start-line="21" selection-end-line="126" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/admin/affiche_produit_sepcii.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="438" column="81" selection-start-line="438" selection-start-column="75" selection-end-line="438" selection-end-column="81" />
+        <state relative-caret-position="484">
+          <caret line="468" lean-forward="true" selection-start-line="468" selection-end-line="468" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin/statistique.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/frontoffice/connexion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/frontoffice/ajouter_produit_specifique.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin/connexion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="28" lean-forward="true" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/frontoffice/demande_produit_specifique.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="405" column="79" selection-start-line="405" selection-start-column="79" selection-end-line="405" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/admin/afficherReclamation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-145">
+          <caret line="506" column="13" lean-forward="true" selection-start-line="506" selection-start-column="13" selection-end-line="506" selection-end-column="13" />
         </state>
       </provider>
     </entry>

@@ -289,47 +289,36 @@ $listeReclamation2= $recl->afficherReclamtion_traiter();
 
 
                             <!-- Modal -->
-                                            <div id="m<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                                            <div id="m<?PHP echo $row['id']; ?>" class="modal fade"role="dialog">
                                                 <div class="modal-dialog">
 
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h4 class="modal-title">Envoyer Email</h4>
+
                                                         </div>
                                                         <div class="modal-body">
                                                             <p>Repondre a la reclamation de <strong><?PHP echo $row['nom']; ?></strong>:</p>
                                                             <form method="post" action="trait.php">
                                                                 <div class="form-group">
-                                                                    <div class="input-group">
-                                                                        <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
+                                                                    <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
 
                                                                     </div>
+                                                                <div class="form-group">
+                                                                    <label for="message-text" class="col-form-label">Message:</label>
+                                                                    <textarea class="form-control" id="message-text"></textarea>
                                                                 </div>
+                                                                <div class="modal-footer">
 
-                                                                <div class="row form-group">
-                                                                    <div class="col col-md-3">
-                                                                        <label for="textarea-input" class=" form-control-label">Message</label>
-                                                                        <textarea></textarea>
-                                                                    </div>
-                                                                    <div class="col-12 col-md-9">
-                                                                  </div>
-                                                                    <div class="card-footer">
-                                                                        <button type="submit" name="envoyer" class="btn btn-secondary btn-sm">
-                                                                            <i class="fa fa-dot-circle-o"></i> envoyer
-                                                                        </button>
-
-                                                                    </div>
-
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-danger">envoyer message</button>
                                                                 </div>
 
                                                             </form>
 
+
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        </div>
+
                                                     </div>
 
                                                 </div>

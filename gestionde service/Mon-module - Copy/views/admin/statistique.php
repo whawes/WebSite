@@ -1,8 +1,10 @@
 <?PHP
 include "../../core/produit_specifiqueC.php";
-include "../../config.php";
+include "../../core/reclamationC.php";
 
-$recl=new Produit_specifiqueC();
+include "../../config.php";
+$recl=new ReclamationC();
+$prod=new Produit_specifiqueC();
 
 $db = config::getConnexion();
 $stmt=$db->prepare("SElECT DISTINCT categorie From produit_specifique  ");
@@ -111,7 +113,7 @@ echo json_encode($jeson);
                 <div class="container-fluid">
                     <div class="header-wrap">
                         <form class="form-header" action="" method="">
-                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." />
+                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value) ,showCustomer2(this.value)" />
                             <button class="au-btn--submit" type="submit" name="bt" id="sr">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
@@ -123,15 +125,15 @@ echo json_encode($jeson);
                                 <div class="noti__item js-item-menu">
                                     <i class="zmdi zmdi-notifications"></i>
                                     <?php
-                                    if($recl->notification()>0){
+                                    if($recl->notif()+$prod->notif_prod()>0){
                                         ?>
-                                        <span class="quantity"><?php echo $recl->notification(); ?></span>
+                                        <span class="quantity"><?php echo $recl->notif()+$prod->notif_prod(); ?></span>
                                         <?php
                                     }
 
                                     ?>                                    <div class="notifi-dropdown js-dropdown">
                                         <div class="notifi__title">
-                                            <p>Vous avez <?php echo $recl->notification(); ?> Notifications</p>
+                                            <p>Vous avez <?php echo $recl->notif()+$prod->notif_prod(); ?> Notifications</p>
                                         </div>
                                         <div class="notifi__item">
                                             <div class="bg-c1 img-cir img-40">
@@ -151,7 +153,7 @@ echo json_encode($jeson);
                                                     <i class="zmdi zmdi-file-text"></i>
                                             </div>
                                             <div class="content">
-                                                <p>nouvelle Demande de produit:<br> <?php echo $recl->notif_con_prod(); ?></p>
+                                                <p>nouvelle Demande de produit:<br> <?php echo $prod->notif_con_prod(); ?></p>
                                             </div>
                                             </a>
 
@@ -234,7 +236,7 @@ echo json_encode($jeson);
                                                     label: 'Categorie plus demader',
                                                     backgroundColor: 'rgb(25,25,112)',
                                                     borderColor: 'rgb(25,25,112)',
-                                                    data: [<?php echo $recl->cat2(); ?>,<?php echo $recl->cat1(); ?>,<?php echo $recl->cat3(); ?>,<?php echo $recl->cat4(); ?>,<?php echo $recl->cat5(); ?>]
+                                                    data: [<?php echo $prod->cat2(); ?>,<?php echo $prod->cat1(); ?>,<?php echo $prod->cat3(); ?>,<?php echo $prod->cat4(); ?>,<?php echo $prod->cat5(); ?>]
                                                 }]
                                             },
 

@@ -403,7 +403,7 @@ if(!isset($_SESSION['Nom']) ) {
                                             </div>
                                             <div class="modal-body">
                                                 <input type="hidden" name="delete_id" value="seession">
-                                                <div class="alert alert-danger">vous voulez envoyer demande de prduit specifique  <strong>
+                                                <div class="alert alert-warning">vous voulez envoyer demande de prduit specifique  <strong>
 
                                                 </div>
                                                 <div class="modal-footer">
