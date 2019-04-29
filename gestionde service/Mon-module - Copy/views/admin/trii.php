@@ -65,9 +65,7 @@ $DB = new config();
                 <button type="button" class="item"  name="bt" data-toggle="modal" data-target="#m<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">                                                            <i class="zmdi zmdi-mail-send"></i>
                 </button>
 
-                <button class="item" data-toggle="modal" data-placement="top" title="Delete" data-target="#delete<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">   >
-                    <i class="zmdi zmdi-delete"></i>
-                </button>
+
             </div>
         </td>
 

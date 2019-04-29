@@ -9,43 +9,49 @@ $nom="";
 $mdp="";
 session_start();
 foreach ($list as $row)
-    {
-        $id=$row['user_id'];
-        $nom=$row['user_name'];
-        $mail=$row['user_mail'];
-        $mdp=$row['user_pass'];
-        $tel=$row['user_tel'];
-        $role=$row['role'];
+{
+    $id=$row['user_id'];
+    $nom=$row['user_name'];
+    $mail=$row['user_email'];
+    $mdp=$row['user_pass'];
+    $tel=$row['user_tel'];
+    $role=$row['role'];
+    $image=$row['image'];
 
 
 
 
-    }
+}
 
 $p=$_SESSION['page2'];
 
-if(($_POST['addressmail']==$nom)&&($_POST['pass']==$mdp) && $role=='Client') {
+if(($_POST['addressmail']==$mail)&&($_POST['pass']==$mdp) && $role=='Client') {
     $_SESSION['id']=$id;
     $_SESSION['Nom']=$nom;
     $_SESSION['mail']=$mail;
-    $_SESSION['tel']=$tel;
+    $_SESSION['tel']=$mdp;
 
 
     echo $p;
     header('location:'.$p);
 }
-else if(($_POST['addressmail']==$nom)&&($_POST['pass']==$mdp)&& $role=='Admin') {
+else if(($_POST['addressmail']==$mail)&&($_POST['pass']==$mdp)&& $role=='Admin') {
     $_SESSION['id']=$id;
     $_SESSION['Nom']=$nom;
-    $_SESSION['mdp']=$mdp;
+    $_SESSION['mail']=$mail;
+    $_SESSION['tel']=$mdp;
+    $_SESSION['image']=$image;
+
     echo $p;
-    header('location:/admin/afficherReclamation.php');
+    header('location:../admin/afficherReclamation.php');
 }
 
 else
-    {
+{
     echo $id;
-    header('location:login.php');
+    echo $mdp;
+
+    // header('location:login.php');
 }
 
 ?>

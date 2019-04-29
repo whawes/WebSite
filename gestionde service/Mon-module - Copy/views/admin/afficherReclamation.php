@@ -2,7 +2,11 @@
 include "../../core/reclamationC.php";
 include "../../core/produit_specifiqueC.php";
 include "../../config.php";
-
+session_start();
+if(!isset($_SESSION['Nom']) ) {
+    $_SESSION['page2'] = $_SERVER['REQUEST_URI'];
+    header('location:../frontoffice/login.php');
+}
 $recl=new ReclamationC();
 $prod=new produit_specifiqueC();
 $listeReclamation = $recl->afficherReclamtion();
@@ -160,23 +164,33 @@ $listeReclamation2= $recl->afficherReclamtion_traiter();
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                       <p></p>
                                     </div>
                                     <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
+                                        <div class="image">
+                                            <a href="#">
+                                                <img src= <?php
+                                                echo  $_SESSION['image'];?> />
+                                            </a>
+                                        </div>
+                                        <a class="js-acc-btn" href="#"> <?php
+                                            echo  $_SESSION['Nom'];?></a>
                                     </div>
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                    <img src= <?php
+                                                    echo  $_SESSION['image'];?> />
                                                 </a>
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
-                                                    <a href="#">john doe</a>
+                                                    <a href="#"><?php
+                                                        echo  $_SESSION['Nom'];?></a>
                                                 </h5>
-                                                <span class="email">johndoe@example.com</span>
+                                                <span class="email"> <?php
+                                                    echo  $_SESSION['mail'];?></span>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__body">
@@ -194,8 +208,8 @@ $listeReclamation2= $recl->afficherReclamtion_traiter();
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <a href="../frontoffice/logout.php">
+                                                <i class="zmdi zmdi-power"></i>Deconnexion</a>
                                         </div>
                                     </div>
                                 </div>
@@ -302,16 +316,18 @@ $listeReclamation2= $recl->afficherReclamtion_traiter();
                                                             <form method="post" action="trait.php">
                                                                 <div class="form-group">
                                                                     <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
+                                                                    <input type="hidden" name="mail" value="<?PHP echo $row['mail']; ?>">
 
-                                                                    </div>
+
+                                                                </div>
                                                                 <div class="form-group">
                                                                     <label for="message-text" class="col-form-label">Message:</label>
-                                                                    <textarea class="form-control" id="message-text"></textarea>
+                                                                    <textarea class="form-control" id="message-text" name="msg"></textarea>
                                                                 </div>
                                                                 <div class="modal-footer">
 
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-danger">envoyer message</button>
+                                                                <button type="submit" class="btn btn-danger" name="envoyer">envoyer message</button>
                                                                 </div>
 
                                                             </form>

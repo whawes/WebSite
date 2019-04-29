@@ -1,12 +1,18 @@
 
 <?PHP
 include "../../core/reclamationC.php";
+include "../../core/notificationC.php";
+
 include "../../config.php";
 
 if (isset($_POST['envoyer']) ) {
     $recl = new reclamationC();
-    $t = $recl->traiter($_POST['delete_id']);
+    $notif= new NotificationC();
     $msgg=$_POST['msg'];
+    $email=$_POST['mail'];
+    $notif->ajouterNotification($email,$msgg);
+   // $t = $recl->traiter($_POST['delete_id']);
+
 $msg='<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=320, target-densitydpi=device-dpi">
     <style type="text/css">
 
@@ -136,7 +142,7 @@ $msg='<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://ww
                                 <td class="w580" width="580">
                                     <p align="left" class="article-title"><singleline label="Title">Reclamation</singleline></p>
                                     <div align="left" class="article-content">
-                                        <multiline label="Description">Enter your description</multiline>
+                                        <multiline label="Description"></multiline>
                                     </div>
                                 </td>
                             </tr>
@@ -202,9 +208,9 @@ $msg='<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://ww
 ';
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    mail($recl->recuperer_mail($_POST['delete_id']), "Reclamation", $msg, $headers);
+   // mail($recl->recuperer_mail($_POST['delete_id']), "Reclamation", $msg, $headers);
 
-    header('Location: afficherReclamation.php');
+   // header('Location: afficherReclamation.php');
 
 }
 

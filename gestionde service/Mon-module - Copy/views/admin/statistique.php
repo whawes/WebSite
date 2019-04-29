@@ -3,6 +3,11 @@ include "../../core/produit_specifiqueC.php";
 include "../../core/reclamationC.php";
 
 include "../../config.php";
+session_start();
+if(!isset($_SESSION['Nom']) ) {
+    $_SESSION['page2'] = $_SERVER['REQUEST_URI'];
+    header('location:../frontoffice/login.php');
+}
 $recl=new ReclamationC();
 $prod=new Produit_specifiqueC();
 
@@ -165,23 +170,33 @@ echo json_encode($jeson);
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                        <p></p>
                                     </div>
                                     <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
+                                        <div class="image">
+                                            <a href="#">
+                                                <img src= <?php
+                                                echo  $_SESSION['image'];?> />
+                                            </a>
+                                        </div>
+                                        <a class="js-acc-btn" href="#"> <?php
+                                            echo  $_SESSION['Nom'];?></a>
                                     </div>
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                    <img src= <?php
+                                                    echo  $_SESSION['image'];?> />
                                                 </a>
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
-                                                    <a href="#">john doe</a>
+                                                    <a href="#"><?php
+                                                        echo  $_SESSION['Nom'];?></a>
                                                 </h5>
-                                                <span class="email">johndoe@example.com</span>
+                                                <span class="email"> <?php
+                                                    echo  $_SESSION['mail'];?></span>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__body">
@@ -199,8 +214,8 @@ echo json_encode($jeson);
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <a href="../frontoffice/logout.php">
+                                                <i class="zmdi zmdi-power"></i>Deconnexion</a>
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +226,6 @@ echo json_encode($jeson);
             </div>
         </header>
         <!-- END HEADER DESKTOP-->
-
         <!-- MAIN CONTENT-->
         <div class="main-content">
             <div class="section__content section__content--p30">

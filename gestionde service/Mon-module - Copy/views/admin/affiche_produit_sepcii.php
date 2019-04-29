@@ -2,7 +2,11 @@
 include "../../core/reclamationC.php";
 include "../../core/produit_specifiqueC.php";
 include "../../config.php";
-
+session_start();
+if(!isset($_SESSION['Nom']) ) {
+    $_SESSION['page2'] = $_SERVER['REQUEST_URI'];
+    header('location:../frontoffice/login.php');
+}
 $recl=new ReclamationC();
 $prod=new produit_specifiqueC();
 $listeProduit_sp = $prod->afficher_Produit_specifique();
@@ -109,7 +113,7 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                 <div class="container-fluid">
                     <div class="header-wrap">
                         <form class="form-header" action="" method="">
-                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value),showCustomer2(this.value)" />
+                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value) ,showCustomer2(this.value)" />
                             <button class="au-btn--submit" type="submit" name="bt" id="sr">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
@@ -161,23 +165,33 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                        <p></p>
                                     </div>
                                     <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
+                                        <div class="image">
+                                            <a href="#">
+                                                <img src= <?php
+                                                echo  $_SESSION['image'];?> />
+                                            </a>
+                                        </div>
+                                        <a class="js-acc-btn" href="#"> <?php
+                                            echo  $_SESSION['Nom'];?></a>
                                     </div>
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                    <img src= <?php
+                                                    echo  $_SESSION['image'];?> />
                                                 </a>
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
-                                                    <a href="#">john doe</a>
+                                                    <a href="#"><?php
+                                                        echo  $_SESSION['Nom'];?></a>
                                                 </h5>
-                                                <span class="email">johndoe@example.com</span>
+                                                <span class="email"> <?php
+                                                    echo  $_SESSION['mail'];?></span>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__body">
@@ -195,8 +209,8 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <a href="../frontoffice/logout.php">
+                                                <i class="zmdi zmdi-power"></i>Deconnexion</a>
                                         </div>
                                     </div>
                                 </div>
@@ -383,7 +397,7 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                         <th></th>
                     </tr>
                     </thead>
-                    <?php foreach($listeProduit_sp as $row)
+                    <?php foreach($listeProduit_sp2 as $row)
                     : ?>
                     <tbody>
                     <tr class="tr-shadow">
@@ -407,7 +421,8 @@ $listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
                             <div class="table-data-feature">
 
                                 <div class="table-data-feature">
-                                    <button type="button" class="item"  name="bt" data-toggle="modal" data-target="#sms<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">                                                            <i class="zmdi zmdi-mail-send"></i>
+                                    <button class="item" data-toggle="modal" data-placement="top" title="Delete" data-target="#delete<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">   >
+                                        <i class="zmdi zmdi-delete"></i>
                                     </button>
 
 
