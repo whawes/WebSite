@@ -1,16 +1,7 @@
 <?php 
-session_start();
-include "../core/Users.php";
-$client=new Users() ;
-$Tabclient=$client->afficherusers();
-/*if (isset($_POST['rechercher']))
-{
-    $Tabemploye=$Employee1->recupererEmploye($_POST['search']);
-}
-if (isset($_POST['trier']))
-{
-    $Tabemploye=$Employee1-> trierEmploye();
-}*/
+include "../core/Newsletters.php";
+$newsletters=new Newsletters() ;
+$Tabnewsletters=$newsletters->afficherNewsletter();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +15,7 @@ if (isset($_POST['trier']))
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Tableau des utilisateurs</title>
+    <title>Tableau des Newsletters abonnes</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -157,15 +148,15 @@ if (isset($_POST['trier']))
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-             <header class="header-desktop">
+            <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value)" />
-                            <button class="au-btn--submit" type="submit" name="bt" id="sr">
-                                <i class="zmdi zmdi-search"></i>
-                            </button>
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <button class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
@@ -304,17 +295,21 @@ if (isset($_POST['trier']))
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="Profileemploye.html">
-                                                        <i class="zmdi zmdi-account"></i>Mon compte</a>
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Changer mot de passe</a>
+                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="logout.php">
-                                                    <i class="zmdi zmdi-power"></i>Deconnecter</a>
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -328,189 +323,73 @@ if (isset($_POST['trier']))
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
-                
+                <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row">
-                        	<div class="col-md-12">
-                                <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">data table</h3>
-                                <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                       
-                                        <div class="rs-select2--light rs-select2--sm">
-                                            <select class="js-select2" name="filtrage" onchange="sort(this.value)">
-                                                <option selected="selected">Users</option>
-                                                <option value="role">Par Role</option>
-                                                <option value="nom">Par Nom</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
-                                        </div>
-                                        <button class="au-btn-filter">
-                                            <i class="zmdi zmdi-filter-list"></i>filters</button>
-                                    </div>
-                                    <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#m" data-toggle="modal" data-target="#myModal" title="Repondre">
-                                            <i class="zmdi zmdi-plus"></i>Ajouter un employe</button>
-                                       
-                                    </div>
-                                </div>
-                                <div id="abc" class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
+                        	<h3>Tableau des client :</h3>
+                            <form action="tableemployee.php" method="POST">
+                                <input  type="text" name="search" />
+                                <button name="rechercher" class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+                                <button name="trier" class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search" title="trier"></i>
+                                </button>
+                            </form><br><br>
+
+                            <div class="col-lg-9">
+
+                                <div class="table-responsive table--no-card m-b-30">
+                                    
+                                    <table class="table table-borderless table-striped table-earning">
                                         <thead>
+
                                             <tr>
-                                                <th>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </th>
-                                                <th>Nom</th>
+                                                <th>ID</th>
                                                 <th>Email</th>
-                                                <th>Role</th>
-                                                
-                                                <th></th>
+                                              <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <?php foreach ($Tabclient as $row):?>
-                                        
+                                        <?php foreach ($Tabnewsletters as $row):  ?>
+                                        	<form action="supprimernewsletter.php?id=<?php echo $row['ID']?>" method="POST" >
                                         <tbody>
-                                            <tr class="tr-shadow">
+                                         
+                                            <tr>
+                                                <td><?php echo $row['ID']?></td>
+                                                <td><?php echo $row['Emails']?></td>
                                                 <td>
-                                                    <label class="au-checkbox">
-                                                        <input type="checkbox">
-                                                        <span class="au-checkmark"></span>
-                                                    </label>
-                                                </td>
-                                                <td><?=$row['Nom']?></td>
-                                                <td>
-                                                    <span class="block-email"><?=$row['Email']?></span>
-                                                </td>
-                                                <td><?php if ($row['Role']=='Client'){?>
-                                                    <span class="role member"><?=$row['Role']?></span>
-                                                <?php } else if ($row['Role']=='Admin'){?>
-                                                <span class="role admin"><?=$row['Role']?></span>
-                                            <?php } else{ ?>
-                                                <span class="role user"><?=$row['Role']?></span>
-                                            <?php }?>
-
-                                                </td>
-                                                
-                                                <td> 
-                                                    <form action="supprimer.php?id=<?=$row['ID']?>" method="post">
                                                     <div class="table-data-feature">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button>
-                                            
-                                                        <button name="supprimer" class="item" data-toggle="tooltip" data-placement="top"  title="Delete">
+                                                        <button name="supprimernewsletter" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                            <i class="zmdi zmdi-more"></i>
-                                                        </button>
+                                                       
                                                     </div>
-                                                </form>
                                                 </td>
-                                                <div id="m" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
-
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Ajouter un employe</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                           <div class="login-form">
-                            <form action="AjouterE.php" method="post">
-                                <div class="form-group">
-                                    <input class="au-input au-input--full" type="text" name="Cin" placeholder="CIN..">
-                                </div>
-                                   <div class="form-group">
-                                    <input class="au-input au-input--full" type="text" name="Nom" placeholder="Nom complet..">
-                                </div>
-                                <div class="form-group">
-                                    <input class="au-input au-input--full" type="email" name="Email" placeholder="Email..">
-                                </div>
-                                <div class="form-group">
-                                    <input class="au-input au-input--full" type="text" name="Numerotelephone" placeholder="Numero de telephone..">
-                                </div>
-                                <div class="form-group">
-                                    <input class="au-input au-input--full" type="text" name="Adresse" placeholder="Adresse..">
-                                </div>
-                                <div class="form-group">
-                                    <select name="Role">
-                                        <option value="Admin">Admin</option>
-                                        <option value="EmployeC" >EmployeC</option>
-                                        <option value="EmployeP" >EmployeP</option>
-                                        <option value="EmployeS" >EmployeS</option>
-                                        <option value="EmployeD" >EmployeD</option>
-                                        <option value="EmployeE" >EmployeE</option>
-
-                                    </select>
-                                </div>
-    
-                                
-                                
-                                <button name="Ajouter" class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Ajouter</button>
-                            </form>
-                           
-                        </div>
-
-                                                        </div>
-
-                                                    </div>
-                                                   <!--end of model -->
-                                                </div>
-                                            </div>
                                             </tr>
-                                           
                                         </tbody>
-                                    <?php endforeach; ?>
+                                        </form>
+                                    <?php endforeach ; ?>
+
                                     </table>
                                 </div>
-                                <!-- END DATA TABLE -->
                             </div>
                             
+                                <!-- END DATA TABLE-->
+                            
                         </div>
-                       
-                    
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-     <script>
-        function sort(id)
-        {
-            $.ajax({
-                url: "tableClient_trie.php",
-                data:{data: id},
-                type: "POST",
-                success: function(data){
-                    $('#abc').html(data);
-                },
-                failure: function(data){
-                    $('#abc').html(data);
-                }
-            });
-        }
-
-
-        function showCustomer(str) {
-
-            var xhttp;
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("abc").innerHTML = this.responseText;
-                }
-            };
-            xhttp.open("GET", "Recherchuser.php?q="+str, true);
-
-            xhttp.send();
-        }
-
-    </script>
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>

@@ -1,7 +1,8 @@
 <?php 
+session_start();
 include "../core/Users.php";
 $client=new Users() ;
-$Tabclient=$client->afficher('EmployeS','12345677');
+$Tabclient=$client->afficher($_SESSION['role'],$_SESSION['id']);
 
 
 ?>
@@ -13,14 +14,20 @@ $Tabclient=$client->afficher('EmployeS','12345677');
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="au theme template">
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Mon profil</title>
 
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -116,7 +123,7 @@ $Tabclient=$client->afficher('EmployeS','12345677');
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
+             <header class="header-desktop">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
@@ -245,7 +252,7 @@ $Tabclient=$client->afficher('EmployeS','12345677');
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#"><?= $_SESSION['nom']?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -256,28 +263,24 @@ $Tabclient=$client->afficher('EmployeS','12345677');
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#"><?= $_SESSION['nom']?></a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email"><?= $_SESSION['mail']?></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                    <a href="Profileemploye.html">
+                                                        <i class="zmdi zmdi-account"></i>Mon compte</a>
                                                 </div>
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                                        <i class="zmdi zmdi-settings"></i>Changer mot de passe</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>Deconnecter</a>
                                             </div>
                                         </div>
                                     </div>
@@ -304,18 +307,51 @@ $Tabclient=$client->afficher('EmployeS','12345677');
                                             <div class="box box-info">
                                              <div class="box-body">
                                               <div class="col-sm-6">
-                                             <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
-                
+                                             <div  align="center"> <label for="profile-image-upload"><img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
+                </label>
                 <input id="profile-image-upload" class="hidden" type="file">
-                   <div style="color:#999;" >cliquer ici pour changer votre photo</div>
+
+<div style="color:#999;">click here to change profile image</div>
                 <!--Upload Image Js And Css-->
+           
+              
+   
+                
+                
+                     <script type="text/javascript">
+  $(document).ready(function() {
+
+    
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.img-responsive').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+
+    $(".hidden").on('change', function(){
+        readURL(this);
+    });
+    
+    $(".upload-button").on('click', function() {
+       $(".hidden").click();
+    });
+});
+</script>
+                     
                      </div>
               <br>
                 <!-- /input-group -->
             </div>
             <div class="col-sm-6">
-            <h4 style="color:#00b1b1;">Md. Ashiqur Rahman </h4></span>
-              <span><p>Developer</p></span>            
+            <h4 style="color:#00b1b1;"><?= $_SESSION['nom']?></h4></span>
+              <span><p><?= $_SESSION['role']?></p></span>            
             </div>
             <?php foreach ($Tabclient as $row): ?>
              <form action="modifierE.php?id=<?=$row['ID'];?>" method="POST">   
@@ -360,11 +396,30 @@ $Tabclient=$client->afficher('EmployeS','12345677');
     </div>
 </div>  
     <script>
-              $function() {
-    $('#profile-image1').on('click', function() {
-        $('#profile-image-upload').click();
+$(document).ready(function() {
+
+    
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.img-circle img-responsive').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+
+    $(".hidden").on('change', function(){
+        readURL(this);
     });
-};       
+    
+    $(".upload-button").on('click', function() {
+       $(".hidden").click();
+    });
+});  
               </script>  
                                </div>
                               </div> 

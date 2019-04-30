@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
     <head>
@@ -170,10 +174,35 @@
                                 <li class="shoping-cart">
                                     <a href="profile.php"><i class="flaticon-people"></i></a>
                                     <div class="add-to-cart-product">
-                                        <div class="cart-checkout">
-                                            <a href="login/login.html">
-                                                Connexion / Inscrire
+                                        <div class="cart-product">
+                                            <div class="cart-product-image">
+                                                <a href="single-product.html">
+                                                    <img src="img/shop/1.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="cart-product-line">
+                                                <p>
+                                                    <h6><span><?=$_SESSION['nom']?></span></h6>
+                                                    <span><?=$_SESSION['mail']?></span>
+                                                </p>
                                                 
+                                            </div>
+                                        </div>
+                                        <div class="total-cart-price">
+                                            <div class="cart-product-line fast-line">
+                                                <a href="profile.php">Mon compte</a>
+                                            </div>
+                                            <div class="cart-product-line">
+                                                <a href="profile.php">Changer mot de passe</a>
+                                            </div>
+                                            <div class="cart-product-line">
+                                                <a href="profile.php">Mes commandes</a>
+                                            </div>
+                                        </div>
+                                        <div class="cart-checkout">
+                                            <a href="logout.php">
+                                                Deconnecter
+                                                <i class="fa fa-chevron-right"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -181,7 +210,7 @@
                                 <li class="shoping-cart">
                                     <a href="#">
                                         <i class="flaticon-shop"></i>
-                                        
+                                        <span>2</span>
                                     </a>
                                     <div class="add-to-cart-product">
                                         <div class="cart-product">

@@ -30,6 +30,14 @@ input, button {
   margin: 0 auto 100px;
   background: #fff;
 }
+.cont-oublie {
+  overflow: hidden;
+  position: relative;
+  width: 635px;
+  height: 385px;
+  margin: 0 auto 100px;
+  background: #fff;
+}
 
 .form {
   position: relative;

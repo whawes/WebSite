@@ -1,12 +1,13 @@
 <?PHP
 include "../entities/User.php";
+
 include "../core/Users.php";
 if (isset($_POST['Ajouter'])) 
-
+;
 {
-if (isset($_POST['Cin']) and isset($_POST['Nom']) and isset($_POST['Email']) and isset($_POST['Motdepasse']) and isset($_POST['Numerotelephone']) and isset($_POST['Adresse']) and isset($_POST['Role']))
+if (isset($_POST['Cin']) and isset($_POST['Nom']) and isset($_POST['Email']) and isset($_POST['Numerotelephone']) and isset($_POST['Adresse']) and isset($_POST['Role']))
 { 
-	$pass=password_hash($_POST['Motdepasse'], PASSWORD_DEFAULT);
+	$pass=password_hash($_POST['Cin'], PASSWORD_DEFAULT);
    $employe1=new User($_POST['Cin'],$_POST['Nom'],'',$_POST['Email'],$pass,$_POST['Numerotelephone'],$_POST['Adresse'],'','',$_POST['Role']);
 
 //Partie2

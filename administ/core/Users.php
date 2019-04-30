@@ -2,6 +2,45 @@
 include "../config.php";
 class Users {
 	
+function Login($email){
+		$sql="SELECT * FROM `users` where Email='$email' ";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
+
+	function afficherusers(){
+		$sql="SELECT * FROM `users`";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
+
+		function afficher($role,$id){
+		$sql="SELECT * FROM `users` WHERE Role='$role' and ID='$id'";
+		$db = config::getConnexion();
+
+		try{
+			
+		    $liste=$db->query($sql);
+		    return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
+
+
 	function ajouterEmploye($employe){
 		$sql="INSERT INTO `users`(`ID`, `Nom`, `Email`, `MotDePasse`, `NumeroTelephone`, `Adresse`,`Role`) VALUES (:id,:nom,:email,:motdepasse,:numerotelephone,:adresse,:role)";
 		$db = config::getConnexion();
@@ -9,8 +48,10 @@ class Users {
         $req=$db->prepare($sql);
 		
 		$id=$employe->getID();
+		;
         $nom=$employe->getNom();
         $email=$employe->getEmail();
+        $motdepasse=$employe->getMotdepasse();
         $numerotelephone=$employe->getNumerotelephone();
         $adresse=$employe->getAdresse();
         $role=$employe->getRole();
@@ -18,7 +59,7 @@ class Users {
         $req->bindValue(':id',$id);
 		$req->bindValue(':nom',$nom);
 		$req->bindValue(':email',$email);
-		$req->bindValue(':motdepasse',$id);
+		$req->bindValue(':motdepasse',$motdepasse);
 		$req->bindValue(':numerotelephone',$numerotelephone);
 		$req->bindValue(':adresse',$adresse);
 		$req->bindValue(':role',$role);
@@ -33,15 +74,17 @@ class Users {
         }
 		
 	}
+
+
 	function ajouterClient($client){
 		$sql="INSERT INTO `users` (`Nom`, `Email`, `Motdepasse`) VALUES (:nom,:email,:motdepasse)";
 		$db = config::getConnexion();
 		try{
         $req=$db->prepare($sql);
 		
-        $nom=$client->getNomC();
-        $email=$client->getemail();
-        $motdepasse=$client->getmotdepasse();
+        $nom=$client->getNom();
+        $email=$client->getEmail();
+        $motdepasse=$client->getMotdepasse();
         
 		$req->bindValue(':nom',$nom);
 		$req->bindValue(':email',$email);
@@ -54,34 +97,10 @@ class Users {
         }
 		
 	}
-	/*function recuperernom($id)
-    {
-        $dbh = config::getConnexion();
-
-        $sth = $dbh->prepare('SELECT ID FROM client WHERE id=1');
-        $sth->execute();
-        $x = $sth->fetchAll();
-        foreach ($x as $b) {
-            foreach ($b as $i)
-                return $i +0;
-        }
 
 
-    }*/
-	
-	function afficherEmploye(){
-		$sql="SELECT * FROM `users` where Role='Employe' ";
-		$db = config::getConnexion();
-		try{
-		$liste=$db->query($sql);
-		return $liste;
-		}
-        catch (Exception $e){
-            die('Erreur: '.$e->getMessage());
-        }	
-	}
-		function afficher($role,$id){
-		$sql="SELECT * FROM `users` WHERE Role='$role' and ID='$id'";
+		function verifiermail($email){
+		$sql="SELECT * FROM `users` WHERE Email='$email'";
 		$db = config::getConnexion();
 
 		try{
@@ -93,19 +112,9 @@ class Users {
             die('Erreur: '.$e->getMessage());
         }	
 	}
-		function afficherusers(){
-		$sql="SELECT * FROM `users`";
-		$db = config::getConnexion();
-		try{
-		$liste=$db->query($sql);
-		return $liste;
-		}
-        catch (Exception $e){
-            die('Erreur: '.$e->getMessage());
-        }	
-	}
 	
-	function supprimerClient($id){
+	
+	function supprimerUser($id){
 		$sql="DELETE FROM users where id= :ID";
 		$db = config::getConnexion();
         $req=$db->prepare($sql);
@@ -117,6 +126,41 @@ class Users {
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
         }
+	}
+	function modifierClient($client,$id){
+		$sql="UPDATE users SET Nom=:nom,Email=:email,NumeroTelephone=:numerotelephone,DateDeNaissance=:datedenaissance,Adresse=:adresse,Ville=:ville,CodePostale=:codepostale WHERE ID='$id'";
+		
+		$db = config::getConnexion();
+try{		
+        $req=$db->prepare($sql);
+
+        $nom=$client->getNom();
+        $email=$client->getEmail();
+        $numerotelephone=$client->getNumerotelephone();
+        $datedenaissance=$client->getDatedenaissance();
+        $adresse=$client->getAdresse();
+        $ville=$client->getVille();
+        $codepostale=$client->getCodepostale();
+        
+
+		$req->bindValue(':nom',$nom);
+		$req->bindValue(':email',$email);
+		$req->bindValue(':numerotelephone',$numerotelephone);
+		$req->bindValue(':datedenaissance',$datedenaissance);
+		$req->bindValue(':adresse',$adresse);
+		$req->bindValue(':ville',$ville);
+		$req->bindValue(':codepostale',$codepostale);
+
+            $s=$req->execute();
+			
+           ;
+        }
+        catch (Exception $e){
+            echo " Erreur ! ".$e->getMessage();
+   echo " Les datas : " ;
+  print_r($datas);
+        }
+		
 	}
 	function modifierEmploye($employe,$id){
 		$sql="UPDATE users SET Nom=:nom,Email=:email,NumeroTelephone=:numerotelephone,DateDeNaissance=:datedenaissance,Adresse=:adresse,Ville=:ville WHERE ID='$id'";
@@ -138,6 +182,30 @@ try{
 		$req->bindValue(':datedenaissance',$datedenaissance);
 		$req->bindValue(':adresse',$adresse);
 		$req->bindValue(':ville',$ville);
+
+            $s=$req->execute();
+			
+           ;
+        }
+        catch (Exception $e){
+            echo " Erreur ! ".$e->getMessage();
+   echo " Les datas : " ;
+  print_r($datas);
+        }
+		
+	}
+	function NouveauMotdepasse($user,$email){
+		$sql="UPDATE users SET MotDePasse=:motdepasse WHERE Email='$email'";
+		
+		$db = config::getConnexion();
+try{		
+        $req=$db->prepare($sql);
+
+        $motdepasse=$user->getMotdepasse();
+  
+
+		$req->bindValue(':motdepasse',$motdepasse);
+		
 
             $s=$req->execute();
 			
@@ -186,6 +254,69 @@ try{
               	die('Erreur:'.$e->getMessage());
               }
         }
+
+        function afficherusers_id(){
+		$sql="SElECT * From users order by ID asc ";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+	function afficherusers_Nom(){
+		$sql="SElECT * From users order by Nom asc ";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+	function afficherusers_role(){
+		$sql="SElECT * From users order by Role asc ";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+
+	function afficheruseres_tri($s){
+		
+		$sql="SELECT * FROM users  WHERE nom like '%$s%' or Email like '%$s%' or ID like '%$s%' or Role  like '%$s%' ";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+
+	/*function recuperernom($id)
+    {
+        $dbh = config::getConnexion();
+
+        $sth = $dbh->prepare('SELECT ID FROM client WHERE id=1');
+        $sth->execute();
+        $x = $sth->fetchAll();
+        foreach ($x as $b) {
+            foreach ($b as $i)
+                return $i +0;
+        }
+
+
+    }*/
+
 }
 
 ?>
