@@ -1,16 +1,17 @@
 <?PHP
+include "../../core/reclamationC.php";
 include "../../core/produit_specifiqueC.php";
-
-$recl=new Produit_specifiqueC();
-$listeProduit_sp=$recl->afficher_Produit_specifique();
-if(isset($_GET['filtrage'])) {
-    if ($_GET['filtrage'] === 'titre')
-        $listeProduit_sp=$recl->afficher_Produit_specifique_titre();
-    else if ($_GET['filtrage'] === 'auteur')
-        $listeProduit_sp=$recl->afficher_Produit_specifique_auteur();
-    else
-        $listeProduit_sp=$recl->afficher_Produit_specifique_categorie();
+include "../../config.php";
+session_start();
+if(!isset($_SESSION['Nom']) ) {
+    $_SESSION['page2'] = $_SERVER['REQUEST_URI'];
+    header('location:../frontoffice/login.php');
 }
+$recl=new ReclamationC();
+$prod=new produit_specifiqueC();
+$listeProduit_sp = $prod->afficher_Produit_specifique();
+$listeProduit_sp2 = $prod->afficher_Produit_specifique_traiter();
+
 
 
 ?>
@@ -52,6 +53,7 @@ if(isset($_GET['filtrage'])) {
 </head>
 
 <body class="animsition">
+
 <div class="page-wrapper">
 
 
@@ -59,7 +61,7 @@ if(isset($_GET['filtrage'])) {
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="#">
-                <img src="images/icon/logo.png" alt="Cool Admin" />
+                <img src="images/icon/logo.png" alt="Cool Admin" class="logo_img" />
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
@@ -111,7 +113,7 @@ if(isset($_GET['filtrage'])) {
                 <div class="container-fluid">
                     <div class="header-wrap">
                         <form class="form-header" action="" method="">
-                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." />
+                            <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value) ,showCustomer2(this.value)" />
                             <button class="au-btn--submit" type="submit" name="bt" id="sr">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
@@ -123,15 +125,15 @@ if(isset($_GET['filtrage'])) {
                                 <div class="noti__item js-item-menu">
                                     <i class="zmdi zmdi-notifications"></i>
                                     <?php
-                                    if($recl->notification()>0){
+                                    if($recl->notif()+$prod->notif_prod()>0){
                                         ?>
-                                        <span class="quantity"><?php echo $recl->notification(); ?></span>
+                                        <span class="quantity"><?php echo $recl->notif()+$prod->notif_prod(); ?></span>
                                         <?php
                                     }
 
                                     ?>                                    <div class="notifi-dropdown js-dropdown">
                                         <div class="notifi__title">
-                                            <p>Vous avez <?php echo $recl->notification(); ?> Notifications</p>
+                                            <p>Vous avez <?php echo $recl->notif()+$prod->notif_prod(); ?> Notifications</p>
                                         </div>
                                         <div class="notifi__item">
                                             <div class="bg-c1 img-cir img-40">
@@ -151,7 +153,7 @@ if(isset($_GET['filtrage'])) {
                                                     <i class="zmdi zmdi-file-text"></i>
                                             </div>
                                             <div class="content">
-                                                <p>nouvelle Demande de produit:<br> <?php echo $recl->notif_con_prod(); ?></p>
+                                                <p>nouvelle Demande de produit:<br> <?php echo $prod->notif_con_prod(); ?></p>
                                             </div>
                                             </a>
 
@@ -163,23 +165,33 @@ if(isset($_GET['filtrage'])) {
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                        <p></p>
                                     </div>
                                     <div class="content">
-                                        <a class="js-acc-btn" href="#">john doe</a>
+                                        <div class="image">
+                                            <a href="#">
+                                                <img src= <?php
+                                                echo  $_SESSION['image'];?> />
+                                            </a>
+                                        </div>
+                                        <a class="js-acc-btn" href="#"> <?php
+                                            echo  $_SESSION['Nom'];?></a>
                                     </div>
                                     <div class="account-dropdown js-dropdown">
                                         <div class="info clearfix">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                    <img src= <?php
+                                                    echo  $_SESSION['image'];?> />
                                                 </a>
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
-                                                    <a href="#">john doe</a>
+                                                    <a href="#"><?php
+                                                        echo  $_SESSION['Nom'];?></a>
                                                 </h5>
-                                                <span class="email">johndoe@example.com</span>
+                                                <span class="email"> <?php
+                                                    echo  $_SESSION['mail'];?></span>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__body">
@@ -197,8 +209,8 @@ if(isset($_GET['filtrage'])) {
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <a href="../frontoffice/logout.php">
+                                                <i class="zmdi zmdi-power"></i>Deconnexion</a>
                                         </div>
                                     </div>
                                 </div>
@@ -212,138 +224,366 @@ if(isset($_GET['filtrage'])) {
 
         <!-- MAIN CONTENT-->
         <div class="main-content">
-            <div class="section__content section__content--p30">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- DATA TABLE -->
-                            <div class="main-content">
-                                <div class="section__content section__content--p30">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <!-- DATA TABLE -->
-                                                <h3 class="title-5 m-b-35">data table</h3>
-                                                <div class="table-data__tool">
-                                                    <div class="table-data__tool-left">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- DATA TABLE -->
+                        <h3 class="title-5 m-b-35">Demande Produit Specifique</h3>
+                        <div class="table-data__tool">
+                            <div class="table-data__tool-left">
 
-                                                        <div class="rs-select2--light rs-select2--sm">
+                                <div class="rs-select2--light rs-select2--sm">
 
 
+                                    <select class="js-select2" name="filtrage" onchange="sort(this.value),sort2(this.value)">
+                                        <option selected="selected">produit specifique</option>
+                                        <option value="titre">titre</option>
+                                        <option value="auteur">auteur</option>
 
-                                                            <form action="" method="GET">
-                                                                <select class="js-select2" name="filtrage">
-                                                                    <option selected="selected">titre</option>
-                                                                    <option value="auteur">Auteur</option>
-                                                                    <option value="categorie">Categorie</option>
-                                                                </select>
-                                                                <div class="dropDownSelect2"></div>
+                                    </select>
+                                    <div class="dropDownSelect2"></div>
+                                </div>
+                                <i class="zmdi zmdi-filter-list"> Filtrage</i>
+
+                                </form>
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+                        <div id="det" class="table-responsive table-responsive-data2">
+                            <table class="table table-data2">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <label class="au-checkbox">
+                                            <input type="checkbox">
+                                            <span class="au-checkmark"></span>
+                                        </label>
+                                    </th>
+                                    <th>titre</th>
+                                    <th>auteur</th>
+                                    <th>categorie</th>
+                                    <th>Autre information</th>
+                                    <th>Adresse Email</th>
+                                    <th>N°Tel</th>
+                                    <th>Etat</th>
+
+
+
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <?php foreach($listeProduit_sp as $row)
+                                : ?>
+                                <tbody>
+                                <tr class="tr-shadow">
+                                    <td>
+                                        <label class="au-checkbox">
+                                            <input type="checkbox">
+                                            <span class="au-checkmark"></span>
+                                        </label>
+                                    </td>
+                                    <td><?PHP echo $row['Titre']; ?></td>
+                                    <td><?PHP echo $row['auteur']; ?></td>
+                                    <td><?PHP echo $row['categorie']; ?></td>
+                                    <td><?PHP echo $row['autre_info']; ?></td>
+
+                                    <td><?PHP echo $row['mail']; ?></td>
+                                    <td><?PHP echo $row['telephone']; ?></td>
+                                    <td><?PHP if($row['etat']=='non')echo"<span class=\"status--denied\">non</span>";
+                                        else echo"<span class=\"status--process\">oui</span>";?></td>
+                                    <td>
+                                    <td>
+                                        <div class="table-data-feature">
+
+                                            <div class="table-data-feature">
+                                                <button type="button" class="item"  name="bt" data-toggle="modal" data-target="#sms<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                </button>
+
+
+
+                                            </div>
+                                    </td>
+                                    <!-- Modal -->
+                                    <div id="sms<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+
+
+                                                <div class="modal-body">
+                                                    <p>Repondre a la reclamation de <strong><?PHP echo $row['id']; ?></strong>:</p>
+                                                    <form method="post" action="trait.php">
+                                                        <div class="form-group">
+                                                            <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
+                                                            <input type="hidden" name="auteur" value="<?PHP echo $row['auteur']; ?>">
+                                                            <input type="hidden" name="produit" value="<?PHP echo $row['Titre']; ?>">
+
                                                         </div>
-                                                        <i class="zmdi zmdi-filter-list"> </i>
-                                                        <input type="submit" value="filtre" class="au-btn-filter">
-                                                        </form>
+                                                        <div class="form-group">
+                                                            <label for="message-text" class="col-form-label">Message:</label>
+                                                            <textarea class="form-control" id="message-text" name="msg"></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
 
-                                                        <div class="table-responsive table-responsive-data2">
-                                <table class="table table-data2">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </th>
-                                        <th>titre</th>
-                                        <th>auteur</th>
-                                        <th>categorie</th>
-                                        <th>Autre information</th>
-                                        <th>Adresse Email</th>
-                                        <th>N°Tel</th>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-danger" name="envoyer">envoyer message</button>
+                                                        </div>
 
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <?php foreach($listeProduit_sp as $row)
-                                        : ?>
-                                        <tbody>
-                                        <tr class="tr-shadow">
-                                            <td>
-                                                <label class="au-checkbox">
-                                                    <input type="checkbox">
-                                                    <span class="au-checkmark"></span>
-                                                </label>
-                                            </td>
-                                            <td><?PHP echo $row['Titre']; ?></td>
-                                            <td><?PHP echo $row['auteur']; ?></td>
-                                            <td><?PHP echo $row['categorie']; ?></td>
-                                            <td><?PHP echo $row['autre_info']; ?></td>
-
-                                            <td><?PHP echo $row['mail']; ?></td>
-                                            <td><?PHP echo $row['telephone']; ?></td>
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <a href="sendsms.php?id=<?php echo $row['id']; ?>">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send" value="traiter" >
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button>
-                                                    </a>
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                        <i class="zmdi zmdi-edit"></i>
-                                                    </button>
-                                                    <a href="supprimerReclamation.php?id=<?php echo $row['id']; ?>">
-
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                        <i class="zmdi zmdi-more"></i>
-                                                    </button>
-                                                    </a>
+                                                    </form>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
-                                        </tbody>
-                                    <?php endforeach; ?>
-                                </table>
-                            </div>
-                            <!-- END DATA TABLE -->
+
+                                            </div>
+
+                                        </div>
+                                    </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                            </div>
-                        </div>
+                        </tr>
+                        <tr class="spacer"></tr>
+
+                        <?php       endforeach;?>
+                        </tbody>
+
+                        </table>
+
                     </div>
                 </div>
+                <!-- END DATA TABLE -->
+
+
+
             </div>
-        </div>
+
     </div>
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
 
-</div>
+            <!-- DATA TABLE -->
 
-<!-- Jquery JS-->
-<script src="vendor/jquery-3.2.1.min.js"></script>
-<!-- Bootstrap JS-->
-<script src="vendor/bootstrap-4.1/popper.min.js"></script>
-<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-<!-- Vendor JS       -->
-<script src="vendor/slick/slick.min.js">
-</script>
-<script src="vendor/wow/wow.min.js"></script>
-<script src="vendor/animsition/animsition.min.js"></script>
-<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-</script>
-<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-<script src="vendor/counter-up/jquery.counterup.min.js">
-</script>
-<script src="vendor/circle-progress/circle-progress.min.js"></script>
-<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-<script src="vendor/chartjs/Chart.bundle.min.js"></script>
-<script src="vendor/select2/select2.min.js">
+            <h3 class="title-5 m-b-35">Liste de demande  tariter</h3>
+            <div class="table-data__tool">
+                <div class="table-data__tool-left">
+
+
+                </div>
+        <div id="det2" class="table-responsive table-responsive-data2"">
+                <table class="table table-data2">
+                    <thead>
+                    <tr>
+                        <th>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </th>
+                        <th>titre</th>
+                        <th>auteur</th>
+                        <th>categorie</th>
+                        <th>Autre information</th>
+                        <th>Adresse Email</th>
+                        <th>N°Tel</th>
+                        <th>Etat</th>
+
+
+
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <?php foreach($listeProduit_sp2 as $row)
+                    : ?>
+                    <tbody>
+                    <tr class="tr-shadow">
+                        <td>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </td>
+                        <td><?PHP echo $row['Titre']; ?></td>
+                        <td><?PHP echo $row['auteur']; ?></td>
+                        <td><?PHP echo $row['categorie']; ?></td>
+                        <td><?PHP echo $row['autre_info']; ?></td>
+
+                        <td><?PHP echo $row['mail']; ?></td>
+                        <td><?PHP echo $row['telephone']; ?></td>
+                        <td><?PHP if($row['etat']=='non')echo"<span class=\"status--denied\">non</span>";
+                            else echo"<span class=\"status--process\">oui</span>";?></td>
+                        <td>
+                        <td>
+                            <div class="table-data-feature">
+
+                                <div class="table-data-feature">
+                                    <button class="item" data-toggle="modal" data-placement="top" title="Delete" data-target="#delete<?PHP echo $row['id']; ?>" data-toggle="modal" data-target="#myModal" title="Repondre">   >
+                                        <i class="zmdi zmdi-delete"></i>
+                                    </button>
+
+
+
+                                </div>
+                        </td>
+                        <!-- Modal -->
+                        <div id="sms<?PHP echo $row['id']; ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+
+                                    <div class="modal-body">
+                                        <p>Repondre a la reclamation de <strong><?PHP echo $row['id']; ?></strong>:</p>
+                                        <form method="post" action="sendsms.php">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="hidden" name="delete_id" value="<?PHP echo $row['id']; ?>">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">Message</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="msg" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <button type="submit" name="envoyer" class="btn btn-secondary btn-sm">
+                                                        <i class="fa fa-dot-circle-o"></i> envoyer
+                                                    </button>
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+            </div>
+                        </tr>
+                        <tr class="spacer"></tr>
+
+                        <?php       endforeach;?>
+                        </tbody>
+
+                        </table>
+
+
+                    </div>
+                    </div>
+                    <!-- END DATA TABLE -->
+
+
+
+                </div>
+
+            </div>
+<!-- END DATA TABLE -->
+
+
+
+        <script>
+            function sort(id)
+            {
+                $.ajax({
+                    url: "trie_prod.php",
+                    data:{data: id},
+                    type: "POST",
+                    success: function(data){
+                        $('#det').html(data);
+                    },
+                    failure: function(data){
+                        $('#det').html(data);
+                    }
+                });
+            }
+
+
+            function showCustomer(str) {
+
+                var xhttp;
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("det2").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "rechercher_prod.php?q="+str, true);
+
+                xhttp.send();
+            }
+
+        </script>
+<script>
+    function sort2(id)
+    {
+        $.ajax({
+            url: "trie_produit_specifique_traiter.php",
+            data:{data: id},
+            type: "POST",
+            success: function(data){
+                $('#det2').html(data);
+            },
+            failure: function(data){
+                $('#det2').html(data);
+            }
+        });
+    }
+
+
+    function showCustomer2(str) {
+
+        var xhttp;
+        xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("det2").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "rechercher_produit_specifique_traiter.php?q="+str, true);
+
+        xhttp.send();
+    }
+
 </script>
 
-<!-- Main JS-->
-<script src="js/main.js"></script>
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
 
 </body>
 

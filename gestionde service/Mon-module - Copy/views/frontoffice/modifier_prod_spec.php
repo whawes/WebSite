@@ -1,6 +1,6 @@
 <?PHP
 include "../../core/produit_specifiqueC.php";
-$n=229;
+$n=238;
 $recl=new produit_specifiqueC();
 $resulat=$recl->afficherProduit_specifique_a_modifier($n);
  foreach($resulat as $row)
@@ -143,25 +143,29 @@ $resulat=$recl->afficherProduit_specifique_a_modifier($n);
                     <nav>
                         <ul id="nav">
                             <li><a href="index.html">HOME</a></li>
-                            <li><a href="#">CATALOGUE</a>
+                            <li><a href="shop.html">CATALOGUE</a>
                                 <ul class="sub-menu">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="cart.html">Cart Page</a></li>
+                                    <li><a href="shop.htmll">CATALOGUE1</a></li>
+                                    <li><a href="shop.html">CATALOGUE2</a></li>
                                 </ul></li>
                             <li><a href="#">ESPACE LECTEUR</a>
                                 <ul class="sub-menu">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="cart.html">Cart Page</a></li>
+                                    <li><a href="lecture.html">Lecture</a></li>
+                                    <li><a href="#">Forum</a></li>
                                 </ul></li>
-                            <li><a href="#">MAISSON D'EDITION</a>
+                            <li><a href="#">RESSOURCES</a>
                                 <ul class="sub-menu">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="cart.html">Cart Page</a></li>
+                                    <li><a href="auteurs.html">Espace auteurs</a></li>
+                                    <li><a href="editeur.html">Espace éditeurs</a></li>
+
                                 </ul></li>
+                            <li><a href="#">ESPACE ECOLE</a>
+                            <li><a href="login-admin.html">ESPACE ECOLE</a>
+                            </li>
                             <li><a href="#">CONTACT</a>
                                 <ul class="sub-menu">
                                     <li><a href="about.html">About Us</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="contact.html">Reclamation</a></li>
                                     <li><a href="demande_produit.html">Demande produit specifie</a></li>
                                 </ul></li>
                         </ul>
@@ -169,11 +173,12 @@ $resulat=$recl->afficherProduit_specifique_a_modifier($n);
                 </div>
             </div>
 
+
             <div class="col-md-1 hidden-sm">
                 <div class="header-right">
                     <ul>
                         <li>
-                            <a href="account.html"><i class="flaticon-people"></i></a>
+                            <a href="my-account.html"><i class="flaticon-people"></i></a>
                         </li>
                         <li class="shoping-cart">
                             <a href="#">
@@ -243,6 +248,62 @@ $resulat=$recl->afficherProduit_specifique_a_modifier($n);
         </div>
     </div>
 </div>
+<!--Header Area End-->
+
+<!-- Mobile Menu Start -->
+<div class="mobile-menu-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="mobile-menu">
+                    <nav id="dropdown">
+                        <ul>
+                            <li><a href="index.html">HOME</a></li>
+                            <li><a href="shop.html">FEATURED</a></li>
+                            <li><a href="shop.html">REVIEW BOOK</a></li>
+                            <li><a href="about.html">ABOUT AUTHOR</a></li>
+                            <li><a href="#">pages</a>
+                                <ul>
+                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="cart.html">Cart Page</a></li>
+                                    <li><a href="checkout.html">Check Out</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="my-account.html">My Account</a></li>
+                                    <li><a href="shop.html">Shopping Page</a></li>
+                                    <li><a href="single-product.html">Single Shop Page</a></li>
+                                    <li><a href="wishlist.html">Wishlist Page</a></li>
+                                    <li><a href="404.html">404 Page</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">CONTACT</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Mobile Menu End -->
+<!-- Breadcrumbs Area Start -->
+<div class="breadcrumbs-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumbs">
+                    <h2>My Request</h2>
+                    <ul class="breadcrumbs-list">
+                        <li>
+                            <a title="Return to Home" href="index.html">Home</a>
+                        </li>
+                        <li>My Request</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs Area Start -->
 <!-- Mobile Menu Start -->
 <div class="mobile-menu-area">
     <div class="container">
@@ -303,10 +364,10 @@ $resulat=$recl->afficherProduit_specifique_a_modifier($n);
                                 <select name="categorie"  >
                                     <option value="<?PHP echo $row['categorie'] ?>">"<?PHP echo $row['categorie'] ?></option>
                                     <option value="Roman">Roman</option>
-                                <option value="2">Bande dessinee</option>
-                                <option value="3">Roman d'amour</option>
-                                <option value="4">Fantastique</option>
-                                <option value="5">Science-fiction</option>
+                                    <option value="Bande dessinee">Bande dessinee</option>
+                                    <option value="Roman-amour">Roman d'amour</option>
+                                    <option value="Fantastique">Fantastique</option>
+                                    <option value="Science-fiction">Science-fiction</option>
 
                                 </select>
                                 </div>

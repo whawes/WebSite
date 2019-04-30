@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login/Registration Form Transition</title>
+  
+  
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+
+  <p class="tip"></p>
+<div class="cont">
+  <div class="form sign-in">
+      <form action="../connexion.php" method="post">
+    <h2>Welcome back,</h2>
+    <label class="label">
+      <span>Email</span>
+      <input name="addressmail" type="email" />
+    </label>
+    <label class="label">
+      <span>Mot de passe</span>
+      <input name="pass"  type="password" />
+    </label>
+      <label class="label">
+        <span>Restez connecté<input type="checkbox" name="connecte"></span>
+      </label>
+   <!-- <p class="forgot-pass">Mot de passe oublié?</p>-->
+    <button type="submit" class="submit">Sign In</button>
+      </form >
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>  ?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up">Sign Up</span>
+        <span class="m--in">Sign In</span>
+      </div>
+    </div>
+    <div class="form sign-up">
+      <h2>Time to feel like home,</h2>
+ 
+              <label class="label">
+              <span>Nom</span>
+              <input type="text" />
+              </label>
+              <label class="label">
+              <span>Email</span>
+              <input type="email" />
+              </label>
+              <table>
+              <label class="label">
+              <span>Mot de passe</span>
+              <input type="password" />
+              </label>
+              <label class="label">
+              <span>Confirmer mot de passe</span>
+              <input type="password"/>
+              </label>
+      
+      
+    
+      <button type="button" class="submit">Sign Up</button>
+    </div>
+  </div>
+</div>
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

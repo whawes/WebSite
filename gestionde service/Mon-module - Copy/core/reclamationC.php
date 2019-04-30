@@ -1,5 +1,4 @@
 <?PHP
-include "config.php";
 class reclamationC {
 
 	function ajouterReclamation($reclamation ){
@@ -25,6 +24,7 @@ class reclamationC {
         }
 		
 	}
+
 	function traiter($s){
 
 		$sql="update reclamation set traitement='oui' where id=:s";
@@ -39,19 +39,72 @@ class reclamationC {
 			die('Erreur: '.$e->getMessage());
 		}
 	}
+	function recuperer_mail($s)
+	{
+		$dbh = config::getConnexion();
+
+		$sth = $dbh->prepare('SELECT mail FROM `reclamation` WHERE id=:s');
+		$sth->bindValue(':s',$s);
+
+		$sth->execute();
+
+		$x = $sth->fetchAll();
+		foreach ($x as $b) {
+			foreach ($b as $i)
+				return $i;
+		}
+
+
+	}
 	function afficherReclamtion(){
-		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
-		$sql="SElECT * From reclamation  ";
-		$db = config::getConnexion();
-		try{
+	//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+	$sql="SElECT * From reclamation where traitement='non'";
+	$db = config::getConnexion();
+	try{
 		$liste=$db->query($sql);
 		return $liste;
-		}
-        catch (Exception $e){
-            die('Erreur: '.$e->getMessage());
-        }	
 	}
-	function afficherReclamtion_a_modifier($s){
+	catch (Exception $e){
+		die('Erreur: '.$e->getMessage());
+	}
+}
+	function afficherReclamtion_traiter(){
+		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+		$sql="SElECT * From reclamation where traitement='oui'";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+	function afficherReclamtion_tri($s){
+		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+		$sql="SELECT * FROM reclamation  WHERE traitement='non' and (nom like '%$s%' or mail like '%$s%')  ";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+	function afficherReclamtion_recherche($s){
+		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+		$sql="SELECT * FROM reclamation  WHERE traitement='oui' and (nom like '%$s%' or mail like '%$s%')  ";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+	/*function afficherReclamtion_a_modifier($s){
 		$dbh = new \PDO('mysql:host=localhost;dbname=atlier_php;charset=utf8', 'root', '');
 		$sth = $dbh->prepare('SElECT msg From reclamation where id=:s');
 		$sth->bindValue(':s',$s);
@@ -63,9 +116,20 @@ class reclamationC {
 			foreach ($b as $i)
 				return $i ;
 		}
-	}
+	}*/
 	function afficherReclamtion_id(){
-		$sql="SElECT * From reclamation order by id asc ";
+		$sql='SELECT * FROM `reclamation` WHERE traitement like "non"';
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+	function afficherReclamtion_id_traiter(){
+		$sql="SElECT * From reclamation where traitement='oui' order by id asc ";
 		$db = config::getConnexion();
 		try{
 			$liste=$db->query($sql);
@@ -77,7 +141,18 @@ class reclamationC {
 	}
 
 	function afficherReclamtion_nom(){
-		$sql="SElECT * From reclamation order by nom asc ";
+		$sql="SElECT * From reclamation where traitement='non' order by nom asc ";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
+	}
+	function afficherReclamtion_nom_traiter(){
+		$sql="SElECT * From reclamation where traitement='oui' order by nom asc ";
 		$db = config::getConnexion();
 		try{
 			$liste=$db->query($sql);
@@ -140,7 +215,7 @@ class reclamationC {
 		}
 
 	}
-	function notif_prod()
+	/*function notif_prod()
 	{
 		$dbh = new \PDO('mysql:host=localhost;dbname=atlier_php;charset=utf8', 'root', '');
 		$sth = $dbh->prepare('SELECT count(*) as total from produit_specifique ');
@@ -152,7 +227,7 @@ class reclamationC {
 		}
 
 	}
-	function notification()
+	/*function notification()
 	{
 		$x=$this->notif()+$this->notif_prod();
 		return $x;
@@ -169,9 +244,30 @@ class reclamationC {
 			return $i;
 		}
 
+	}*/
+
+	function recuperer_user($ad){
+		$sql="SELECT * from user where mail=$ad";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }}
+	function afficher_user($mail,$mdp){
+		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
+		$sql="SElECT * From users where user_email='$mail' and user_pass='$mdp'";
+		$db = config::getConnexion();
+		try{
+			$liste=$db->query($sql);
+			return $liste;
+		}
+		catch (Exception $e){
+			die('Erreur: '.$e->getMessage());
+		}
 	}
-
-
 }
 
 ?>
