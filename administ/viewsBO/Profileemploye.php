@@ -66,54 +66,21 @@ $Tabclient=$client->afficher($_SESSION['role'],$_SESSION['id']);
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="Login.html">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="Login.php">Dashboard 1</a>
-                                </li>
-                             
-                            </ul>
+                            <a class="js-arrow" href="index.php">
+                                <i class="fas fa-tachometer-alt"></i>Acceuil</a>
                         </li>
                         <li>
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Gestion des employés</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-                                    <a href="Login.html">Ajouter un employé</a>
+                                <li>
+                                    <a href="tableclient.php">Tableau des utilisateurs</a>
                                 </li>
                                 <li>
-                                    <a href="tableemployee.php">Tableau des employés</a>
+                                    <a href="tablenewsletter.php">Tableau des Newslettes abonnes</a>
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Gestion des clients</a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                 
-                                <li>
-                                    <a href="tableclient.php">Tableau des clients</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
                     </ul>
                 </nav>
             </div>
@@ -252,7 +219,7 @@ $Tabclient=$client->afficher($_SESSION['role'],$_SESSION['id']);
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#"><?= $_SESSION['nom']?></a>
+                                            <a class="js-acc-btn" href="#"><?=$_SESSION['nom']?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -263,14 +230,14 @@ $Tabclient=$client->afficher($_SESSION['role'],$_SESSION['id']);
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"><?= $_SESSION['nom']?></a>
+                                                        <a href="#"><?=$_SESSION['nom']?></a>
                                                     </h5>
-                                                    <span class="email"><?= $_SESSION['mail']?></span>
+                                                    <span class="email"><?=$_SESSION['mail']?></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="Profileemploye.html">
+                                                    <a href="Profileemploye.php">
                                                         <i class="zmdi zmdi-account"></i>Mon compte</a>
                                                 </div>
                                                 <div class="account-dropdown__item">

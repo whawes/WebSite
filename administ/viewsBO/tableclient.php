@@ -52,7 +52,7 @@ if (isset($_POST['trier']))
 <body class="animsition">
     <div class="page-wrapper">
      <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
+         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
                     <img src="logo.png" alt="Cool Admin" />
@@ -61,90 +61,19 @@ if (isset($_POST['trier']))
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                         <li class="active has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="index.html">Dashboard 1</a>
-                                </li>
-                             
-                            </ul>
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="index.php">
+                                <i class="fas fa-tachometer-alt"></i>Acceuil</a>
                         </li>
                         <li>
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-chart-bar"></i>Gestion des employés</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li>
-                                    <a href="ajouteremployer.html">Ajouter un employé</a>
+                                <li>
+                                    <a href="tableclient.php">Tableau des utilisateurs</a>
                                 </li>
                                 <li>
-                                    <a href="tableemployee.php">Tableau des employés</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-chart-bar"></i>Gestion des clients</a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                 
-                                <li>
-                                    <a href="tableclient.php">Tableau des clients</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Pages</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="login.html">Login</a>
-                                </li>
-                                <li>
-                                    <a href="register.html">Register</a>
-                                </li>
-                                <li>
-                                    <a href="forget-pass.html">Forget Password</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-desktop"></i>UI Elements</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="button.html">Button</a>
-                                </li>
-                                <li>
-                                    <a href="badge.html">Badges</a>
-                                </li>
-                                <li>
-                                    <a href="tab.html">Tabs</a>
-                                </li>
-                                <li>
-                                    <a href="card.html">Cards</a>
-                                </li>
-                                <li>
-                                    <a href="alert.html">Alerts</a>
-                                </li>
-                                <li>
-                                    <a href="progress-bar.html">Progress Bars</a>
-                                </li>
-                                <li>
-                                    <a href="modal.html">Modals</a>
-                                </li>
-                                <li>
-                                    <a href="switch.html">Switchs</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grids</a>
-                                </li>
-                                <li>
-                                    <a href="fontawesome.html">Fontawesome Icon</a>
-                                </li>
-                                <li>
-                                    <a href="typo.html">Typography</a>
+                                    <a href="tablenewsletter.php">Tableau des Newslettes abonnes</a>
                                 </li>
                             </ul>
                         </li>
@@ -162,10 +91,10 @@ if (isset($_POST['trier']))
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" id="ss" placeholder="Search for datas &amp; reports..." onkeyup="showCustomer(this.value)" />
-                            <button class="au-btn--submit" type="submit" name="bt" id="sr">
-                                <i class="zmdi zmdi-search"></i>
-                            </button>
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <button class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
                             </form>
                             <div class="header-button">
                                 <div class="noti-wrap">
@@ -286,7 +215,7 @@ if (isset($_POST['trier']))
                                             <img src="images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#"><?=$_SESSION['nom']?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -297,14 +226,14 @@ if (isset($_POST['trier']))
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#"><?=$_SESSION['nom']?></a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email"><?=$_SESSION['mail']?></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="Profileemploye.html">
+                                                    <a href="Profileemploye.php">
                                                         <i class="zmdi zmdi-account"></i>Mon compte</a>
                                                 </div>
                                                 <div class="account-dropdown__item">

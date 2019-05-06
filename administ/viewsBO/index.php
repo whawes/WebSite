@@ -56,7 +56,7 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="index.html">
+                            <a class="js-arrow" href="index.php">
                                 <i class="fas fa-tachometer-alt"></i>Acceuil</a>
                         </li>
                         <li>

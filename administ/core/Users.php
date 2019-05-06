@@ -1,5 +1,5 @@
 <?PHP
-include "../config.php";
+//include "../config.php";
 class Users {
 	
 function Login($email){
@@ -77,7 +77,7 @@ function Login($email){
 
 
 	function ajouterClient($client){
-		$sql="INSERT INTO `users` (`Nom`, `Email`, `Motdepasse`) VALUES (:nom,:email,:motdepasse)";
+		$sql="INSERT INTO `users` (`Nom`, `Email`, `Motdepasse`,`Role`) VALUES (:nom,:email,:motdepasse,'Client')";
 		$db = config::getConnexion();
 		try{
         $req=$db->prepare($sql);
@@ -196,6 +196,30 @@ try{
 	}
 	function NouveauMotdepasse($user,$email){
 		$sql="UPDATE users SET MotDePasse=:motdepasse WHERE Email='$email'";
+		
+		$db = config::getConnexion();
+try{		
+        $req=$db->prepare($sql);
+
+        $motdepasse=$user->getMotdepasse();
+  
+
+		$req->bindValue(':motdepasse',$motdepasse);
+		
+
+            $s=$req->execute();
+			
+           ;
+        }
+        catch (Exception $e){
+            echo " Erreur ! ".$e->getMessage();
+   echo " Les datas : " ;
+  print_r($datas);
+        }
+		
+	}
+	function ModifierMotdepasse($user,$id){
+		$sql="UPDATE users SET MotDePasse=:motdepasse WHERE ID='$id'";
 		
 		$db = config::getConnexion();
 try{		

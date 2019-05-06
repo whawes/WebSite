@@ -1,6 +1,7 @@
 <?php 
 include "../../entities/User.php";
 include "../../core/Users.php";
+include "../../config.php";
 if (isset($_POST["ConfirmerM"])) 
 {
 	

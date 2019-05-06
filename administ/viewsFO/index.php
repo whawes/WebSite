@@ -44,6 +44,8 @@ session_start();
         <link rel="stylesheet" href="css/responsive.css">
         <!-- modernizr css -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/script.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -193,7 +195,7 @@ session_start();
                                                 <a href="profile.php">Mon compte</a>
                                             </div>
                                             <div class="cart-product-line">
-                                                <a href="profile.php">Changer mot de passe</a>
+                                                <a href="changermdp.php">Changer mot de passe</a>
                                             </div>
                                             <div class="cart-product-line">
                                                 <a href="profile.php">Mes commandes</a>

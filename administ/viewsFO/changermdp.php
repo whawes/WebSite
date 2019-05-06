@@ -210,7 +210,7 @@ $clients=$Client->afficher($role,$id);
                                                 <a href="profile.php">Mon compte</a>
                                             </div>
                                             <div class="cart-product-line">
-                                                <a href="changermdp.php">Changer mot de passe</a>
+                                                <a href="profile.php">Changer mot de passe</a>
                                             </div>
                                             <div class="cart-product-line">
                                                 <a href="profile.php">Mes commandes</a>
@@ -462,96 +462,35 @@ $clients=$Client->afficher($role,$id);
                             
                         </div><!-- /.col -->
 <?php foreach ($clients as $row):?>
-    <form action="modifierC.php?id=<?=$row['ID'];?>" method="POST">
+    <form action="Modifiermdp.php?id=<?=$row['ID'];?>" method="POST">
                         <div class="col-xs-12 col-sm-9">
                             <h4 class="blue">
                                 <span class="middle"><?= $row['Nom']?></span>
                             </h4>
 
                             <div class="profile-user-info">
-                                <div class="profile-info-row">
-                                    <div class="profile-info-name">Nom</div>
-
-                                    <div class="profile-info-value">
-                                        <span><input type="text" name="Nom" value="<?= $row['Nom']?>" class=""></span>
-                                    </div>
-                                </div>
-
-                                <div class="profile-info-row">
-                                    <div class="profile-info-name">Email</div>
-
-                                    <div class="profile-info-value">
-                                        
-                                        <span><input type="email" name="Email" value="<?= $row['Email']?>" class=""></span>
-                                       
-                                    </div>
-                                </div>
-
-                                <div class="profile-info-row">
-                                    <div class="profile-info-name">Date</div>
-
-                                    <div class="profile-info-value">
-                                        <span><input type="Date" name="Datedenaissance" value="<?= $row['DateDeNaissance']?>" class=""></span>
-                                    </div>
-                                </div>
-
-                                <div class="profile-info-row">
-                                    <div class="profile-info-name">Telephone</div>
-
-                                    <div class="profile-info-value">
-                                        <span><input type="text" name="Numerotelephone" value="<?= $row['NumeroTelephone']?>" class=""></span>
-                                    </div>
-                                </div>
-
-                                <div class="profile-info-row">
-                                    <div class="profile-info-name">Adresse</div>
-                                      
-                                    <div class="profile-info-value">
-                                        <span><input type="text" name="Adresse" value="<?= $row['Adresse']?>" class=""></span>
-                                    </div>
+                                <div>
+                                    Votre actuel mot de passe:
+                                        <span><input type="password" name="mdp"></span>
+                                   
+                                </div><br>
+                                <div>
+                                    Votre nouveau mot de passe:
+                                        <span><input type="password" name="Nouveaumdp"></span>
+                                   
+                                </div><br>
+                                <div>
+                                    Confirmer votre nouveau mot de passe:
+                                        <span><input type="password" name="mdp"></span>
+                                   
                                 </div>
                             </div>
 
-                            <div class="hr hr-8 dotted"></div>
-
-                            <div class="profile-user-info">
-                                <div class="profile-info-row">
-                                    <div class="profile-info-name">Ville</div>
-
-                                    <div class="profile-info-value">
-                                        <span><input type="text" name="Ville" value="<?= $row['Ville']?>" class=""></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="profile-user-info">
-                                <div class="profile-info-row">
-                                    <div class="profile-info-name">Code postale</div>
-
-                                    <div class="profile-info-value">
-                                        <span><input type="text" name="Codepostale" value="<?= $row['CodePostale']?>" class=""></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="checkbox">
-                                                        <label>
-                                                            <span><input type="checkbox" name="newsletter" /></span>
-                                                            Inscrivez-vous à notre newsletter!
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <span><input type="checkbox" /></span>
-                                                            Recevez des offres spéciales de nos partenaires!
-                                                        </label>
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <span><input type="checkbox" /></span>
-                                                            Recevez des offres spéciales de nos partenaires!
-                                                        </label>
-                                                    </div>
+                            
+                           
+                        
                             <div class="profile-info-value">
-                            <button class="btn btn-search btn-small" type="submit" name="modifier">Modifier</button>
+                            <button class="btn btn-search btn-small" type="submit" name="Changermdp">Changer mot de passe </button>
                         </div>
                         </div>
                         </form>
